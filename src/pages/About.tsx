@@ -89,19 +89,6 @@ const About = () => {
                   </motion.div>
                 ))}
               </div>
-
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                }}
-                whileTap={{
-                  scale: 0.95,
-                }}
-                className="bg-linear-to-r from-[#006B3F] to-emerald-600 text-white px-8 py-4 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all flex items-center"
-              >
-                Learn More About Us
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </motion.button>
             </motion.div>
 
             <motion.div

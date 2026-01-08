@@ -1,18 +1,13 @@
 import { Clock, Calendar, ArrowRight, Sparkles, Video } from 'lucide-react';
 import { motion } from 'framer-motion';
-
-import MeetThePastor from '@/components/MeetThePastor';
 import About from './About';
 import QuoteSection from '@/components/QuoteSection';
 import UpcomingEvents from '@/components/UpcomingEvents';
 import GivingSection from '@/components/GivingSection';
 import ContactSection from '@/components/ContactSection';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import JoinMinistriesSection from '@/components/MinistrySection/JoinMinistriesSection';
-
-// const PRIMARY_GREEN = '#006B3F';
-// const ACCENT_GOLD = '#FFD700';
-// const SECONDARY_GOLD = '#FDB813';
+import { useEffect } from 'react';
 
 const SERVICE_TIMES = [
   {
@@ -33,6 +28,16 @@ const SERVICE_TIMES = [
 ];
 
 const HomePage = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      const el = document.getElementById(location.state.scrollTo);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
   const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
@@ -166,7 +171,7 @@ const HomePage = () => {
                   whileTap={{
                     scale: 0.95,
                   }}
-                  className="group bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-[#FFD700]/50 transition-all flex items-center justify-center"
+                  className="cursor-pointer group bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-[#FFD700]/50 transition-all flex items-center justify-center"
                 >
                   Plan Your Visit
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -182,7 +187,7 @@ const HomePage = () => {
                   onClick={() => {
                     navigate('/live-service');
                   }}
-                  className="group bg-white/10 backdrop-blur-md border-2 border-white/30 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all flex items-center justify-center"
+                  className="cursor-pointer group bg-white/10 backdrop-blur-md border-2 border-white/30 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all flex items-center justify-center"
                 >
                   <Video className="mr-2 w-5 h-5" />
                   Watch Services
@@ -353,7 +358,7 @@ const HomePage = () => {
                   y: -10,
                   scale: 1.02,
                 }}
-                className="group relative bg-linear-to-br from-white to-slate-50 p-8 rounded-3xl border-2 border-slate-100 hover:border-[#006B3F]/30 hover:shadow-2xl transition-all cursor-pointer overflow-hidden"
+                className="group relative bg-linear-to-br from-white to-slate-50 p-8 rounded-3xl border-2 border-slate-100 hover:border-[#006B3F]/30 hover:shadow-xl transition-all overflow-hidden"
               >
                 <div className="absolute inset-0 bg-linear-to-br from-[#006B3F]/0 to-[#FFD700]/0 group-hover:from-[#006B3F]/5 group-hover:to-[#FFD700]/5 transition-all" />
 
@@ -369,7 +374,13 @@ const HomePage = () => {
                   <p className="text-slate-600 text-lg font-semibold">{service.time}</p>
 
                   <div className="mt-6 pt-6 border-t border-slate-200 group-hover:border-[#FFD700]/50 transition-all">
-                    <button className="text-[#006B3F] font-bold text-sm flex items-center group-hover:text-[#FFD700] transition-colors">
+                    <button
+                      onClick={() => {
+                        const el = document.getElementById('map');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      className="cursor-pointer text-[#006B3F] font-bold text-sm flex items-center group-hover:text-[#FFD700] transition-colors"
+                    >
                       Get Directions
                       <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </button>

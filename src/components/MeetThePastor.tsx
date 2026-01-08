@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { GraduationCap, Heart, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const MeetThePastor = () => {
+  const navigate = useNavigate();
   return (
     <section
       id="about"
@@ -124,7 +126,8 @@ const MeetThePastor = () => {
               whileTap={{
                 scale: 0.95,
               }}
-              className="bg-linear-to-r from-[#006B3F] to-emerald-600 text-white px-8 py-4 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all flex items-center"
+              className="cursor-pointer bg-linear-to-r from-[#006B3F] to-emerald-600 text-white px-8 py-4 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all flex items-center"
+              onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
             >
               Schedule a Meeting
               <ArrowRight className="ml-2 w-5 h-5" />

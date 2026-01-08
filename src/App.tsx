@@ -39,7 +39,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/live-service" element={<LiveService />} />
-            {/* <Route path="/ministries/:ministry" element={<MinistryPage />} /> */}
+            <Route path="/ministries/:id" element={<MinistryPage />} />
 
             {/* <Route path="/contact" element={<Contact />} /> */}
             {/* <Route path="/ministry-page" element={<MinistryPage />} /> */}
