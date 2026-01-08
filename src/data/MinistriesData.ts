@@ -1,4 +1,4 @@
-import { Music, Heart, PlayCircle, Users, GraduationCap, Church, MapPin } from "lucide-react";
+import { Music, Heart, PlayCircle, Users, GraduationCap, Church, MapPin } from 'lucide-react';
 
 export const MINISTRIES_DATA = [
   {

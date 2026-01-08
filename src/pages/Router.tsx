@@ -7,15 +7,13 @@ interface RouterContextType {
 const RouterContext = createContext<RouterContextType>({
   currentPage: 'home',
   navigateTo: () => {},
-  params: {}
+  params: {},
 });
 export const useRouter = () => useContext(RouterContext);
 interface RouterProviderProps {
   children: ReactNode;
 }
-export const RouterProvider: React.FC<RouterProviderProps> = ({
-  children
-}) => {
+export const RouterProvider: React.FC<RouterProviderProps> = ({ children }) => {
   const [currentPage, setCurrentPage] = useState('home');
   const [params, setParams] = useState<Record<string, string>>({});
   const navigateTo = (page: string, pageParams?: Record<string, string>) => {
@@ -25,14 +23,18 @@ export const RouterProvider: React.FC<RouterProviderProps> = ({
     }
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   };
-  return <RouterContext.Provider value={{
-    currentPage,
-    navigateTo,
-    params
-  }}>
+  return (
+    <RouterContext.Provider
+      value={{
+        currentPage,
+        navigateTo,
+        params,
+      }}
+    >
       {children}
-    </RouterContext.Provider>;
+    </RouterContext.Provider>
+  );
 };

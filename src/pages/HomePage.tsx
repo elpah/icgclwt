@@ -1,44 +1,18 @@
-import { useState, useEffect } from 'react';
-import {
-  Church,
-  MapPin,
-  Clock,
-  Calendar,
-  Heart,
-  Users,
-  PlayCircle,
-  Music,
-  BookOpen,
-  Mail,
-  Phone,
-  ChevronRight,
-  Facebook,
-  Twitter,
-  Instagram,
-  Youtube,
-  Menu,
-  X,
-  ArrowRight,
-  Sparkles,
-  Video,
-  Mic2,
-  GraduationCap,
-  Smile,
-} from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { RouterProvider, useRouter } from './Router';
-import { MinistryPage } from './MinistryPage';
-import LiveServices from '@/pages/LiveService';
+import { Clock, Calendar, ArrowRight, Sparkles, Video } from 'lucide-react';
+import { motion } from 'framer-motion';
+
 import MeetThePastor from '@/components/MeetThePastor';
 import About from './About';
 import QuoteSection from '@/components/QuoteSection';
 import UpcomingEvents from '@/components/UpcomingEvents';
 import GivingSection from '@/components/GivingSection';
 import ContactSection from '@/components/ContactSection';
+import { useNavigate } from 'react-router-dom';
+import JoinMinistriesSection from '@/components/MinistrySection/JoinMinistriesSection';
 
-const PRIMARY_GREEN = '#006B3F';
-const ACCENT_GOLD = '#FFD700';
-const SECONDARY_GOLD = '#FDB813';
+// const PRIMARY_GREEN = '#006B3F';
+// const ACCENT_GOLD = '#FFD700';
+// const SECONDARY_GOLD = '#FDB813';
 
 const SERVICE_TIMES = [
   {
@@ -56,12 +30,13 @@ const SERVICE_TIMES = [
     time: '6:00 PM - 8:00 PM',
     title: 'Mid-week Service',
   },
-]
+];
 
 const HomePage = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-900 via-[#006B3F] to-emerald-900">
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-linear-to-br from-slate-900 via-[#006B3F] to-emerald-900">
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
             animate={{
@@ -149,7 +124,7 @@ const HomePage = () => {
               >
                 Experience
                 <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] via-yellow-400 to-[#FFD700] animate-pulse">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FFD700] via-yellow-400 to-[#FFD700] animate-pulse">
                   God's Power
                 </span>
               </motion.h1>
@@ -191,7 +166,7 @@ const HomePage = () => {
                   whileTap={{
                     scale: 0.95,
                   }}
-                  className="group bg-gradient-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-[#FFD700]/50 transition-all flex items-center justify-center"
+                  className="group bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-[#FFD700]/50 transition-all flex items-center justify-center"
                 >
                   Plan Your Visit
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -205,10 +180,7 @@ const HomePage = () => {
                     scale: 0.95,
                   }}
                   onClick={() => {
-                    const element = document.getElementById('live-service');
-                    element?.scrollIntoView({
-                      behavior: 'smooth',
-                    });
+                    navigate('/live-service');
                   }}
                   className="group bg-white/10 backdrop-blur-md border-2 border-white/30 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all flex items-center justify-center"
                 >
@@ -248,9 +220,9 @@ const HomePage = () => {
                   <img
                     src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=800"
                     alt="Worship"
-                    className="w-full h-[500px] object-cover"
+                    className="w-full h-125 object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
                 </motion.div>
                 <motion.div
                   animate={{
@@ -261,7 +233,7 @@ const HomePage = () => {
                     repeat: Infinity,
                     ease: 'easeInOut',
                   }}
-                  className="absolute -top-8 -right-8 bg-gradient-to-br from-[#FFD700] to-[#FDB813] rounded-2xl p-6 shadow-2xl z-20 w-64"
+                  className="absolute -top-8 -right-8 bg-linear-to-br from-[#FFD700] to-[#FDB813] rounded-2xl p-6 shadow-2xl z-20 w-64"
                 >
                   <div className="flex items-center space-x-3 mb-3">
                     <div className="bg-white/20 backdrop-blur-sm rounded-xl p-2">
@@ -381,12 +353,12 @@ const HomePage = () => {
                   y: -10,
                   scale: 1.02,
                 }}
-                className="group relative bg-gradient-to-br from-white to-slate-50 p-8 rounded-3xl border-2 border-slate-100 hover:border-[#006B3F]/30 hover:shadow-2xl transition-all cursor-pointer overflow-hidden"
+                className="group relative bg-linear-to-br from-white to-slate-50 p-8 rounded-3xl border-2 border-slate-100 hover:border-[#006B3F]/30 hover:shadow-2xl transition-all cursor-pointer overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#006B3F]/0 to-[#FFD700]/0 group-hover:from-[#006B3F]/5 group-hover:to-[#FFD700]/5 transition-all" />
+                <div className="absolute inset-0 bg-linear-to-br from-[#006B3F]/0 to-[#FFD700]/0 group-hover:from-[#006B3F]/5 group-hover:to-[#FFD700]/5 transition-all" />
 
                 <div className="relative z-10">
-                  <div className="w-16 h-16 bg-gradient-to-br from-[#006B3F] to-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all shadow-lg">
+                  <div className="w-16 h-16 bg-linear-to-br from-[#006B3F] to-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all shadow-lg">
                     <Clock className="w-8 h-8 text-[#FFD700]" />
                   </div>
 
@@ -409,10 +381,10 @@ const HomePage = () => {
         </div>
       </section>
 
-      <MeetThePastor />
       <About />
-      <QuoteSection />
       <UpcomingEvents />
+      <QuoteSection />
+      <JoinMinistriesSection />
       <GivingSection />
       <ContactSection />
     </div>

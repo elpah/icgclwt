@@ -27,10 +27,10 @@ const UpcomingEvents = () => {
       image:
         'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800',
     },
-  ] as any[];
+  ];
   return (
     <section id="events" className="py-24 bg-white relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-[#FFD700]/5 to-transparent" />
+      <div className="absolute top-0 left-0 w-1/3 h-full bg-linear-to-r from-[#FFD700]/5 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -97,7 +97,7 @@ const UpcomingEvents = () => {
                   alt={event.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
 
                 <div className="absolute top-4 left-4 bg-white rounded-2xl px-4 py-2 shadow-lg">
                   <p className="text-xs font-bold text-[#006B3F] uppercase tracking-wider">

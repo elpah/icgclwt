@@ -3,7 +3,7 @@ import { BookOpen } from 'lucide-react';
 
 const QuoteSection = () => {
   return (
-    <section className="py-20 bg-gradient-to-r from-[#006B3F] via-emerald-700 to-[#006B3F] text-white relative overflow-hidden">
+    <section className="py-20 bg-linear-to-r from-[#006B3F] via-emerald-700 to-[#006B3F] text-white relative overflow-hidden">
       <motion.div
         animate={{
           rotate: 360,

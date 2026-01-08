@@ -1,11 +1,13 @@
-import { useRouter } from '@/pages/Router';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Church, PlayCircle, X, Menu } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navigation = () => {
   const MotionLink = motion(Link);
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+  const navigate = useNavigate();
 
   const NAV_LINKS = [
     {
@@ -35,28 +37,45 @@ const Navigation = () => {
   ] as any[];
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { navigateTo, currentPage } = useRouter();
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
-  const handleNavClick = (page: string) => {
-    if (page === 'home') {
-      navigateTo('home');
+
+  const handleNavClick = (target: string) => {
+    if (target === 'live-service') {
+      navigate('/live-service');
+      setMobileMenuOpen(false);
+      return;
+    }
+
+    const scrollToSection = () => {
+      if (target === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      const el = document.getElementById(target);
+      el?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    if (isHome) {
+      scrollToSection();
     } else {
-      navigateTo('home');
-      setTimeout(() => {
-        const element = document.getElementById(page);
-        element?.scrollIntoView({
-          behavior: 'smooth',
-        });
-      }, 100);
+      navigate('/');
+      setTimeout(scrollToSection, 150);
     }
     setMobileMenuOpen(false);
   };
+
   return (
     <>
       <nav
@@ -73,19 +92,19 @@ const Navigation = () => {
               x: 0,
             }}
             className="flex items-center space-x-3 cursor-pointer"
-            onClick={() => navigateTo('home')}
+            onClick={() => navigate('/')}
           >
-            <div className="bg-gradient-to-br from-[#006B3F] to-emerald-700 p-2.5 rounded-xl shadow-lg">
+            <div className="bg-linear-to-br from-[#006B3F] to-emerald-700 p-2.5 rounded-xl shadow-lg">
               <Church className="w-7 h-7 text-[#FFD700]" />
             </div>
             <div>
               <h1
-                className={`font-bold text-xl leading-tight ${isScrolled ? 'text-[#006B3F]' : 'text-white'}`}
+                className={`font-bold text-xl leading-tight ${isScrolled || !isHome ? 'text-[#006B3F]' : 'text-white'}`}
               >
                 ICGC
               </h1>
               <p
-                className={`text-[10px] font-bold tracking-[0.2em] uppercase ${isScrolled ? 'text-slate-500' : 'text-slate-200'}`}
+                className={`text-[10px] font-bold tracking-[0.2em] uppercase ${isScrolled || !isHome ? 'text-slate-500' : 'text-slate-200'}`}
               >
                 Living Word Temple
               </p>
@@ -97,19 +116,13 @@ const Navigation = () => {
             {NAV_LINKS.map((link, index) => (
               <motion.button
                 key={link.name}
-                initial={{
-                  opacity: 0,
-                  y: -10,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                transition={{
-                  delay: index * 0.1,
-                }}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
                 onClick={() => handleNavClick(link.href)}
-                className={`text-sm font-semibold transition-colors hover:text-[#FFD700] ${isScrolled ? 'text-slate-700' : 'text-white'}`}
+                className={`cursor-pointer text-sm font-semibold transition-colors hover:text-[#FFD700]
+              ${isScrolled || !isHome ? 'text-slate-700' : 'text-white'}
+             `}
               >
                 {link.name}
               </motion.button>
@@ -129,16 +142,9 @@ const Navigation = () => {
               whileTap={{
                 scale: 0.95,
               }}
-              onClick={() => {
-                navigateTo('home');
-                setTimeout(() => {
-                  document.getElementById('live-service')?.scrollIntoView({
-                    behavior: 'smooth',
-                  });
-                }, 100);
-              }}
+              onClick={() => navigate('/live-service')}
               to="/live-service"
-              className="bg-gradient-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-6 py-2.5 rounded-full font-bold text-sm shadow-lg hover:shadow-xl transition-all flex items-center space-x-2"
+              className="bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-6 py-2.5 rounded-full font-bold text-sm shadow-lg hover:shadow-xl transition-all flex items-center space-x-2"
             >
               <PlayCircle className="w-4 h-4" />
               <span>Watch Live</span>
@@ -186,7 +192,7 @@ const Navigation = () => {
                   {link.name}
                 </button>
               ))}
-              <button className="bg-gradient-to-r from-[#006B3F] to-emerald-700 text-[#FFD700] w-full py-4 rounded-xl font-bold text-lg shadow-xl">
+              <button className="bg-linear-to-r from-[#006B3F] to-emerald-700 text-[#FFD700] w-full py-4 rounded-xl font-bold text-lg shadow-xl">
                 Join Service Online
               </button>
             </div>

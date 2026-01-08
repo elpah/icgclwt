@@ -11,7 +11,7 @@ import {
   Heart,
 } from 'lucide-react';
 
-const LiveServices = () => {
+const LiveService = () => {
   const SERVICE_TIMES = [
     {
       day: 'Sundays',
@@ -50,7 +50,7 @@ const LiveServices = () => {
             }}
             className="text-center mb-12"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-red-500/10 text-red-600 text-sm font-bold uppercase tracking-wider mb-4 flex items-center justify-center space-x-2 w-fit mx-auto">
+            <span className="px-4 py-1.5 rounded-full bg-red-500/10 text-red-600 text-sm font-bold uppercase tracking-wider mb-4 flex items-center justify-center space-x-2 w-fit mx-auto">
               <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
               <span>Live Streaming</span>
             </span>
@@ -75,12 +75,10 @@ const LiveServices = () => {
             className="max-w-6xl mx-auto"
           >
             {/* Video Player */}
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-video bg-gradient-to-br from-slate-900 to-slate-800 mb-8">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-video bg-linear-to-br from-slate-900 to-slate-800 mb-8">
               <iframe
                 width="100%"
                 height="100%"
-
-                
                 src="https://www.youtube.com/embed/CVCBKZRJf_8"
                 title="Live Service"
                 frameBorder="0"
@@ -96,7 +94,7 @@ const LiveServices = () => {
                 whileHover={{
                   scale: 1.02,
                 }}
-                className="bg-gradient-to-br from-[#006B3F] to-emerald-700 rounded-2xl p-8 text-white shadow-lg cursor-pointer group"
+                className="bg-linear-to-br from-[#006B3F] to-emerald-700 rounded-2xl p-8 text-white shadow-lg cursor-pointer group"
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3">
@@ -120,7 +118,7 @@ const LiveServices = () => {
                 className="bg-white rounded-2xl p-8 shadow-lg border-2 border-slate-100 cursor-pointer group"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className="bg-gradient-to-br from-purple-500 to-indigo-500 rounded-xl p-3">
+                  <div className="bg-linear-to-br from-purple-500 to-indigo-500 rounded-xl p-3">
                     <Video className="w-8 h-8 text-white" />
                   </div>
                 </div>
@@ -138,7 +136,7 @@ const LiveServices = () => {
                 className="bg-white rounded-2xl p-8 shadow-lg border-2 border-slate-100 cursor-pointer group"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className="bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl p-3">
+                  <div className="bg-linear-to-br from-orange-500 to-amber-500 rounded-xl p-3">
                     <Mic2 className="w-8 h-8 text-white" />
                   </div>
                 </div>
@@ -151,7 +149,7 @@ const LiveServices = () => {
             </div>
 
             {/* Service Times */}
-            <div className="bg-gradient-to-br from-slate-50 to-white rounded-3xl p-8 md:p-12 border-2 border-slate-100">
+            <div className="bg-linear-to-br from-slate-50 to-white rounded-3xl p-8 md:p-12 border-2 border-slate-100">
               <h3 className="text-3xl font-bold text-slate-900 mb-8 text-center">Service Times</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {SERVICE_TIMES.map((service, index) => (
@@ -160,7 +158,7 @@ const LiveServices = () => {
                     className="bg-white rounded-2xl p-6 shadow-md border border-slate-100"
                   >
                     <div className="flex items-center space-x-3 mb-4">
-                      <div className="bg-gradient-to-br from-[#006B3F] to-emerald-600 rounded-xl p-2">
+                      <div className="bg-linear-to-br from-[#006B3F] to-emerald-600 rounded-xl p-2">
                         <Clock className="w-6 h-6 text-[#FFD700]" />
                       </div>
                       <h4 className="font-bold text-lg text-slate-900">{service.title}</h4>
@@ -243,7 +241,7 @@ const LiveServices = () => {
                 className="bg-white rounded-2xl p-8 shadow-lg text-center"
               >
                 <div
-                  className={`w-16 h-16 bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg`}
+                  className={`w-16 h-16 bg-linear-to-br ${item.color} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg`}
                 >
                   <item.icon className="w-8 h-8 text-white" />
                 </div>
@@ -258,4 +256,4 @@ const LiveServices = () => {
   );
 };
 
-export default LiveServices;
+export default LiveService;
