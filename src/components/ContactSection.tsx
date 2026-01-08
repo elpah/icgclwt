@@ -205,7 +205,7 @@ const ContactSection = () => {
                 whileTap={{
                   scale: 0.98,
                 }}
-                className="w-full bg-linear-to-r from-[#006B3F] to-emerald-600 text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all shadow-lg"
+                className="cursor-pointer w-full bg-linear-to-r from-[#006B3F] to-emerald-600 text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all shadow-lg"
               >
                 Submit Message
               </motion.button>

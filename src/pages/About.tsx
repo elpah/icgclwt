@@ -77,7 +77,7 @@ const About = () => {
                     whileHover={{
                       scale: 1.05,
                     }}
-                    className="bg-white rounded-2xl p-5 shadow-md hover:shadow-xl transition-all cursor-pointer border border-slate-100"
+                    className="bg-white rounded-2xl p-5 shadow-md hover:shadow-xl transition-all border border-slate-100"
                   >
                     <div
                       className={`w-12 h-12 bg-linear-to-br ${item.color} rounded-xl flex items-center justify-center mb-3`}
