@@ -34,7 +34,7 @@ const Navigation = () => {
       name: 'Contact',
       href: 'contact',
     },
-  ] as any[];
+  ];
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   useEffect(() => {

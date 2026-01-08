@@ -8,8 +8,7 @@ import HomePage from './pages/HomePage';
 const LiveService = lazy(() => import('./pages/LiveService'));
 const MinistryPage = lazy(() => import('./pages/MinistryPage'));
 
-let theme: Theme = 'light';
-let container: Container = 'none';
+const theme: Theme = 'light';
 
 function App() {
   const { pathname } = useLocation();
@@ -40,11 +39,6 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/live-service" element={<LiveService />} />
             <Route path="/ministries/:id" element={<MinistryPage />} />
-
-            {/* <Route path="/contact" element={<Contact />} /> */}
-            {/* <Route path="/ministry-page" element={<MinistryPage />} /> */}
-            {/* <Route path="/study-abroad/countries" element={<CountryDetailsPage />} /> */}
-            {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
         </Suspense>
       </div>

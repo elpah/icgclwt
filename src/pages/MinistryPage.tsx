@@ -30,8 +30,7 @@ const MinistryPage: React.FC = () => {
             <motion.button
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-         onClick={() => navigate('/', { state: { scrollTo: 'ministries' } })}
-
+              onClick={() => navigate('/', { state: { scrollTo: 'ministries' } })}
               className="flex items-center space-x-2 text-white mb-6 hover:text-[#FFD700] transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />

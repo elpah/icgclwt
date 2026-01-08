@@ -43,4 +43,4 @@ export const CORE_VALUES = [
       'We are committed to transparency, honesty, and accountability in all our dealings.',
     color: 'from-slate-600 to-slate-800',
   },
-] as any[];
+];

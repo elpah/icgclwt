@@ -17,7 +17,7 @@ const GivingSection = () => {
           viewport={{
             once: true,
           }}
-          className="bg-gradient-to-br from-[#006B3F] via-emerald-700 to-[#006B3F] rounded-[3rem] overflow-hidden shadow-2xl"
+          className="bg-linear-to-br from-[#006B3F] via-emerald-700 to-[#006B3F] rounded-[3rem] overflow-hidden shadow-2xl"
         >
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="p-12 md:p-16 text-white">
@@ -39,7 +39,7 @@ const GivingSection = () => {
                   whileTap={{
                     scale: 0.98,
                   }}
-                  className="w-full bg-gradient-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all flex items-center justify-center shadow-lg group"
+                  className="w-full bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all flex items-center justify-center shadow-lg group"
                 >
                   Give Online
                   <Heart className="ml-2 w-5 h-5 fill-current group-hover:scale-110 transition-transform" />
@@ -62,13 +62,13 @@ const GivingSection = () => {
               </div>
             </div>
 
-            <div className="relative min-h-[500px]">
+            <div className="relative min-h-125">
               <img
                 src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb8?auto=format&fit=crop&q=80&w=800"
                 alt="Giving"
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#006B3F] via-[#006B3F]/20 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-[#006B3F] via-[#006B3F]/20 to-transparent" />
 
               <div className="absolute bottom-8 left-8 right-8 space-y-4">
                 <motion.div

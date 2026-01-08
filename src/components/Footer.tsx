@@ -2,12 +2,12 @@ import { motion } from 'framer-motion';
 import { Church, Facebook, Twitter, Instagram, Youtube, Clock, ArrowRight } from 'lucide-react';
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white pt-20 pb-10 relative overflow-hidden">
+    <footer className="bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 text-white pt-20 pb-10 relative overflow-hidden">
       <div className="absolute inset-0 opacity-5">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
+            backgroundImage: 'radial-linear(circle, white 1px, transparent 1px)',
             backgroundSize: '40px 40px',
           }}
         />
@@ -17,7 +17,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="bg-gradient-to-br from-[#006B3F] to-emerald-700 p-2.5 rounded-xl shadow-lg">
+              <div className="bg-linear-to-br from-[#006B3F] to-emerald-700 p-2.5 rounded-xl shadow-lg">
                 <Church className="w-6 h-6 text-[#FFD700]" />
               </div>
               <div>
@@ -119,7 +119,7 @@ const Footer = () => {
                 whileTap={{
                   scale: 0.95,
                 }}
-                className="bg-gradient-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] p-3 rounded-xl hover:shadow-lg transition-all"
+                className="bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] p-3 rounded-xl hover:shadow-lg transition-all"
               >
                 <ArrowRight className="w-5 h-5" />
               </motion.button>

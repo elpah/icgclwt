@@ -270,4 +270,4 @@ export const MINISTRIES_DATA = [
     leader: 'Bro. Samuel Nkrumah',
     contact: 'outreach@icgclwt.org',
   },
-] as any[];
+];
