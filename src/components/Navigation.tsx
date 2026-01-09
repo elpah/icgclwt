@@ -57,6 +57,11 @@ const Navigation = () => {
       setMobileMenuOpen(false);
       return;
     }
+    if (target === 'events') {
+      navigate('/events');
+      setMobileMenuOpen(false);
+      return;
+    }
 
     const scrollToSection = () => {
       if (target === 'home') {
