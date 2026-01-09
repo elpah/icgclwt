@@ -95,9 +95,14 @@ const Navigation = () => {
             className="flex items-center space-x-3 cursor-pointer"
             onClick={() => navigate('/')}
           >
-            <div className="bg-linear-to-br from-[#006B3F] to-emerald-700 p-2.5 rounded-xl shadow-lg">
-              <Church className="w-7 h-7 text-[#FFD700]" />
+            <div className=" p-1  flex items-center justify-center">
+              <img
+                src="https://icgcpeterborough.com/wp-content/uploads/2023/09/ICGCNCT.png"
+                alt="ICGC"
+                className="h-10 w-auto object-contain"
+              />
             </div>
+
             <div>
               <h1
                 className={`font-bold text-xl leading-tight ${isScrolled || !isHome ? 'text-[#006B3F]' : 'text-white'}`}

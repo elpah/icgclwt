@@ -17,9 +17,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="bg-linear-to-br from-[#006B3F] to-emerald-700 p-2.5 rounded-xl shadow-lg">
-                <Church className="w-6 h-6 text-[#FFD700]" />
+              <div className=" p-1  flex items-center justify-center">
+                <img
+                  src="https://icgcpeterborough.com/wp-content/uploads/2023/09/ICGCNCT.png"
+                  alt="ICGC"
+                  className="h-10 w-auto object-contain"
+                />
               </div>
+
               <div>
                 <h1 className="font-bold text-lg leading-tight">ICGC</h1>
                 <p className="text-[10px] font-bold tracking-widest uppercase text-slate-400">
