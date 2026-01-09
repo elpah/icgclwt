@@ -144,15 +144,7 @@
 
 // export default EventDetailsPage;
 
-import {
-  Clock,
-  Calendar,
-  MapPin,
-  ArrowRight,
-  Users,
-  Heart,
-  Share2,
-} from 'lucide-react';
+import { Clock, Calendar, MapPin, ArrowRight, Users, Heart, Share2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useNavigate, useParams } from 'react-router-dom';
 import { UPCOMING_EVENTS } from '@/data/upcomingEventsData';
@@ -190,9 +182,7 @@ const EventDetailsPage = () => {
                 </span>
               </div>
 
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
-                {event.title}
-              </h1>
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">{event.title}</h1>
 
               <div className="flex flex-wrap gap-6 text-white">
                 <div className="flex items-center gap-2">

@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { useRouter } from '@/pages/Router';
 import { Target, Users, Zap } from 'lucide-react';
 import MinistryCardsContainer from './MinistryCardsContainer';
 

@@ -40,9 +40,7 @@ const EventCard = ({ event, index = 0 }: EventCardProps) => {
         <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
 
         <div className="absolute top-4 left-4 bg-white rounded-2xl px-4 py-2 shadow-lg">
-          <p className="text-xs font-bold text-[#006B3F] uppercase tracking-wider">
-            {event.date}
-          </p>
+          <p className="text-xs font-bold text-[#006B3F] uppercase tracking-wider">{event.date}</p>
         </div>
 
         <div className="absolute bottom-4 right-4 bg-[#FFD700] rounded-full px-3 py-1.5">
@@ -62,9 +60,7 @@ const EventCard = ({ event, index = 0 }: EventCardProps) => {
           {event.title}
         </h3>
 
-        <p className="text-slate-600 text-sm mb-4 line-clamp-2 leading-relaxed">
-          {event.desc}
-        </p>
+        <p className="text-slate-600 text-sm mb-4 line-clamp-2 leading-relaxed">{event.desc}</p>
 
         <span className="text-[#006B3F] text-sm font-bold flex items-center group-hover:text-[#FFD700] transition-colors">
           Learn More

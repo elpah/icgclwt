@@ -5,9 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const MeetThePastor = () => {
   const navigate = useNavigate();
   return (
-    <section
-      className="py-24 bg-linear-to-br from-slate-50 to-slate-100 relative overflow-hidden"
-    >
+    <section className="py-24 bg-linear-to-br from-slate-50 to-slate-100 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/3 h-full bg-linear-to-l from-[#006B3F]/5 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
