@@ -171,7 +171,8 @@ const HomePage = () => {
                   whileTap={{
                     scale: 0.95,
                   }}
-                  className="cursor-pointer group bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-[#FFD700]/50 transition-all flex items-center justify-center"
+                  className="cursor-pointer group bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-8 py-4 rounded-full font-bold text-lg shadow-md hover:shadow-[#FFD700]/50 transition-all flex items-center justify-center"
+                  onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
                 >
                   Plan Your Visit
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -301,7 +302,7 @@ const HomePage = () => {
 
       {/* <LiveServices /> */}
 
-      <section id="services" className="py-24 bg-white relative overflow-hidden">
+      <section className="py-24 bg-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div
             className="absolute inset-0"

@@ -130,12 +130,12 @@ const AllEventsPage = () => {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full px-6 py-4 rounded-full text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-4 focus:ring-[#FFD700]/50 transition-all"
+                  className=" border border-gray-300 w-full px-6 py-4 rounded-full text-white placeholder-white focus:outline-none focus:ring-4 focus:ring-[#FFD700]/50 transition-all"
                 />
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full sm:w-auto bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-2xl transition-all whitespace-nowrap"
+                  className="cursor-pointer w-full sm:w-auto bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-xl transition-all whitespace-nowrap"
                 >
                   Subscribe
                 </motion.button>

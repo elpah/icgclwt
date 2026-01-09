@@ -19,10 +19,6 @@ const Navigation = () => {
       href: 'about',
     },
     {
-      name: 'Services',
-      href: 'services',
-    },
-    {
       name: 'Events',
       href: 'events',
     },

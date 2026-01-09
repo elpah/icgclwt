@@ -8,7 +8,7 @@ const UpcomingEvents = () => {
   const navigate = useNavigate();
 
   return (
-    <section id="events" className="py-24 bg-white relative overflow-hidden">
+    <section className="py-24 bg-white relative overflow-hidden">
       <div className="absolute top-0 left-0 w-1/3 h-full bg-linear-to-r from-[#FFD700]/5 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

@@ -6,7 +6,6 @@ const MeetThePastor = () => {
   const navigate = useNavigate();
   return (
     <section
-      id="about"
       className="py-24 bg-linear-to-br from-slate-50 to-slate-100 relative overflow-hidden"
     >
       <div className="absolute top-0 right-0 w-1/3 h-full bg-linear-to-l from-[#006B3F]/5 to-transparent" />
