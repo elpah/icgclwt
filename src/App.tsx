@@ -1,3 +1,5 @@
+import './global.css';
+
 import { lazy, Suspense, useEffect } from 'react';
 import { Theme } from './settings/types';
 import Navigation from './components/Navigation';
