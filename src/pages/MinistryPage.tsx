@@ -31,7 +31,7 @@ const MinistryPage: React.FC = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               onClick={() => navigate('/', { state: { scrollTo: 'ministries' } })}
-              className="flex items-center space-x-2 text-white mb-6 hover:text-[#FFD700] transition-colors"
+              className="cursor-pointer flex items-center space-x-2 text-white mb-6 hover:text-[#FFD700] transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
               <span className="font-semibold">Back to Ministries</span>
@@ -133,7 +133,7 @@ const MinistryPage: React.FC = () => {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full mt-6 bg-linear-to-r from-[#006B3F] to-emerald-600 text-white py-4 rounded-2xl font-bold hover:shadow-xl transition-all"
+                className="cursor-pointer w-full mt-6 bg-linear-to-r from-[#006B3F] to-emerald-600 text-white py-4 rounded-2xl font-bold hover:shadow-xl transition-all"
               >
                 Join This Ministry
               </motion.button>

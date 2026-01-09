@@ -1,33 +1,10 @@
+import { UPCOMING_EVENTS } from '@/data/upcomingEventsData';
 import { motion } from 'framer-motion';
 import { ChevronRight, Clock, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const UpcomingEvents = () => {
-  const UPCOMING_EVENTS = [
-    {
-      title: 'Greater Works 2024',
-      date: 'July 22 - 26',
-      time: '5:00 PM Daily',
-      desc: 'Join us for our annual spiritual convocation of power and grace.',
-      image:
-        'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=800',
-    },
-    {
-      title: 'Youth Camp: Elevate',
-      date: 'August 15 - 18',
-      time: 'Residential',
-      desc: 'Empowering the next generation for impactful Christian living.',
-      image:
-        'https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=800',
-    },
-    {
-      title: 'Choir Concert',
-      date: 'Sept 10',
-      time: '4:00 PM',
-      desc: 'A night of soul-lifting melodies and deep worship.',
-      image:
-        'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800',
-    },
-  ];
+  const navigate = useNavigate();
   return (
     <section id="events" className="py-24 bg-white relative overflow-hidden">
       <div className="absolute top-0 left-0 w-1/3 h-full bg-linear-to-r from-[#FFD700]/5 to-transparent" />
@@ -121,7 +98,10 @@ const UpcomingEvents = () => {
                   {event.desc}
                 </p>
 
-                <button className="text-[#006B3F] text-sm font-bold flex items-center group-hover:text-[#FFD700] transition-colors">
+                <button
+                  onClick={() => navigate(`/event-details/${event.id}`)}
+                  className="text-[#006B3F] text-sm font-bold flex items-center group-hover:text-[#FFD700] transition-colors"
+                >
                   Learn More
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>

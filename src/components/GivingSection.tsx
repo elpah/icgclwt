@@ -39,7 +39,7 @@ const GivingSection = () => {
                   whileTap={{
                     scale: 0.98,
                   }}
-                  className="w-full bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all flex items-center justify-center shadow-lg group"
+                  className="cursor-pointer w-full bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all flex items-center justify-center shadow-lg group"
                 >
                   Give Online
                   <Heart className="ml-2 w-5 h-5 fill-current group-hover:scale-110 transition-transform" />

@@ -37,7 +37,7 @@ const ContactSection = () => {
                 {
                   icon: MapPin,
                   title: 'Location',
-                  content: 'Living Word Temple, Adenta - Accra, Ghana',
+                  content: 'Living Word Temple, Winneba, Ghana',
                   color: 'from-red-500 to-pink-500',
                   link: 'https://maps.google.com',
                 },

@@ -1,0 +1,32 @@
+export const UPCOMING_EVENTS = [
+  {
+    id: 'greater-works-2024',
+    title: 'Greater Works 2024',
+    date: 'July 22 - 26',
+    time: '5:00 PM Daily',
+    desc: 'Join us for our annual spiritual convocation of power and grace.',
+    image: 'https://images.unsplash.com/photo-1438232992991-995b7058bbb3',
+    category: 'Conference',
+    link: '#',
+  },
+  {
+    id: 'youth-camp-elevate',
+    title: 'Youth Camp: Elevate',
+    date: 'August 15 - 18',
+    time: 'Residential',
+    desc: 'Empowering the next generation for impactful Christian living.',
+    image: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94',
+    category: 'Youth',
+    link: '#',
+  },
+  {
+    id: 'choir-concert',
+    title: 'Choir Concert',
+    date: 'Sept 10',
+    time: '4:00 PM',
+    desc: 'A night of soul-lifting melodies and deep worship.',
+    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4',
+    category: 'Music',
+    link: '#',
+  },
+];

@@ -12,7 +12,6 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    
     "clsx": "^2.1.1",
     "framer-motion": "^12.4.10",
     "lucide-react": "^0.542.0",

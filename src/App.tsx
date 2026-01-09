@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 
 const LiveService = lazy(() => import('./pages/LiveService'));
 const MinistryPage = lazy(() => import('./pages/MinistryPage'));
+const EventDetailsPage = lazy(() => import('./pages/EventDetailsPage'));
 
 const theme: Theme = 'light';
 
@@ -39,6 +40,29 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/live-service" element={<LiveService />} />
             <Route path="/ministries/:id" element={<MinistryPage />} />
+            <Route
+              path="/event-details/:id"
+              element={
+                <EventDetailsPage
+                  event={{
+                    title: '',
+                    date: '',
+                    time: '',
+                    desc: '',
+                    image: '',
+                    category: '',
+                    link: '',
+                  }}
+                  onBack={function (): void {
+                    throw new Error('Function not implemented.');
+                  }}
+                  relatedEvents={[]}
+                  onEventClick={function (index: number): void {
+                    throw new Error('Function not implemented.');
+                  }}
+                />
+              }
+            />
           </Routes>
         </Suspense>
       </div>
