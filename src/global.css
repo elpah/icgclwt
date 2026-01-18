@@ -3,11 +3,17 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+  height: auto;
+  min-height: 100%;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
-body,
-#root,
+#root {
+  min-height: 100%;
+  width: 100%;
+}
+
 .app-container {
   width: 100%;
   max-width: 100%;

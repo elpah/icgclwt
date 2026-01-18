@@ -55,6 +55,7 @@ const HomePage = () => {
             }}
             className="absolute top-20 right-20 w-96 h-96 bg-[#FFD700]/10 rounded-full blur-3xl"
           />
+          j_lipbuin20
           <motion.div
             animate={{
               scale: [1.2, 1, 1.2],

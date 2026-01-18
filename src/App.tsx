@@ -35,7 +35,10 @@ function App() {
   setTheme(theme);
 
   return (
-    <div className="app-container">
+    <div
+      className="app-container
+"
+    >
       <Navigation />
       <div className="content">
         <Suspense fallback={<div>Loading...</div>}>

@@ -105,12 +105,12 @@ const Navigation = () => {
 
             <div>
               <h1
-                className={`font-bold text-xl leading-tight ${isScrolled || !isHome ? 'text-[#006B3F]' : 'text-white'}`}
+                className={`font-bold text-xl leading-tight ${isScrolled || !isHome || mobileMenuOpen ? 'text-[#006B3F]' : 'text-white'}`}
               >
                 ICGC
               </h1>
               <p
-                className={`text-[10px] font-bold tracking-[0.2em] uppercase ${isScrolled || !isHome ? 'text-slate-500' : 'text-slate-200'}`}
+                className={`text-[10px] font-bold tracking-[0.2em] uppercase ${isScrolled || !isHome || mobileMenuOpen ? 'text-slate-500' : 'text-slate-200'}`}
               >
                 Living Word Temple
               </p>
@@ -163,9 +163,17 @@ const Navigation = () => {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
-              <X className={isScrolled || !isHome ? 'text-slate-900' : 'text-white'} />
+              <X
+                className={
+                  isScrolled || !isHome || mobileMenuOpen ? 'text-slate-900' : 'text-white'
+                }
+              />
             ) : (
-              <Menu className={isScrolled || !isHome ? 'text-slate-900' : 'text-white'} />
+              <Menu
+                className={
+                  isScrolled || !isHome || mobileMenuOpen ? 'text-slate-900' : 'text-white'
+                }
+              />
             )}
           </button>
         </div>
@@ -198,7 +206,10 @@ const Navigation = () => {
                   {link.name}
                 </button>
               ))}
-              <button className="bg-linear-to-r from-[#006B3F] to-emerald-700 text-[#FFD700] w-full py-4 rounded-xl font-bold text-lg shadow-xl">
+              <button
+                onClick={() => navigate('/live-service')}
+                className="bg-linear-to-r from-[#006B3F] to-emerald-700 text-[#FFD700] w-full py-4 rounded-xl font-bold text-lg shadow-xl"
+              >
                 Join Service Online
               </button>
             </div>
