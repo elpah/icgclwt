@@ -1,0 +1,18 @@
+# Allow all search engines to crawl your site, except sensitive or unnecessary directories
+User-agent: *
+Disallow: /node_modules/
+Disallow: /build/
+Disallow: /dist/
+Disallow: /scripts/
+Disallow: /test/
+Disallow: /admin/
+Disallow: /private/
+
+# Allow access to everything else
+Allow: /
+
+# Sitemap location (important for search engines)
+Sitemap: https://www.icgclivingwordtemple.com/sitemap.xml
+
+# Crawl-delay can be set for heavy sites, e.g. Google ignores it but other bots may respect it
+# Crawl-delay: 10

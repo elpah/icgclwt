@@ -72,7 +72,7 @@ const ContactSection = () => {
                     <item.icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-slate-900 mb-1">{item.title}</h4>
+                    <p className="font-bold text-slate-900 mb-1">{item.title}</p>
                     <p className="text-slate-600">{item.content}</p>
                   </div>
                 </motion.a>
@@ -80,36 +80,41 @@ const ContactSection = () => {
             </div>
 
             <div className="mt-12">
-              <h4 className="font-bold text-slate-900 mb-6 text-lg">Connect With Us</h4>
+              <h1 className="font-bold text-slate-900 mb-6 text-lg">Connect With Us</h1>
               <div className="flex space-x-4">
                 {[
                   {
                     Icon: Facebook,
                     color: 'hover:bg-blue-500',
                     link: 'https://facebook.com/icgc',
+                    name: 'facebook',
                   },
                   {
                     Icon: Twitter,
                     color: 'hover:bg-sky-500',
                     link: 'https://twitter.com/icgc',
+                    name: 'twitter',
                   },
                   {
                     Icon: Instagram,
                     color: 'hover:bg-pink-500',
                     link: 'https://instagram.com/icgc',
+                    name: 'instagram',
                   },
                   {
                     Icon: Youtube,
                     color: 'hover:bg-red-500',
                     link: 'https://youtube.com/@icgc',
+                    name: 'youtube',
                   },
-                ].map(({ Icon, color, link }, i) => (
+                ].map(({ Icon, color, link, name }, i) => (
                   <motion.a
                     key={i}
                     whileHover={{
                       scale: 1.1,
                       y: -2,
                     }}
+                    aria-label={name}
                     href={link}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -122,7 +127,7 @@ const ContactSection = () => {
             </div>
 
             <div className="mt-12 bg-linear-to-br from-slate-50 to-white rounded-2xl p-6 border-2 border-slate-100">
-              <h4 className="font-bold text-slate-900 mb-4">Office Hours</h4>
+              <p className="font-bold text-slate-900 mb-4">Office Hours</p>
               <div className="space-y-2 text-slate-600">
                 <p className="flex justify-between">
                   <span>Monday - Friday:</span>
@@ -154,20 +159,30 @@ const ContactSection = () => {
             }}
             className="bg-white p-10 rounded-[3rem] shadow-2xl border-2 border-slate-100"
           >
-            <h3 className="text-2xl font-bold mb-8 text-slate-900">Send us a Message</h3>
+            <p className="text-2xl font-bold mb-8 text-slate-900">Send us a Message</p>
             <form className="space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Name</label>
+                  <label htmlFor="fullName" className="text-sm font-bold text-slate-700">
+                    Name
+                  </label>
                   <input
+                    id="fullName"
+                    name="fullName"
+                    autoComplete="name"
                     type="text"
                     className="w-full px-5 py-4 rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-all"
                     placeholder="Your name"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700">Email</label>
+                  <label htmlFor="email" className="text-sm font-bold text-slate-700">
+                    Email
+                  </label>
                   <input
+                    id="email"
+                    name="email"
+                    autoComplete="email"
                     type="email"
                     className="w-full px-5 py-4 rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-all"
                     placeholder="Your email"
@@ -175,24 +190,37 @@ const ContactSection = () => {
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700">Phone</label>
+                <label htmlFor="phone" className="text-sm font-bold text-slate-700">
+                  Phone
+                </label>
                 <input
+                  id="phone"
+                  name="phone"
+                  autoComplete="tel"
                   type="tel"
                   className="w-full px-5 py-4 rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-all"
                   placeholder="Your phone number"
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700">Subject</label>
+                <label htmlFor="subject" className="text-sm font-bold text-slate-700">
+                  Subject
+                </label>
                 <input
+                  id="subject"
+                  name="subject"
                   type="text"
                   className="w-full px-5 py-4 rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-all"
                   placeholder="How can we help?"
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700">Message</label>
+                <label htmlFor="message" className="text-sm font-bold text-slate-700">
+                  Message
+                </label>
                 <textarea
+                  id="message"
+                  name="message"
                   rows={5}
                   className="w-full px-5 py-4 rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-all resize-none"
                   placeholder="Your message..."

@@ -49,9 +49,9 @@ const MeetThePastor = () => {
             <div className="relative">
               <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
                 <img
-                  src="https://scontent-ams2-1.xx.fbcdn.net/v/t39.30808-6/492254476_23900126772914905_8930891602656982219_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=teZ5HAoYpLgQ7kNvwHheyMS&_nc_oc=Adlps3g7HreJqOSuJHzAfNRO2SvHx39DgVZU6NxSSJctaHn-u1a5tZO29OTYZ6AT8Rg&_nc_zt=23&_nc_ht=scontent-ams2-1.xx&_nc_gid=RfWPpkUvYkNJ8fURi5nrOA&oh=00_AfrXMuwK3o3ciPI4eoDSMFwEGhs2xEKFUsU-A0lPHiht0A&oe=696093A0"
+                  src="/images/rev_obeng.webp"
                   alt="Head Pastor"
-                  className="w-full h-150 object-cover"
+                  className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-[#006B3F]/40 to-transparent" />
               </div>

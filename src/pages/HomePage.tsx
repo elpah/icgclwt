@@ -8,7 +8,6 @@ import ContactSection from '@/components/ContactSection';
 import { useLocation, useNavigate } from 'react-router-dom';
 import JoinMinistriesSection from '@/components/MinistrySection/JoinMinistriesSection';
 import { useEffect } from 'react';
-
 const SERVICE_TIMES = [
   {
     day: 'Sundays',
@@ -55,7 +54,6 @@ const HomePage = () => {
             }}
             className="absolute top-20 right-20 w-96 h-96 bg-[#FFD700]/10 rounded-full blur-3xl"
           />
-          j_lipbuin20
           <motion.div
             animate={{
               scale: [1.2, 1, 1.2],
@@ -72,7 +70,11 @@ const HomePage = () => {
 
         <div className="absolute inset-0 z-0 opacity-20">
           <img
-            src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=1920"
+            src="images/church_cover_image.webp"
+            width={1920}
+            height={1080}
+            loading="eager"
+            decoding="async"
             alt="Church Hero"
             className="w-full h-full object-cover"
           />
@@ -225,8 +227,12 @@ const HomePage = () => {
                   className="relative z-10 rounded-3xl overflow-hidden shadow-2xl"
                 >
                   <img
-                    src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=800"
-                    alt="Worship"
+                    src="images/church_cover_smaller.webp"
+                    width={800}
+                    height={450}
+                    loading="eager"
+                    decoding="async"
+                    alt="Church Hero Worship"
                     className="w-full h-125 object-cover"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />

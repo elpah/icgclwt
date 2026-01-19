@@ -19,9 +19,12 @@ const Footer = () => {
             <div className="flex items-center space-x-3 mb-6">
               <div className=" p-1  flex items-center justify-center">
                 <img
-                  src="https://icgcpeterborough.com/wp-content/uploads/2023/09/ICGCNCT.png"
-                  alt="ICGC"
+                  src="/images/icgc_logo.webp"
+                  width="87"
+                  height="80"
+                  alt="ICGC Logo"
                   className="h-10 w-auto object-contain"
+                  loading="eager"
                 />
               </div>
 
@@ -36,22 +39,38 @@ const Footer = () => {
               Raising leaders, shaping vision, and influencing society through Christ.
             </p>
             <div className="flex space-x-3">
-              {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
+              {[
+                { name: 'Facebook', Icon: Facebook },
+                { name: 'Twitter', Icon: Twitter },
+                { name: 'Instagram', Icon: Instagram },
+                { name: 'YouTube', Icon: Youtube },
+              ].map(({ name, Icon }, i) => (
                 <a
                   key={i}
                   href="#"
+                  aria-label={`Follow us on ${name}`}
                   className="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#FFD700] hover:bg-slate-700 transition-all"
                 >
                   <Icon className="w-5 h-5" />
                 </a>
               ))}
+              {/* {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                   aria-label={`Follow us on ${}`}
+                  className="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#FFD700] hover:bg-slate-700 transition-all"
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))} */}
             </div>
           </div>
 
           <div>
-            <h4 className="font-bold mb-6 text-white uppercase tracking-wider text-sm">
+            <h1 className="font-bold mb-6 text-white uppercase tracking-wider text-sm">
               Quick Links
-            </h4>
+            </h1>
             <ul className="space-y-3 text-slate-400 text-sm">
               <li>
                 <a
@@ -89,7 +108,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-bold mb-6 text-white uppercase tracking-wider text-sm">Services</h4>
+            <p className="font-bold mb-6 text-white uppercase tracking-wider text-sm">Services</p>
             <ul className="space-y-3 text-slate-400 text-sm">
               <li className="flex items-start">
                 <Clock className="w-4 h-4 mr-2 mt-0.5 text-[#FFD700]" />
@@ -107,9 +126,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-bold mb-6 text-white uppercase tracking-wider text-sm">
-              Subscribe
-            </h4>
+            <p className="font-bold mb-6 text-white uppercase tracking-wider text-sm">Subscribe</p>
             <p className="text-slate-400 text-sm mb-4">Stay updated with our weekly newsletter.</p>
             <div className="flex space-x-2">
               <input
@@ -118,6 +135,7 @@ const Footer = () => {
                 className="bg-slate-800 border-2 border-slate-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD700] focus:border-transparent w-full text-white placeholder-slate-500"
               />
               <motion.button
+                aria-label="Subscribe"
                 whileHover={{
                   scale: 1.05,
                 }}

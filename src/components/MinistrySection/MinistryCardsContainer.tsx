@@ -32,7 +32,7 @@ const MinistryCardsContainer = () => {
             <min.icon className="w-7 h-7 text-white" />
           </div>
 
-          <h4 className="font-bold text-slate-800 text-center text-sm leading-tight">{min.name}</h4>
+          <p className="font-bold text-slate-800 text-center text-sm leading-tight">{min.name}</p>
         </motion.div>
       ))}
     </div>

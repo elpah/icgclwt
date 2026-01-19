@@ -84,7 +84,7 @@ const About = () => {
                     >
                       <item.icon className="w-6 h-6 text-white" />
                     </div>
-                    <h4 className="font-bold text-slate-900 mb-1">{item.title}</h4>
+                    <p className="font-bold text-slate-900 mb-1">{item.title}</p>
                     <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
                   </motion.div>
                 ))}
@@ -110,6 +110,8 @@ const About = () => {
                   src="https://images.unsplash.com/photo-1543165365-07232ed12abd?auto=format&fit=crop&q=80&w=800"
                   alt="Our Church Family"
                   className="w-full h-150 object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-[#006B3F]/40 to-transparent" />
               </div>

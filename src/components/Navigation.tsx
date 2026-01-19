@@ -97,9 +97,12 @@ const Navigation = () => {
           >
             <div className=" p-1  flex items-center justify-center">
               <img
-                src="https://icgcpeterborough.com/wp-content/uploads/2023/09/ICGCNCT.png"
-                alt="ICGC"
+                src="/images/icgc_logo.webp"
+                alt="ICGC Logo"
                 className="h-10 w-auto object-contain"
+                loading="eager"
+                width="87"
+                height="80"
               />
             </div>
 
@@ -150,6 +153,7 @@ const Navigation = () => {
               }}
               onClick={() => navigate('/live-service')}
               to="/live-service"
+              aria-label="Watch Live Service"
               className="bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-6 py-2.5 rounded-full font-bold text-sm shadow-lg hover:shadow-xl transition-all flex items-center space-x-2"
             >
               <PlayCircle className="w-4 h-4" />
@@ -160,6 +164,7 @@ const Navigation = () => {
           {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2 rounded-md"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
