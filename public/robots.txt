@@ -1,0 +1,16 @@
+# Block sensitive or unnecessary directories for all bots
+User-agent: *
+Disallow: /node_modules/
+Disallow: /build/
+Disallow: /dist/
+Disallow: /scripts/
+Disallow: /test/
+Disallow: /admin/
+Disallow: /private/
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.icgclivingwordtemple.com/sitemap.xml
+
+# Optional crawl delay (not used by Google)
+# Crawl-delay: 10
