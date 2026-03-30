@@ -1,4 +1,4 @@
-import { Clock, Calendar, ArrowRight, Sparkles, Video } from 'lucide-react';
+import { Clock, Calendar, ArrowRight, Home, Video } from 'lucide-react';
 import { motion } from 'framer-motion';
 import About from './About';
 import QuoteSection from '@/components/QuoteSection';
@@ -110,7 +110,7 @@ const HomePage = () => {
                 }}
                 className="inline-flex items-center space-x-2 px-4 py-2 mb-6 rounded-full bg-[#FFD700]/20 backdrop-blur-sm border border-[#FFD700]/30"
               >
-                <Sparkles className="w-4 h-4 text-[#FFD700]" />
+                <Home className="w-4 h-4 text-[#FFD700]" />
                 <span className="text-[#FFD700] text-sm font-bold tracking-wider">
                   WELCOME HOME
                 </span>
@@ -250,7 +250,7 @@ const HomePage = () => {
                 >
                   <div className="flex items-center space-x-3 mb-3">
                     <div className="bg-white/20 backdrop-blur-sm rounded-xl p-2">
-                      <Sparkles className="w-6 h-6 text-white" />
+                      <Home className="w-6 h-6 text-white" />
                     </div>
                   </div>
                   <div className="text-sm text-[#006B3F] font-bold leading-relaxed">
