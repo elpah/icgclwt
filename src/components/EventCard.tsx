@@ -27,7 +27,7 @@ const EventCard = ({ event, index = 0 }: EventCardProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      whileHover={{ y: -10 }}
+      // whileHover={{ y: -10 }}
       onClick={() => navigate(`/event-details/${event.id}`)}
       className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all cursor-pointer border-2 border-slate-100 hover:border-[#FFD700]/50"
     >

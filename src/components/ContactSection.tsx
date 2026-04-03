@@ -23,11 +23,11 @@ const ContactSection = () => {
               Contact
             </span>
 
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
               Get in Touch
             </h2>
 
-            <p className="text-slate-600 mb-10 text-lg leading-relaxed">
+            <p className="text-slate-600 mb-10  text-md lg:text-lg leading-relaxed">
               We'd love to hear from you! Whether you have questions, need prayer, or want to know
               more about our church, we're here to help.
             </p>
@@ -157,7 +157,7 @@ const ContactSection = () => {
             viewport={{
               once: true,
             }}
-            className="bg-white p-10 rounded-[3rem] shadow-2xl border-2 border-slate-100"
+            className="bg-white py-10 px-5 md:p-10 rounded-2xl shadow-2xl border-2 border-slate-100"
           >
             <p className="text-2xl font-bold mb-8 text-slate-900">Send us a Message</p>
             <form className="space-y-5">
@@ -171,7 +171,7 @@ const ContactSection = () => {
                     name="fullName"
                     autoComplete="name"
                     type="text"
-                    className="w-full px-5 py-4 rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-all"
+                    className="w-full px-5 py-3 md:py-4 rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-all mt-1"
                     placeholder="Your name"
                   />
                 </div>
@@ -184,7 +184,7 @@ const ContactSection = () => {
                     name="email"
                     autoComplete="email"
                     type="email"
-                    className="w-full px-5 py-4 rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-all"
+                    className="w-full px-5  py-3 md:py-4  rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-all mt-1"
                     placeholder="Your email"
                   />
                 </div>
@@ -198,7 +198,7 @@ const ContactSection = () => {
                   name="phone"
                   autoComplete="tel"
                   type="tel"
-                  className="w-full px-5 py-4 rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-all"
+                  className="w-full px-5  py-3 md:py-4  rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-all mt-1"
                   placeholder="Your phone number"
                 />
               </div>
@@ -210,7 +210,7 @@ const ContactSection = () => {
                   id="subject"
                   name="subject"
                   type="text"
-                  className="w-full px-5 py-4 rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-all"
+                  className="w-full px-5  py-3 md:py-4  rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-all mt-1"
                   placeholder="How can we help?"
                 />
               </div>
@@ -222,7 +222,7 @@ const ContactSection = () => {
                   id="message"
                   name="message"
                   rows={5}
-                  className="w-full px-5 py-4 rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-all resize-none"
+                  className="w-full px-5  py-3 md:py-4  rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-all resize-none mt-1"
                   placeholder="Your message..."
                 />
               </div>
@@ -233,7 +233,7 @@ const ContactSection = () => {
                 whileTap={{
                   scale: 0.98,
                 }}
-                className="cursor-pointer w-full bg-linear-to-r from-[#006B3F] to-emerald-600 text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all shadow-lg"
+                className="cursor-pointer w-full bg-linear-to-r from-[#006B3F] to-emerald-600 text-white py-5 rounded-lg font-bold text-lg hover:shadow-xl transition-all shadow-lg"
               >
                 Submit Message
               </motion.button>

@@ -26,7 +26,7 @@ const MeetThePastor = () => {
           <span className="inline-block px-4 py-2 rounded-full bg-[#006B3F]/10 text-[#006B3F] text-sm font-bold uppercase tracking-wider mb-4">
             Leadership
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
             Meet Our Head Pastor
           </h2>
         </motion.div>
@@ -47,17 +47,17 @@ const MeetThePastor = () => {
             className="relative"
           >
             <div className="relative">
-              <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative z-10 rounded-3xl overflow-hidden shadow-lg">
                 <img
                   src="/images/rev_obeng.webp"
                   alt="Head Pastor"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-[#006B3F]/40 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-[#006B3F]/20 to-transparent" />
               </div>
 
-              <div className="absolute -top-6 -left-6 w-32 h-32 bg-linear-to-br from-[#FFD700] to-[#FDB813] rounded-3xl z-0 blur-xl opacity-50" />
-              <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-linear-to-br from-[#006B3F] to-emerald-600 rounded-3xl z-0 blur-xl opacity-30" />
+              <div className="absolute -top-6 -left-6 w-32 h-32 bg-linear-to-br from-[#FFD700] to-[#FDB813] rounded-lg z-0 blur-lg opacity-50" />
+              <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-linear-to-br from-[#006B3F] to-emerald-600 rounded-lg z-0 blur-lg opacity-30" />
             </div>
           </motion.div>
 
@@ -74,18 +74,18 @@ const MeetThePastor = () => {
               once: true,
             }}
           >
-            <h3 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl  font-bold mb-4 text-slate-900">
               Rev. Reuben K Obeng
             </h3>
             <p className="text-[#006B3F] font-bold text-xl mb-6">DSM & Head Pastor</p>
 
-            <p className="text-slate-600 mb-6 leading-relaxed text-lg">
+            <p className="text-slate-600 mb-6 leading-relaxed text-md md:text-lg">
               Rev. Obeng has been serving as the Head Pastor of ICGC Living Word Temple for over 15
               years. His passion for teaching God's Word and raising up leaders has transformed
               countless lives.
             </p>
 
-            <p className="text-slate-600 mb-8 leading-relaxed text-lg">
+            <p className="text-slate-600 mb-8 leading-relaxed text-md md:text-lg">
               With a heart for the local community and a vision for global impact, Rev. Obeng leads
               our congregation with wisdom, compassion, and unwavering faith in God's promises.
             </p>
@@ -117,13 +117,10 @@ const MeetThePastor = () => {
             </div>
 
             <motion.button
-              whileHover={{
-                scale: 1.05,
-              }}
               whileTap={{
                 scale: 0.95,
               }}
-              className="cursor-pointer bg-linear-to-r from-[#006B3F] to-emerald-600 text-white px-8 py-4 rounded-full font-bold shadow-xl hover:shadow-2xl transition-all flex items-center"
+              className="cursor-pointer bg-linear-to-r from-[#006B3F] to-emerald-600 text-white px-8 py-4 rounded-full font-bold shadow-md hover:shadow-lg transition-all flex items-center"
               onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
             >
               Schedule a Meeting

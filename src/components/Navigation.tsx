@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Church, PlayCircle, X, Menu } from 'lucide-react';
+import { PlayCircle, X, Menu } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -206,13 +206,16 @@ const Navigation = () => {
                 <button
                   key={link.name}
                   onClick={() => handleNavClick(link.href)}
-                  className="text-2xl font-bold text-slate-800 border-b border-slate-100 pb-2 text-left"
+                  className="text-xl font-semibold text-slate-800 border-b border-slate-100 pb-3 text-left"
                 >
                   {link.name}
                 </button>
               ))}
               <button
-                onClick={() => navigate('/live-service')}
+                onClick={() => {
+                  navigate('/live-service');
+                  setMobileMenuOpen(false);
+                }}
                 className="bg-linear-to-r from-[#006B3F] to-emerald-700 text-[#FFD700] w-full py-4 rounded-xl font-bold text-lg shadow-xl"
               >
                 Join Service Online

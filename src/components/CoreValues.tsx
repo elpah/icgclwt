@@ -22,8 +22,10 @@ const CoreValues = () => {
           <span className="inline-block px-4 py-2 rounded-full bg-[#006B3F]/10 text-[#006B3F] text-sm font-bold uppercase tracking-wider mb-4">
             Our Values
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">What We Stand For</h2>
-          <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+            What We Stand For
+          </h2>
+          <p className="text-slate-600 text-md md:text-lg max-w-2xl mx-auto">
             Our core values guide everything we do as a church family
           </p>
         </motion.div>
@@ -46,18 +48,17 @@ const CoreValues = () => {
               transition={{
                 delay: idx * 0.1,
               }}
-              whileHover={{
-                y: -5,
-              }}
-              className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all border-2 border-slate-100"
+              className="bg-white rounded-2xl p-8 shadow-md hover:shadow-lg transition-all border-2 border-slate-100"
             >
               <div
-                className={`w-16 h-16 bg-linear-to-br ${value.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg`}
+                className={`w-14 h-14 bg-linear-to-br ${value.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg`}
               >
-                <value.icon className="w-8 h-8 text-white" />
+                <value.icon className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-3">{value.title}</h3>
-              <p className="text-slate-600 leading-relaxed">{value.description}</p>
+              <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-3">{value.title}</h3>
+              <p className="text-md md:text-lg text-slate-600 leading-relaxed">
+                {value.description}
+              </p>
             </motion.div>
           ))}
         </div>

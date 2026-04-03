@@ -12,7 +12,6 @@ const UpcomingEvents = () => {
       <div className="absolute top-0 left-0 w-1/3 h-full bg-linear-to-r from-[#FFD700]/5 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -23,12 +22,13 @@ const UpcomingEvents = () => {
             <span className="inline-block px-4 py-1.5 rounded-full bg-[#FFD700]/20 text-[#006B3F] text-sm font-bold uppercase tracking-wider mb-4">
               Events
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">What's Happening</h2>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+              What's Happening
+            </h2>
             <p className="text-slate-600 text-lg">
               Join our upcoming activities and special events
             </p>
           </div>
-
           <motion.button
             whileHover={{ x: 5 }}
             onClick={() => navigate('/events')}
@@ -38,8 +38,6 @@ const UpcomingEvents = () => {
             <ChevronRight className="ml-1 w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </motion.button>
         </motion.div>
-
-        {/* Events Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {UPCOMING_EVENTS.map((event, index) => (
             <EventCard key={event.id} event={event} index={index} />

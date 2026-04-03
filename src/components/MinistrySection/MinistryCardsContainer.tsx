@@ -17,10 +17,9 @@ const MinistryCardsContainer = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ delay: idx * 0.05 }}
-          whileHover={{ scale: 1.05, y: -5 }}
           className="bg-white p-6 rounded-2xl flex flex-col items-center justify-center
                      border-2 border-slate-100 hover:border-[#FFD700]/50
-                     hover:shadow-xl transition-all cursor-pointer group"
+                     hover:shadow-lg transition-all cursor-pointer group"
           onClick={() => handleClick(min.id)}
         >
           <div

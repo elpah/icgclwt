@@ -23,17 +23,21 @@ const JoinMinistriesSection = () => {
           <span className="inline-block px-4 py-1.5 rounded-full bg-[#006B3F]/10 text-[#006B3F] text-sm font-bold uppercase tracking-wider mb-4">
             Get Involved
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900">Our Ministries</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto text-lg">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-slate-900">
+            Our Ministries
+          </h2>
+          <p className="text-slate-600 max-w-2xl mx-auto text-md lg:text-lg">
             Discover a place where you can grow, serve, and make a difference
           </p>
         </motion.div>
         <MinistryCardsContainer />
 
         {/* Why Join Section */}
-        <div className="bg-linear-to-br from-[#006B3F] to-emerald-700 rounded-3xl p-12 text-white">
+        <div className="bg-linear-to-br from-[#006B3F] to-emerald-700 rounded-3xl py-10 px-5 md:p-10 text-white">
           <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-3xl md:text-4xl font-bold mb-6">Why Join a Ministry?</h3>
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+              Why Join a Ministry?
+            </h3>
             <p className="text-slate-200 text-lg mb-10 leading-relaxed">
               Ministries are the heartbeat of our church. When you join a ministry, you're not just
               volunteering—you're discovering your purpose, using your gifts, and impacting lives

@@ -26,7 +26,6 @@ const QuoteSection = () => {
         }}
         className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full -ml-48 -mb-48"
       />
-
       <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
         <motion.div
           initial={{

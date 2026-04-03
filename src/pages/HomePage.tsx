@@ -1,411 +1,217 @@
-import { Clock, Calendar, ArrowRight, Home, Video } from 'lucide-react';
-import { motion } from 'framer-motion';
-import About from './About';
-import QuoteSection from '@/components/QuoteSection';
-import UpcomingEvents from '@/components/UpcomingEvents';
-import GivingSection from '@/components/GivingSection';
-import ContactSection from '@/components/ContactSection';
+import { useEffect, lazy, Suspense, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import JoinMinistriesSection from '@/components/MinistrySection/JoinMinistriesSection';
-import { useEffect } from 'react';
+import { Clock, Calendar, ArrowRight, Home, Video } from 'lucide-react';
+
+const About = lazy(() => import('./About'));
+const QuoteSection = lazy(() => import('@/components/QuoteSection'));
+const UpcomingEvents = lazy(() => import('@/components/UpcomingEvents'));
+const GivingSection = lazy(() => import('@/components/GivingSection'));
+const ContactSection = lazy(() => import('@/components/ContactSection'));
+const JoinMinistriesSection = lazy(
+  () => import('@/components/MinistrySection/JoinMinistriesSection')
+);
+
 const SERVICE_TIMES = [
   {
+    id: 'sunday',
     day: 'Sundays',
     time: '7:30 AM - 10:00 AM',
-    title: 'First Service',
+    title: 'Sunday Service',
   },
   {
-    day: 'Sundays',
-    time: '10:30 AM - 1:00 PM',
-    title: 'Second Service',
-  },
-  {
-    day: 'Wednesdays',
+    id: 'wednesday',
+    day: 'Wednesday',
     time: '6:00 PM - 8:00 PM',
-    title: 'Mid-week Service',
+    title: 'Teaching Service',
+  },
+  {
+    id: 'friday',
+    day: 'Friday',
+    time: '6:00 PM - 8:00 PM',
+    title: 'Prayer Service',
   },
 ];
 
 const HomePage = () => {
   const location = useLocation();
-
-  useEffect(() => {
-    if (location.state?.scrollTo) {
-      const el = document.getElementById(location.state.scrollTo);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  }, [location]);
   const navigate = useNavigate();
-  return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-linear-to-br from-slate-900 via-[#006B3F] to-emerald-900">
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 90, 0],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-            className="absolute top-20 right-20 w-96 h-96 bg-[#FFD700]/10 rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{
-              scale: [1.2, 1, 1.2],
-              rotate: [0, -90, 0],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-            className="absolute bottom-20 left-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"
-          />
-        </div>
 
+  const scrollToId = useCallback(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    requestAnimationFrame(() => {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }, []);
+
+  // Handle scroll from navigation state (if coming from another page)
+  useEffect(() => {
+    const targetId = location.state?.scrollTo;
+    if (!targetId) return;
+
+    scrollToId(targetId);
+  }, [location.state?.scrollTo, scrollToId]);
+
+  const goToLiveService = useCallback(() => {
+    navigate('/live-service');
+  }, [navigate]);
+
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-linear-to-br from-slate-900 via-[#006B3F] to-emerald-900">
         <div className="absolute inset-0 z-0 opacity-20">
           <img
             src="images/church_cover_image.webp"
+            alt="Church Hero"
             width={1920}
             height={1080}
             loading="eager"
+            fetchPriority="high"
             decoding="async"
-            alt="Church Hero"
             className="w-full h-full object-cover"
           />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-20 pb-32">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{
-                opacity: 0,
-                y: 30,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                duration: 0.8,
-              }}
-              className="text-white"
-            >
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  scale: 0.9,
-                }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                }}
-                transition={{
-                  delay: 0.2,
-                }}
-                className="inline-flex items-center space-x-2 px-4 py-2 mb-6 rounded-full bg-[#FFD700]/20 backdrop-blur-sm border border-[#FFD700]/30"
-              >
+            {/* LEFT */}
+            <div className="text-white">
+              <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-[#FFD700]/20 border border-[#FFD700]/30">
                 <Home className="w-4 h-4 text-[#FFD700]" />
                 <span className="text-[#FFD700] text-sm font-bold tracking-wider">
                   WELCOME HOME
                 </span>
-              </motion.div>
+              </div>
 
-              <motion.h1
-                initial={{
-                  opacity: 0,
-                  y: 20,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                transition={{
-                  delay: 0.3,
-                }}
-                className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-[0.95]"
-              >
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold leading-[0.95] mb-6">
                 Experience
                 <br />
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FFD700] via-yellow-400 to-[#FFD700] animate-pulse">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FFD700] via-yellow-400 to-[#FFD700]">
                   God's Power
                 </span>
-              </motion.h1>
+              </h1>
 
-              <motion.p
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: 1,
-                }}
-                transition={{
-                  delay: 0.5,
-                }}
-                className="text-lg md:text-xl text-slate-300 mb-10 leading-relaxed max-w-xl"
-              >
+              <p className="text-lg md:text-xl text-slate-300 max-w-xl mb-10">
                 A message-centered, mission-oriented community where lives are transformed and
                 leaders are raised.
-              </motion.p>
+              </p>
 
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 20,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                transition={{
-                  delay: 0.7,
-                }}
-                className="flex flex-col sm:flex-row gap-4"
-              >
-                <motion.button
-                  whileHover={{
-                    scale: 1.05,
-                  }}
-                  whileTap={{
-                    scale: 0.95,
-                  }}
-                  className="cursor-pointer group bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-8 py-4 rounded-full font-bold text-lg shadow-md hover:shadow-[#FFD700]/50 transition-all flex items-center justify-center"
-                  onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button
+                  onClick={() => scrollToId('contact')}
+                  className="cursor-pointer bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center"
                 >
                   Plan Your Visit
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </motion.button>
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </button>
 
-                <motion.button
-                  whileHover={{
-                    scale: 1.05,
-                  }}
-                  whileTap={{
-                    scale: 0.95,
-                  }}
-                  onClick={() => {
-                    navigate('/live-service');
-                  }}
-                  className="cursor-pointer group bg-white/10 backdrop-blur-md border-2 border-white/30 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all flex items-center justify-center"
+                <button
+                  onClick={goToLiveService}
+                  className=" cursor-pointer  bg-white/10 border border-white/30 text-white px-8 py-4 rounded-full font-bold flex items-center justify-center"
                 >
                   <Video className="mr-2 w-5 h-5" />
                   Watch Services
-                </motion.button>
-              </motion.div>
-            </motion.div>
-
-            <motion.div
-              initial={{
-                opacity: 0,
-                scale: 0.9,
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-              }}
-              transition={{
-                delay: 0.5,
-                duration: 0.8,
-              }}
-              className="hidden lg:block relative"
-            >
-              <div className="relative">
-                <motion.div
-                  animate={{
-                    y: [0, -20, 0],
-                  }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                  className="relative z-10 rounded-3xl overflow-hidden shadow-2xl"
-                >
-                  <img
-                    src="images/church_cover_smaller.webp"
-                    width={800}
-                    height={450}
-                    loading="eager"
-                    decoding="async"
-                    alt="Church Hero Worship"
-                    className="w-full h-125 object-cover"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
-                </motion.div>
-                <motion.div
-                  animate={{
-                    y: [0, 15, 0],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                  className="absolute -top-8 -right-8 bg-linear-to-br from-[#FFD700] to-[#FDB813] rounded-2xl p-6 shadow-2xl z-20 w-64"
-                >
-                  <div className="flex items-center space-x-3 mb-3">
-                    <div className="bg-white/20 backdrop-blur-sm rounded-xl p-2">
-                      <Home className="w-6 h-6 text-white" />
-                    </div>
-                  </div>
-                  <div className="text-sm text-[#006B3F] font-bold leading-relaxed">
-                    Raising leaders, shaping vision, influencing society through Christ
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  animate={{
-                    y: [0, -15, 0],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                  className="absolute -bottom-8 -left-8 bg-white rounded-2xl p-6 shadow-2xl z-20 w-48"
-                >
-                  <div className="flex items-center space-x-3 mb-3">
-                    <div className="bg-[#006B3F]/10 rounded-xl p-2">
-                      <Calendar className="w-5 h-5 text-[#006B3F]" />
-                    </div>
-                    <div className="text-2xl font-bold text-[#006B3F]">3x</div>
-                  </div>
-                  <div className="text-sm text-slate-600 font-bold">Weekly Services</div>
-                </motion.div>
+                </button>
               </div>
-            </motion.div>
+            </div>
+
+            {/* RIGHT */}
+            <div className="hidden lg:block relative">
+              <img
+                src="images/church_cover_smaller.webp"
+                alt="Church Worship"
+                width={800}
+                height={450}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-125 object-cover rounded-3xl shadow-2xl"
+              />
+
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent rounded-3xl" />
+
+              {/* CARD 1 */}
+              <div className="absolute -top-6 -right-6 bg-linear-to-br from-[#FFD700] to-[#FDB813] rounded-2xl p-6 shadow-xl w-64">
+                <p className="text-sm text-[#006B3F] font-bold">
+                  Raising leaders, shaping vision, influencing society through Christ
+                </p>
+              </div>
+
+              {/* CARD 2 */}
+              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl w-48">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="bg-[#006B3F]/10 p-2 rounded-xl">
+                    <Calendar className="w-5 h-5 text-[#006B3F]" />
+                  </div>
+                  <div className="text-2xl font-bold text-[#006B3F]">3x</div>
+                </div>
+                <div className="text-sm text-slate-600 font-bold">Weekly Services</div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <motion.div
-          animate={{
-            y: [0, 10, 0],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 2,
-          }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 hidden md:block"
-        >
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1">
-            <motion.div
-              animate={{
-                y: [0, 12, 0],
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 1.5,
-              }}
-              className="w-1.5 h-2 bg-white rounded-full"
-            />
-          </div>
-        </motion.div>
       </section>
 
-      {/* <LiveServices /> */}
-
-      <section className="py-24 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: 'radial-gradient(circle, #006B3F 1px, transparent 1px)',
-              backgroundSize: '30px 30px',
-            }}
-          />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{
-              opacity: 0,
-              y: 20,
-            }}
-            whileInView={{
-              opacity: 1,
-              y: 0,
-            }}
-            viewport={{
-              once: true,
-            }}
-            className="text-center mb-16"
-          >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-[#006B3F]/10 text-[#006B3F] text-sm font-bold uppercase tracking-wider mb-4">
-              Join Us
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Worship With Us</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto text-lg">
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">Worship With Us</h2>
+            <p className="text-slate-600 mt-4">
               Experience vibrant worship, powerful teaching, and genuine community
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {SERVICE_TIMES.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{
-                  opacity: 0,
-                  y: 30,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  delay: index * 0.1,
-                }}
-                whileHover={{
-                  y: -10,
-                  scale: 1.02,
-                }}
-                className="group relative bg-linear-to-br from-white to-slate-50 p-8 rounded-3xl border-2 border-slate-100 hover:border-[#006B3F]/30 hover:shadow-xl transition-all overflow-hidden"
+            {SERVICE_TIMES.map(service => (
+              <div
+                key={service.id}
+                className="p-8 rounded-3xl border bg-white hover:shadow-lg transition"
               >
-                <div className="absolute inset-0 bg-linear-to-br from-[#006B3F]/0 to-[#FFD700]/0 group-hover:from-[#006B3F]/5 group-hover:to-[#FFD700]/5 transition-all" />
-
-                <div className="relative z-10">
-                  <div className="w-16 h-16 bg-linear-to-br from-[#006B3F] to-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all shadow-lg">
-                    <Clock className="w-8 h-8 text-[#FFD700]" />
-                  </div>
-
-                  <h3 className="text-2xl font-bold mb-2 text-slate-900">{service.title}</h3>
-                  <div className="inline-block px-3 py-1 bg-[#006B3F]/10 rounded-full mb-4">
-                    <p className="text-[#006B3F] font-bold text-sm">{service.day}</p>
-                  </div>
-                  <p className="text-slate-600 text-lg font-semibold">{service.time}</p>
-
-                  <div className="mt-6 pt-6 border-t border-slate-200 group-hover:border-[#FFD700]/50 transition-all">
-                    <button
-                      onClick={() => {
-                        const el = document.getElementById('map');
-                        if (el) el.scrollIntoView({ behavior: 'smooth' });
-                      }}
-                      className="cursor-pointer text-[#006B3F] font-bold text-sm flex items-center group-hover:text-[#FFD700] transition-colors"
-                    >
-                      Get Directions
-                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
+                <div className="w-14 h-14 bg-[#006B3F] rounded-2xl flex items-center justify-center mb-6">
+                  <Clock className="w-7 h-7 text-[#FFD700]" />
                 </div>
-              </motion.div>
+
+                <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                <div className="text-sm text-[#006B3F] font-semibold mb-2">{service.day}</div>
+                <div className="text-slate-600 font-medium">{service.time}</div>
+
+                <button
+                  onClick={() => scrollToId('map')}
+                  className="mt-6 text-[#006B3F] font-bold flex items-center"
+                >
+                  Get Directions
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </button>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <About />
-      <UpcomingEvents />
-      <QuoteSection />
-      <JoinMinistriesSection />
-      <GivingSection />
-      <ContactSection />
+      {/* ================= LAZY SECTIONS ================= */}
+      <Suspense fallback={null}>
+        <About />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <UpcomingEvents />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <QuoteSection />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <JoinMinistriesSection />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <GivingSection />
+      </Suspense>
+
+      <Suspense fallback={<div className="p-10 text-center">Loading...</div>}>
+        <ContactSection />
+      </Suspense>
     </div>
   );
 };
