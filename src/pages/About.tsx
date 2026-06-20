@@ -1,34 +1,34 @@
-import { Heart, BookOpen, Music, Users } from "lucide-react";
-import { motion } from "framer-motion";
-import CoreValues from "@/components/CoreValues";
-import MeetThePastor from "@/components/MeetThePastor";
+import { Heart, BookOpen, Music, Users } from 'lucide-react';
+import { motion } from 'framer-motion';
+import CoreValues from '@/components/CoreValues';
+import MeetThePastor from '@/components/MeetThePastor';
 
 const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 
 const VALUES = [
   {
     icon: Heart,
-    title: "Family",
-    desc: "A community where you belong",
-    color: "from-red-500 to-pink-500",
+    title: 'Family',
+    desc: 'A community where you belong',
+    color: 'from-red-500 to-pink-500',
   },
   {
     icon: BookOpen,
-    title: "The Word",
-    desc: "Sound biblical teaching",
-    color: "from-blue-500 to-cyan-500",
+    title: 'The Word',
+    desc: 'Sound biblical teaching',
+    color: 'from-blue-500 to-cyan-500',
   },
   {
     icon: Music,
-    title: "Worship",
-    desc: "Engaging praise & worship",
-    color: "from-purple-500 to-indigo-500",
+    title: 'Worship',
+    desc: 'Engaging praise & worship',
+    color: 'from-purple-500 to-indigo-500',
   },
   {
     icon: Users,
-    title: "Impact",
-    desc: "Reaching out to our city",
-    color: "from-green-500 to-emerald-500",
+    title: 'Impact',
+    desc: 'Reaching out to our city',
+    color: 'from-green-500 to-emerald-500',
   },
 ];
 
@@ -43,7 +43,7 @@ const About = () => {
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.5, ease: easeOutExpo }}
                 className="inline-block px-4 py-2 rounded-full bg-[#006B3F]/10 text-[#006B3F] text-sm font-bold uppercase tracking-wider mb-6"
               >
@@ -53,7 +53,7 @@ const About = () => {
               <motion.div
                 initial={{ y: 20 }}
                 whileInView={{ y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.5, delay: 0.2, ease: easeOutExpo }}
               >
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-slate-900 leading-tight">
@@ -68,24 +68,23 @@ const About = () => {
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.5, delay: 0.3, ease: easeOutExpo }}
                 className="text-slate-600 mb-6 leading-relaxed text-md md:text-lg"
               >
-                International Central Gospel Church (ICGC) is a Christian
-                organization, multi-cultural in nature, but primarily for the
-                empowerment of the African person.
+                International Central Gospel Church (ICGC) is a Christian organization,
+                multi-cultural in nature, but primarily for the empowerment of the African person.
               </motion.p>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.5, delay: 0.3, ease: easeOutExpo }}
                 className="text-slate-600 mb-8 leading-relaxed text-md md:text-lg"
               >
-                Living Word Temple is a vibrant branch of the ICGC family,
-                dedicated to building people of integrity and excellence.
+                Living Word Temple is a vibrant branch of the ICGC family, dedicated to building
+                people of integrity and excellence.
               </motion.p>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
@@ -94,7 +93,7 @@ const About = () => {
                     key={item.title}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
+                    viewport={{ once: true, margin: '-50px' }}
                     transition={{
                       duration: 0.5,
                       delay: 0.3 + index * 0.1,
@@ -107,12 +106,8 @@ const About = () => {
                     >
                       <item.icon className="w-6 h-6 text-white" />
                     </div>
-                    <p className="font-bold text-lg md:text-xl text-slate-900 mb-2">
-                      {item.title}
-                    </p>
-                    <p className="text-md md:text-lg text-slate-500 leading-relaxed">
-                      {item.desc}
-                    </p>
+                    <p className="font-bold text-lg md:text-xl text-slate-900 mb-2">{item.title}</p>
+                    <p className="text-md md:text-lg text-slate-500 leading-relaxed">{item.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -124,25 +119,25 @@ const About = () => {
                 className="relative z-10 rounded-3xl overflow-hidden shadow-2xl"
                 initial={{ opacity: 0, scale: 1.03 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.8, ease: easeOutExpo }}
               >
                 <img
-                  src="https://images.unsplash.com/photo-1543165365-07232ed12abd?auto=format&fit=crop&q=80&w=800"
+                  src="https://res.cloudinary.com/dvwpuenzk/image/upload/v1781938363/icgc_banner_kfyfxr.avif"
                   alt="Our Church Family"
                   className="w-full aspect-4/5 object-cover"
                   loading="lazy"
                   decoding="async"
                 />
 
-                <div className="absolute inset-0 bg-linear-to-t from-[#006B3F]/40 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-[#006B3F]/20 to-transparent" />
               </motion.div>
 
               <motion.div
                 className="absolute bottom-8 left-8 right-8 bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-2xl z-20"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: 0.4, ease: easeOutExpo }}
               >
                 <div className="flex items-center gap-4">
@@ -152,9 +147,7 @@ const About = () => {
 
                   <div>
                     <div className="text-2xl font-bold text-slate-900">20+</div>
-                    <div className="text-sm text-slate-600 font-medium">
-                      Years of Ministry
-                    </div>
+                    <div className="text-sm text-slate-600 font-medium">Years of Ministry</div>
                   </div>
                 </div>
               </motion.div>

@@ -206,7 +206,7 @@ export const MINISTRIES_DATA = [
   },
   {
     id: 'women',
-    name: 'Women of Grace',
+    name: 'Precious Vessels of Virtue',
     icon: Heart,
     color: 'from-rose-500 to-pink-500',
     description: 'Empowering women in faith',

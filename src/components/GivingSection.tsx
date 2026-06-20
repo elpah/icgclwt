@@ -5,7 +5,7 @@ import { Heart } from "lucide-react";
 const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 
 const GivingSection = () => {
-  const moneyNumber = useMemo(() => "0244 000 000", []);
+  const moneyNumber = useMemo(() => "024 595 3629", []);
 
   return (
     <section id="giving" className="py-24 bg-white relative overflow-hidden">

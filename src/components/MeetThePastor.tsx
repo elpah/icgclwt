@@ -46,7 +46,7 @@ const MeetThePastor = () => {
                 <img
                   src="/images/rev_obeng.webp"
                   alt="Head Pastor"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover scale-x-[-1]"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-[#006B3F]/20 to-transparent" />
               </div>

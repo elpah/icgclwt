@@ -61,9 +61,9 @@ const ContactSection = () => {
                 {
                   icon: Phone,
                   title: "Phone",
-                  content: "+233 (0) 30 123 4567",
+                  content: "+233 (0) 24 595 3629",
                   color: "from-green-500 to-emerald-500",
-                  link: "tel:+233301234567",
+                  link: "tel:+233245953629",
                 },
                 {
                   icon: Mail,
