@@ -1,6 +1,8 @@
-import { motion } from 'framer-motion';
-import { GraduationCap, Heart, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion";
+import { GraduationCap, Heart, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 
 const MeetThePastor = () => {
   const navigate = useNavigate();
@@ -9,41 +11,34 @@ const MeetThePastor = () => {
       <div className="absolute top-0 right-0 w-1/3 h-full bg-linear-to-l from-[#006B3F]/5 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-          }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block px-4 py-2 rounded-full bg-[#006B3F]/10 text-[#006B3F] text-sm font-bold uppercase tracking-wider mb-4">
+        <div className="text-center mb-16">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, ease: easeOutExpo }}
+            className="inline-block px-4 py-2 rounded-full bg-[#006B3F]/10 text-[#006B3F] text-sm font-bold uppercase tracking-wider mb-4"
+          >
             Leadership
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+          </motion.span>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.1, ease: easeOutExpo }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4"
+          >
             Meet Our Head Pastor
-          </h2>
-        </motion.div>
+          </motion.h2>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
-            initial={{
-              opacity: 0,
-              x: -50,
-            }}
-            whileInView={{
-              opacity: 1,
-              x: 0,
-            }}
-            viewport={{
-              once: true,
-            }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: easeOutExpo, delay: 0.2 }}
             className="relative"
           >
             <div className="relative">
@@ -61,37 +56,61 @@ const MeetThePastor = () => {
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{
-              opacity: 0,
-              x: 50,
-            }}
-            whileInView={{
-              opacity: 1,
-              x: 0,
-            }}
-            viewport={{
-              once: true,
-            }}
-          >
-            <h3 className="text-3xl md:text-4xl lg:text-5xl  font-bold mb-4 text-slate-900">
+          <div>
+            <motion.h3
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, ease: easeOutExpo }}
+              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-slate-900"
+            >
               Rev. Reuben K Obeng
-            </h3>
-            <p className="text-[#006B3F] font-bold text-xl mb-6">DSM & Head Pastor</p>
+            </motion.h3>
 
-            <p className="text-slate-600 mb-6 leading-relaxed text-md md:text-lg">
-              Rev. Obeng has been serving as the Head Pastor of ICGC Living Word Temple for over 15
-              years. His passion for teaching God's Word and raising up leaders has transformed
-              countless lives.
-            </p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: 0.1, ease: easeOutExpo }}
+              className="text-[#006B3F] font-bold text-xl mb-6"
+            >
+              DSM & Head Pastor
+            </motion.p>
 
-            <p className="text-slate-600 mb-8 leading-relaxed text-md md:text-lg">
-              With a heart for the local community and a vision for global impact, Rev. Obeng leads
-              our congregation with wisdom, compassion, and unwavering faith in God's promises.
-            </p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: 0.2, ease: easeOutExpo }}
+              className="text-slate-600 mb-6 leading-relaxed text-md md:text-lg"
+            >
+              Rev. Obeng has been serving as the Head Pastor of ICGC Living Word
+              Temple for over 15 years. His passion for teaching God's Word and
+              raising up leaders has transformed countless lives.
+            </motion.p>
 
-            <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-slate-100 mb-8">
-              <h4 className="font-bold text-slate-900 mb-3">Qualifications & Education</h4>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: 0.3, ease: easeOutExpo }}
+              className="text-slate-600 mb-8 leading-relaxed text-md md:text-lg"
+            >
+              With a heart for the local community and a vision for global
+              impact, Rev. Obeng leads our congregation with wisdom, compassion,
+              and unwavering faith in God's promises.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: 0.4, ease: easeOutExpo }}
+              className="bg-white rounded-2xl p-6 shadow-lg border-2 border-slate-100 mb-8"
+            >
+              <h4 className="font-bold text-slate-900 mb-3">
+                Qualifications & Education
+              </h4>
               <ul className="space-y-2 text-slate-600">
                 <li className="flex items-start">
                   <GraduationCap className="w-5 h-5 mr-2 mt-0.5 text-[#006B3F]" />
@@ -99,7 +118,9 @@ const MeetThePastor = () => {
                 </li>
                 <li className="flex items-start">
                   <GraduationCap className="w-5 h-5 mr-2 mt-0.5 text-[#006B3F]" />
-                  <span>Master of Art - Human Right and Human Resource Development</span>
+                  <span>
+                    Master of Art - Human Right and Human Resource Development
+                  </span>
                 </li>
                 <li className="flex items-start">
                   <GraduationCap className="w-5 h-5 mr-2 mt-0.5 text-[#006B3F]" />
@@ -107,26 +128,30 @@ const MeetThePastor = () => {
                 </li>
                 <li className="flex items-start">
                   <GraduationCap className="w-5 h-5 mr-2 mt-0.5 text-[#006B3F]" />
-                  <span>Certificate in Counselling from Central University, Accra</span>
+                  <span>
+                    Certificate in Counselling from Central University, Accra
+                  </span>
                 </li>
                 <li className="flex items-start">
                   <Heart className="w-5 h-5 mr-2 mt-0.5 text-[#006B3F]" />
                   <span>15+ Years of Pastoral Ministry</span>
                 </li>
               </ul>
-            </div>
+            </motion.div>
 
             <motion.button
-              whileTap={{
-                scale: 0.95,
-              }}
-              className="cursor-pointer bg-linear-to-r from-[#006B3F] to-emerald-600 text-white px-8 py-4 rounded-full font-bold shadow-md hover:shadow-lg transition-all flex items-center"
-              onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: 0.5, ease: easeOutExpo }}
+              whileTap={{ scale: 0.95 }}
+              className="cursor-pointer bg-linear-to-r from-[#006B3F] to-emerald-600 text-white px-8 py-4 rounded-full font-bold shadow-md hover:shadow-lg transition-shadow flex items-center"
+              onClick={() => navigate("/", { state: { scrollTo: "contact" } })}
             >
               Schedule a Meeting
               <ArrowRight className="ml-2 w-5 h-5" />
             </motion.button>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

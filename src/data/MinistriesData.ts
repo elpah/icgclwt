@@ -32,7 +32,7 @@ export const MINISTRIES_DATA = [
       'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=600',
     ],
     leader: 'Bro. Emmanuel Mensah',
-    contact: 'worship@icgclwt.org',
+    contact: 'info@icgclivingwordtemple.com',
   },
   {
     id: 'children',
@@ -65,7 +65,7 @@ export const MINISTRIES_DATA = [
       'https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&q=80&w=600',
     ],
     leader: 'Sis. Grace Asante',
-    contact: 'children@icgclwt.org',
+    contact: 'info@icgclivingwordtemple.com',
   },
   {
     id: 'media',
@@ -103,7 +103,7 @@ export const MINISTRIES_DATA = [
       'https://images.unsplash.com/photo-1499673610122-01c7122c5dcb?auto=format&fit=crop&q=80&w=600',
     ],
     leader: 'Bro. Kwame Boateng',
-    contact: 'media@icgclwt.org',
+    contact: 'info@icgclivingwordtemple.com',
   },
   {
     id: 'hospitality',
@@ -136,7 +136,7 @@ export const MINISTRIES_DATA = [
       'https://images.unsplash.com/photo-1591115765373-5207764f72e7?auto=format&fit=crop&q=80&w=600',
     ],
     leader: 'Sis. Abena Osei',
-    contact: 'hospitality@icgclwt.org',
+    contact: 'info@icgclivingwordtemple.com',
   },
   {
     id: 'youth',
@@ -169,7 +169,7 @@ export const MINISTRIES_DATA = [
       'https://images.unsplash.com/photo-1525026198548-4baa812f1183?auto=format&fit=crop&q=80&w=600',
     ],
     leader: 'Pastor Daniel Owusu',
-    contact: 'youth@icgclwt.org',
+    contact: 'info@icgclivingwordtemple.com',
   },
   {
     id: 'men',
@@ -202,7 +202,7 @@ export const MINISTRIES_DATA = [
       'https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&q=80&w=600',
     ],
     leader: 'Elder Joseph Antwi',
-    contact: 'men@icgclwt.org',
+    contact: 'info@icgclivingwordtemple.com',
   },
   {
     id: 'women',
@@ -235,7 +235,7 @@ export const MINISTRIES_DATA = [
       'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&fit=crop&q=80&w=600',
     ],
     leader: 'Sis. Akosua Adjei',
-    contact: 'women@icgclwt.org',
+    contact: 'info@icgclivingwordtemple.com',
   },
   {
     id: 'outreach',
@@ -268,6 +268,6 @@ export const MINISTRIES_DATA = [
       'https://images.unsplash.com/photo-1532629345422-7515f3d16bb8?auto=format&fit=crop&q=80&w=600',
     ],
     leader: 'Bro. Samuel Nkrumah',
-    contact: 'outreach@icgclwt.org',
+    contact: 'info@icgclivingwordtemple.com',
   },
 ];

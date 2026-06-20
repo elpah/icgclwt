@@ -1,16 +1,26 @@
-import { useMemo } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Clock, Calendar, MapPin, ArrowRight, Users, Heart, Share2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { useMemo } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  Clock,
+  Calendar,
+  MapPin,
+  ArrowRight,
+  Users,
+  Heart,
+  Share2,
+} from "lucide-react";
 
-import { UPCOMING_EVENTS } from '@/data/upcomingEventsData';
-import EventCard from '@/components/EventCard';
+import { UPCOMING_EVENTS } from "@/data/upcomingEventsData";
+import EventCard from "@/components/EventCard";
 
 const EventDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const event = useMemo(() => UPCOMING_EVENTS.find(e => e.id === id), [id]);
-  const relatedEvents = useMemo(() => UPCOMING_EVENTS.filter(e => e.id !== id), [id]);
+  const event = useMemo(() => UPCOMING_EVENTS.find((e) => e.id === id), [id]);
+  const relatedEvents = useMemo(
+    () => UPCOMING_EVENTS.filter((e) => e.id !== id),
+    [id],
+  );
 
   if (!event) {
     return (
@@ -23,24 +33,26 @@ const EventDetailsPage = () => {
   return (
     <div className="min-h-screen bg-slate-50">
       <section className="relative h-125 overflow-hidden">
-        <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
+        <img
+          src={event.image}
+          alt={event.title}
+          className="w-full h-full object-cover"
+        />
 
         <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent" />
 
         <div className="absolute inset-0 flex items-end">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 w-full">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: 'easeOut' }}
-            >
+            <div>
               <div className="inline-block px-4 py-2 rounded-full bg-[#FFD700] mb-4">
                 <span className="text-[#006B3F] text-sm font-bold uppercase tracking-wider">
                   {event.category}
                 </span>
               </div>
 
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">{event.title}</h1>
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                {event.title}
+              </h1>
 
               <div className="flex flex-wrap gap-6 text-white text-sm md:text-base">
                 <div className="flex items-center gap-2">
@@ -58,22 +70,18 @@ const EventDetailsPage = () => {
                   <span>ICGC Living Word Temple</span>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-3xl p-8 shadow-lg"
-            >
+            <div className="bg-white rounded-3xl p-8 shadow-lg">
               <h2 className="text-3xl font-bold mb-6">About This Event</h2>
-              <p className="text-slate-600 text-lg mb-8 leading-relaxed">{event.desc}</p>
+              <p className="text-slate-600 text-lg mb-8 leading-relaxed">
+                {event.desc}
+              </p>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-slate-50 rounded-2xl p-6">
                   <Users className="w-6 h-6 text-blue-500 mb-2" />
@@ -83,19 +91,15 @@ const EventDetailsPage = () => {
                 <div className="bg-slate-50 rounded-2xl p-6">
                   <Heart className="w-6 h-6 text-green-500 mb-2" />
                   <h4 className="font-bold">Registration</h4>
-                  <p className="text-slate-600">Free entry, no registration required</p>
+                  <p className="text-slate-600">
+                    Free entry, no registration required
+                  </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
           <div>
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.9 }}
-              viewport={{ once: true }}
-              className="bg-linear-to-br from-[#006B3F] to-emerald-700 rounded-3xl p-8 text-white sticky top-24"
-            >
+            <div className="bg-linear-to-br from-[#006B3F] to-emerald-700 rounded-3xl p-8 text-white sticky top-24">
               <h3 className="text-2xl font-bold mb-6">Event Details</h3>
 
               <a
@@ -111,7 +115,7 @@ const EventDetailsPage = () => {
                 <Share2 className="w-5 h-5" />
                 Share Event
               </button>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -121,22 +125,19 @@ const EventDetailsPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {relatedEvents.map((event, index) => (
-              <EventCard key={event.id} event={event} index={index} />
+              <EventCard key={event.id} event={event} />
             ))}
           </div>
         </div>
       </section>
       <section className="py-16 bg-linear-to-br from-[#006B3F] to-emerald-700 text-center">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-          transition={{ duration: 0.2 }}
-          onClick={() => navigate('/events')}
+        <button
+          onClick={() => navigate("/events")}
           className="bg-[#FFD700] text-[#006B3F] px-8 py-4 rounded-full font-bold inline-flex items-center gap-2"
         >
           Explore All Events
           <ArrowRight className="w-5 h-5" />
-        </motion.button>
+        </button>
       </section>
     </div>
   );
