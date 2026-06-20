@@ -59,7 +59,7 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-900 via-[#006B3F] to-emerald-900">
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-linear-to-br from-slate-900 via-[#006B3F] to-emerald-900">
         <div className="absolute inset-0 z-0 opacity-20">
           <img
             src="images/church_cover_image.webp"
@@ -102,7 +102,7 @@ const HomePage = () => {
                 >
                   Experience
                   <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] via-yellow-400 to-[#FFD700]">
+                  <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FFD700] via-yellow-400 to-[#FFD700]">
                     God's Power
                   </span>
                 </motion.h1>
