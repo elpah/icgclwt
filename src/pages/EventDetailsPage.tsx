@@ -1,26 +1,15 @@
-import { useMemo } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import {
-  Clock,
-  Calendar,
-  MapPin,
-  ArrowRight,
-  Users,
-  Heart,
-  Share2,
-} from "lucide-react";
+import { useMemo } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Clock, Calendar, MapPin, ArrowRight, Users, Heart, Share2 } from 'lucide-react';
 
-import { UPCOMING_EVENTS } from "@/data/upcomingEventsData";
-import EventCard from "@/components/EventCard";
+import { UPCOMING_EVENTS } from '@/data/upcomingEventsData';
+import EventCard from '@/components/EventCard';
 
 const EventDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const event = useMemo(() => UPCOMING_EVENTS.find((e) => e.id === id), [id]);
-  const relatedEvents = useMemo(
-    () => UPCOMING_EVENTS.filter((e) => e.id !== id),
-    [id],
-  );
+  const event = useMemo(() => UPCOMING_EVENTS.find(e => e.id === id), [id]);
+  const relatedEvents = useMemo(() => UPCOMING_EVENTS.filter(e => e.id !== id), [id]);
 
   if (!event) {
     return (
@@ -33,11 +22,7 @@ const EventDetailsPage = () => {
   return (
     <div className="min-h-screen bg-slate-50">
       <section className="relative h-125 overflow-hidden">
-        <img
-          src={event.image}
-          alt={event.title}
-          className="w-full h-full object-cover"
-        />
+        <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
 
         <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent" />
 
@@ -50,9 +35,7 @@ const EventDetailsPage = () => {
                 </span>
               </div>
 
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                {event.title}
-              </h1>
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">{event.title}</h1>
 
               <div className="flex flex-wrap gap-6 text-white text-sm md:text-base">
                 <div className="flex items-center gap-2">
@@ -60,10 +43,10 @@ const EventDetailsPage = () => {
                   <span>{event.date}</span>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-[#FFD700]" />
-                  <span>{event.time}</span>
-                </div>
+                {/* { event.time && <div className="flex items-center gap-2">
+                <Clock className="w-5 h-5 text-[#FFD700]" />
+                <span>{event.time}</span>
+              </div>} */}
 
                 <div className="flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-[#FFD700]" />
@@ -79,9 +62,7 @@ const EventDetailsPage = () => {
           <div className="lg:col-span-2">
             <div className="bg-white rounded-3xl p-8 shadow-lg">
               <h2 className="text-3xl font-bold mb-6">About This Event</h2>
-              <p className="text-slate-600 text-lg mb-8 leading-relaxed">
-                {event.desc}
-              </p>
+              <p className="text-slate-600 text-lg mb-8 leading-relaxed">{event.desc}</p>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-slate-50 rounded-2xl p-6">
                   <Users className="w-6 h-6 text-blue-500 mb-2" />
@@ -91,9 +72,7 @@ const EventDetailsPage = () => {
                 <div className="bg-slate-50 rounded-2xl p-6">
                   <Heart className="w-6 h-6 text-green-500 mb-2" />
                   <h4 className="font-bold">Registration</h4>
-                  <p className="text-slate-600">
-                    Free entry, no registration required
-                  </p>
+                  <p className="text-slate-600">Free entry, no registration required</p>
                 </div>
               </div>
             </div>
@@ -132,7 +111,7 @@ const EventDetailsPage = () => {
       </section>
       <section className="py-16 bg-linear-to-br from-[#006B3F] to-emerald-700 text-center">
         <button
-          onClick={() => navigate("/events")}
+          onClick={() => navigate('/events')}
           className="bg-[#FFD700] text-[#006B3F] px-8 py-4 rounded-full font-bold inline-flex items-center gap-2"
         >
           Explore All Events
