@@ -1,21 +1,21 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { PlayCircle, X, Menu } from "lucide-react";
-import { useState, useEffect, useCallback, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from 'framer-motion';
+import { PlayCircle, X, Menu } from 'lucide-react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 
 const NAV_LINKS = [
-  { name: "Home", href: "home" },
-  { name: "About", href: "about" },
-  { name: "Events", href: "events" },
-  { name: "Ministries", href: "ministries" },
-  { name: "Contact", href: "contact" },
+  { name: 'Home', href: 'home' },
+  { name: 'About', href: 'about' },
+  { name: 'Events', href: 'events' },
+  { name: 'Ministries', href: 'ministries' },
+  { name: 'Contact', href: 'contact' },
 ];
 
 const Navigation = () => {
   const location = useLocation();
-  const isHome = location.pathname === "/";
+  const isHome = location.pathname === '/';
   const navigate = useNavigate();
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,66 +30,61 @@ const Navigation = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleNavClick = useCallback(
     (target: string) => {
-      if (target === "live-service") {
-        navigate("/live-service");
+      if (target === 'live-service') {
+        navigate('/live-service');
         setMobileMenuOpen(false);
         return;
       }
-      if (target === "events") {
-        navigate("/events");
+      if (target === 'events') {
+        navigate('/events');
         setMobileMenuOpen(false);
         return;
       }
 
       const scrollToSection = () => {
-        if (target === "home") {
-          window.scrollTo({ top: 0, behavior: "smooth" });
+        if (target === 'home') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
           return;
         }
         const el = document.getElementById(target);
-        el?.scrollIntoView({ behavior: "smooth" });
+        el?.scrollIntoView({ behavior: 'smooth' });
       };
 
       if (isHome) {
         scrollToSection();
       } else {
-        navigate("/");
+        navigate('/');
         setTimeout(scrollToSection, 150);
       }
       setMobileMenuOpen(false);
     },
-    [isHome, navigate],
+    [isHome, navigate]
   );
 
-  const navTextColor =
-    isScrolled || !isHome || mobileMenuOpen ? "text-slate-700" : "text-white";
+  const navTextColor = isScrolled || !isHome || mobileMenuOpen ? 'text-slate-700' : 'text-white';
 
-  const logoTextColor =
-    isScrolled || !isHome || mobileMenuOpen ? "text-[#006B3F]" : "text-white";
+  const logoTextColor = isScrolled || !isHome || mobileMenuOpen ? 'text-[#006B3F]' : 'text-white';
 
   const logoSubColor =
-    isScrolled || !isHome || mobileMenuOpen
-      ? "text-slate-500"
-      : "text-slate-200";
+    isScrolled || !isHome || mobileMenuOpen ? 'text-slate-500' : 'text-slate-200';
 
-  const iconColor =
-    isScrolled || !isHome || mobileMenuOpen ? "text-slate-900" : "text-white";
+  const iconColor = isScrolled || !isHome || mobileMenuOpen ? 'text-slate-900' : 'text-white';
 
   return (
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled || !isHome
-            ? "bg-white/95 backdrop-blur-md shadow-lg py-3"
-            : "bg-transparent py-6"
+            ? 'bg-white/95 backdrop-blur-md shadow-lg py-3'
+            : 'bg-transparent py-6'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -99,7 +94,7 @@ const Navigation = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: easeOutExpo }}
             className="flex items-center space-x-3 cursor-pointer"
-            onClick={() => navigate("/")}
+            onClick={() => navigate('/')}
           >
             <div className="p-1 flex items-center justify-center">
               <img
@@ -113,14 +108,8 @@ const Navigation = () => {
             </div>
 
             <div>
-              <h1
-                className={`font-bold text-xl leading-tight ${logoTextColor}`}
-              >
-                ICGC
-              </h1>
-              <p
-                className={`text-[10px] font-bold tracking-[0.2em] uppercase ${logoSubColor}`}
-              >
+              <h1 className={`font-bold text-xl leading-tight ${logoTextColor}`}>ICGC</h1>
+              <p className={`text-[10px] font-bold tracking-[0.2em] uppercase ${logoSubColor}`}>
                 Living Word Temple
               </p>
             </div>
@@ -147,7 +136,7 @@ const Navigation = () => {
               transition={{ duration: 0.4, delay: 0.5, ease: easeOutExpo }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => navigate("/live-service")}
+              onClick={() => navigate('/live-service')}
               className="bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-6 py-2.5 rounded-full font-bold text-sm shadow-lg hover:shadow-xl flex items-center space-x-2"
             >
               <PlayCircle className="w-4 h-4" />
@@ -158,14 +147,10 @@ const Navigation = () => {
           {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2 rounded-md"
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            {mobileMenuOpen ? (
-              <X className={iconColor} />
-            ) : (
-              <Menu className={iconColor} />
-            )}
+            {mobileMenuOpen ? <X className={iconColor} /> : <Menu className={iconColor} />}
           </button>
         </div>
       </nav>
@@ -186,9 +171,9 @@ const Navigation = () => {
 
             {/* Drawer */}
             <motion.div
-              initial={{ x: "100%" }}
+              initial={{ x: '100%' }}
               animate={{ x: 0 }}
-              exit={{ x: "100%" }}
+              exit={{ x: '100%' }}
               transition={{ duration: 0.35, ease: easeOutExpo }}
               className="fixed top-0 right-0 bottom-0 z-50 w-80 max-w-[85vw] bg-white md:hidden pt-24 px-6 shadow-2xl"
             >
@@ -212,7 +197,7 @@ const Navigation = () => {
                 }}
                 className="flex flex-col space-y-6"
               >
-                {NAV_LINKS.map((link) => (
+                {NAV_LINKS.map(link => (
                   <motion.button
                     key={link.name}
                     variants={{
@@ -240,7 +225,7 @@ const Navigation = () => {
                     },
                   }}
                   onClick={() => {
-                    navigate("/live-service");
+                    navigate('/live-service');
                     setMobileMenuOpen(false);
                   }}
                   className="bg-linear-to-r from-[#006B3F] to-emerald-700 text-[#FFD700] w-full py-4 rounded-xl font-bold text-lg shadow-xl"

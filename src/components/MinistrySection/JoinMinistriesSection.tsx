@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
-import { Target, Users, Zap } from "lucide-react";
-import MinistryCardsContainer from "./MinistryCardsContainer";
+import { motion } from 'framer-motion';
+import { Target, Users, Zap } from 'lucide-react';
+import MinistryCardsContainer from './MinistryCardsContainer';
 
 const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 
@@ -12,7 +12,7 @@ const JoinMinistriesSection = () => {
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5, ease: easeOutExpo }}
             className="inline-block px-4 py-1.5 rounded-full bg-[#006B3F]/10 text-[#006B3F] text-sm font-bold uppercase tracking-wider mb-4"
           >
@@ -22,7 +22,7 @@ const JoinMinistriesSection = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5, delay: 0.1, ease: easeOutExpo }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-slate-900"
           >
@@ -32,7 +32,7 @@ const JoinMinistriesSection = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5, delay: 0.2, ease: easeOutExpo }}
             className="text-slate-600 max-w-2xl mx-auto text-md lg:text-lg"
           >
@@ -46,7 +46,7 @@ const JoinMinistriesSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.7, ease: easeOutExpo }}
           className="bg-linear-to-br from-[#006B3F] to-emerald-700 rounded-3xl py-10 px-5 md:p-10 text-white"
         >
@@ -54,7 +54,7 @@ const JoinMinistriesSection = () => {
             <motion.h3
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.5, ease: easeOutExpo }}
               className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
             >
@@ -64,38 +64,38 @@ const JoinMinistriesSection = () => {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.5, delay: 0.1, ease: easeOutExpo }}
               className="text-slate-200 text-lg mb-10 leading-relaxed"
             >
-              Ministries are the heartbeat of our church. When you join a
-              ministry, you're not just volunteering—you're discovering your
-              purpose, using your gifts, and impacting lives for eternity.
+              Ministries are the heartbeat of our church. When you join a ministry, you're not just
+              volunteering—you're discovering your purpose, using your gifts, and impacting lives
+              for eternity.
             </motion.p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 {
                   icon: Target,
-                  title: "Find Your Purpose",
-                  description: "Discover how God has uniquely gifted you",
+                  title: 'Find Your Purpose',
+                  description: 'Discover how God has uniquely gifted you',
                 },
                 {
                   icon: Users,
-                  title: "Build Community",
-                  description: "Form meaningful relationships with others",
+                  title: 'Build Community',
+                  description: 'Form meaningful relationships with others',
                 },
                 {
                   icon: Zap,
-                  title: "Make an Impact",
-                  description: "Use your talents to change lives",
+                  title: 'Make an Impact',
+                  description: 'Use your talents to change lives',
                 },
               ].map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
+                  viewport={{ once: true, margin: '-50px' }}
                   transition={{
                     duration: 0.5,
                     delay: index * 0.2,

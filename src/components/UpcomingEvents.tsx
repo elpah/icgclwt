@@ -1,8 +1,8 @@
-import { UPCOMING_EVENTS } from "@/data/upcomingEventsData";
-import { motion } from "framer-motion";
-import { ChevronRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import EventCard from "@/components/EventCard";
+import { UPCOMING_EVENTS } from '@/data/upcomingEventsData';
+import { motion } from 'framer-motion';
+import { ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import EventCard from '@/components/EventCard';
 
 const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 
@@ -19,7 +19,7 @@ const UpcomingEvents = () => {
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.5, ease: easeOutExpo }}
               className="inline-block px-4 py-1.5 rounded-full bg-[#FFD700]/20 text-[#006B3F] text-sm font-bold uppercase tracking-wider mb-4"
             >
@@ -29,7 +29,7 @@ const UpcomingEvents = () => {
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.5, delay: 0.1, ease: easeOutExpo }}
               className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4"
             >
@@ -39,7 +39,7 @@ const UpcomingEvents = () => {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.5, delay: 0.2, ease: easeOutExpo }}
               className="text-slate-600 text-lg"
             >
@@ -50,10 +50,10 @@ const UpcomingEvents = () => {
           <motion.button
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5, delay: 0.3, ease: easeOutExpo }}
             whileHover={{ x: 5 }}
-            onClick={() => navigate("/events")}
+            onClick={() => navigate('/events')}
             className="mt-4 md:mt-0 text-[#006B3F] font-bold flex items-center"
           >
             View All Events
@@ -67,7 +67,7 @@ const UpcomingEvents = () => {
               key={event.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: '-50px' }}
               transition={{
                 duration: 0.5,
                 delay: index * 0.2,

@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
-import { GraduationCap, Heart, ArrowRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { motion } from 'framer-motion';
+import { GraduationCap, Heart, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 
@@ -15,7 +15,7 @@ const MeetThePastor = () => {
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5, ease: easeOutExpo }}
             className="inline-block px-4 py-2 rounded-full bg-[#006B3F]/10 text-[#006B3F] text-sm font-bold uppercase tracking-wider mb-4"
           >
@@ -25,7 +25,7 @@ const MeetThePastor = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5, delay: 0.1, ease: easeOutExpo }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4"
           >
@@ -37,7 +37,7 @@ const MeetThePastor = () => {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.7, ease: easeOutExpo, delay: 0.2 }}
             className="relative"
           >
@@ -46,13 +46,13 @@ const MeetThePastor = () => {
                 <img
                   src="/images/rev_obeng.webp"
                   alt="Head Pastor"
-                  className="w-full h-full object-cover scale-x-[-1]"
+                  className="w-full h-[full]  object-cover scale-x-[-1]"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-[#006B3F]/20 to-transparent" />
+                {/* <div className="absolute inset-0 bg-linear-to-t from-[#006B3F]/20 to-transparent" /> */}
               </div>
 
-              <div className="absolute -top-6 -left-6 w-32 h-32 bg-linear-to-br from-[#FFD700] to-[#FDB813] rounded-lg z-0 blur-lg opacity-50" />
-              <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-linear-to-br from-[#006B3F] to-emerald-600 rounded-lg z-0 blur-lg opacity-30" />
+              {/* <div className="absolute -top-6 -left-6 w-32 h-32 bg-linear-to-br from-[#FFD700] to-[#FDB813] rounded-lg z-0 blur-lg opacity-50" /> */}
+              {/* <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-linear-to-br from-[#006B3F] to-emerald-600 rounded-lg z-0 blur-lg opacity-30" /> */}
             </div>
           </motion.div>
 
@@ -60,7 +60,7 @@ const MeetThePastor = () => {
             <motion.h3
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.5, ease: easeOutExpo }}
               className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-slate-900"
             >
@@ -70,7 +70,7 @@ const MeetThePastor = () => {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.5, delay: 0.1, ease: easeOutExpo }}
               className="text-[#006B3F] font-bold text-xl mb-6"
             >
@@ -80,37 +80,34 @@ const MeetThePastor = () => {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.5, delay: 0.2, ease: easeOutExpo }}
               className="text-slate-600 mb-6 leading-relaxed text-md md:text-lg"
             >
-              Rev. Obeng has been serving as the Head Pastor of ICGC Living Word
-              Temple for over 15 years. His passion for teaching God's Word and
-              raising up leaders has transformed countless lives.
+              Rev. Obeng has been serving as the Head Pastor of ICGC Living Word Temple for over 15
+              years. His passion for teaching God's Word and raising up leaders has transformed
+              countless lives.
             </motion.p>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.5, delay: 0.3, ease: easeOutExpo }}
               className="text-slate-600 mb-8 leading-relaxed text-md md:text-lg"
             >
-              With a heart for the local community and a vision for global
-              impact, Rev. Obeng leads our congregation with wisdom, compassion,
-              and unwavering faith in God's promises.
+              With a heart for the local community and a vision for global impact, Rev. Obeng leads
+              our congregation with wisdom, compassion, and unwavering faith in God's promises.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.5, delay: 0.4, ease: easeOutExpo }}
               className="bg-white rounded-2xl p-6 shadow-lg border-2 border-slate-100 mb-8"
             >
-              <h4 className="font-bold text-slate-900 mb-3">
-                Qualifications & Education
-              </h4>
+              <h4 className="font-bold text-slate-900 mb-3">Qualifications & Education</h4>
               <ul className="space-y-2 text-slate-600">
                 <li className="flex items-start">
                   <GraduationCap className="w-5 h-5 mr-2 mt-0.5 text-[#006B3F]" />
@@ -118,9 +115,7 @@ const MeetThePastor = () => {
                 </li>
                 <li className="flex items-start">
                   <GraduationCap className="w-5 h-5 mr-2 mt-0.5 text-[#006B3F]" />
-                  <span>
-                    Master of Art - Human Right and Human Resource Development
-                  </span>
+                  <span>Master of Art - Human Right and Human Resource Development</span>
                 </li>
                 <li className="flex items-start">
                   <GraduationCap className="w-5 h-5 mr-2 mt-0.5 text-[#006B3F]" />
@@ -128,9 +123,7 @@ const MeetThePastor = () => {
                 </li>
                 <li className="flex items-start">
                   <GraduationCap className="w-5 h-5 mr-2 mt-0.5 text-[#006B3F]" />
-                  <span>
-                    Certificate in Counselling from Central University, Accra
-                  </span>
+                  <span>Certificate in Counselling from Central University, Accra</span>
                 </li>
                 <li className="flex items-start">
                   <Heart className="w-5 h-5 mr-2 mt-0.5 text-[#006B3F]" />
@@ -142,11 +135,11 @@ const MeetThePastor = () => {
             <motion.button
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.5, delay: 0.5, ease: easeOutExpo }}
               whileTap={{ scale: 0.95 }}
               className="cursor-pointer bg-linear-to-r from-[#006B3F] to-emerald-600 text-white px-8 py-4 rounded-full font-bold shadow-md hover:shadow-lg transition-shadow flex items-center"
-              onClick={() => navigate("/", { state: { scrollTo: "contact" } })}
+              onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
             >
               Schedule a Meeting
               <ArrowRight className="ml-2 w-5 h-5" />

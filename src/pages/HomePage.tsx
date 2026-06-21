@@ -1,37 +1,37 @@
-import { useEffect, lazy, Suspense, useCallback } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Clock, Calendar, ArrowRight, Home, Video } from "lucide-react";
-import { motion } from "framer-motion";
+import { useEffect, lazy, Suspense, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Clock, Calendar, ArrowRight, Video } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-const About = lazy(() => import("./About"));
-const QuoteSection = lazy(() => import("@/components/QuoteSection"));
-const UpcomingEvents = lazy(() => import("@/components/UpcomingEvents"));
-const GivingSection = lazy(() => import("@/components/GivingSection"));
-const ContactSection = lazy(() => import("@/components/ContactSection"));
-const JoinMinistriesSection = lazy(() =>
-  import("@/components/MinistrySection/JoinMinistriesSection"),
+const About = lazy(() => import('./About'));
+const QuoteSection = lazy(() => import('@/components/QuoteSection'));
+const UpcomingEvents = lazy(() => import('@/components/UpcomingEvents'));
+const GivingSection = lazy(() => import('@/components/GivingSection'));
+const ContactSection = lazy(() => import('@/components/ContactSection'));
+const JoinMinistriesSection = lazy(
+  () => import('@/components/MinistrySection/JoinMinistriesSection')
 );
 
 const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 
 const SERVICE_TIMES = [
   {
-    id: "sunday",
-    day: "Sundays",
-    time: "7:30 AM - 10:00 AM",
-    title: "Sunday Service",
+    id: 'sunday',
+    day: 'Sundays',
+    time: '7:30 AM - 10:00 AM',
+    title: 'Sunday Service',
   },
   {
-    id: "wednesday",
-    day: "Wednesday",
-    time: "6:00 PM - 8:00 PM",
-    title: "Teaching Service",
+    id: 'wednesday',
+    day: 'Wednesday',
+    time: '6:00 PM - 8:00 PM',
+    title: 'Teaching Service',
   },
   {
-    id: "friday",
-    day: "Friday",
-    time: "6:00 PM - 8:00 PM",
-    title: "Prayer Service",
+    id: 'friday',
+    day: 'Friday',
+    time: '6:00 PM - 8:00 PM',
+    title: 'Prayer Service',
   },
 ];
 
@@ -39,11 +39,11 @@ const HomePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const scrollToId = useCallback((id) => {
+  const scrollToId = useCallback(id => {
     const el = document.getElementById(id);
     if (!el) return;
     requestAnimationFrame(() => {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }, []);
 
@@ -54,7 +54,7 @@ const HomePage = () => {
   }, [location.state?.scrollTo, scrollToId]);
 
   const goToLiveService = useCallback(() => {
-    navigate("/live-service");
+    navigate('/live-service');
   }, [navigate]);
 
   return (
@@ -77,18 +77,6 @@ const HomePage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* LEFT */}
             <div className="text-white">
-              <motion.div
-                initial={{ opacity: 0, y: 25 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1, ease: easeOutExpo }}
-                className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-[#FFD700]/20 border border-[#FFD700]/30"
-              >
-                <Home className="w-4 h-4 text-[#FFD700]" />
-                <span className="text-[#FFD700] text-sm font-bold tracking-wider">
-                  WELCOME HOME
-                </span>
-              </motion.div>
-
               <motion.div
                 initial={{ y: 25 }}
                 animate={{ y: 0 }}
@@ -114,13 +102,13 @@ const HomePage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5, ease: easeOutExpo }}
               >
-                A message-centered, mission-oriented community where lives are
-                transformed and leaders are raised.
+                A message-centered, mission-oriented community where lives are transformed and
+                leaders are raised.
               </motion.p>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <motion.button
-                  onClick={() => scrollToId("contact")}
+                  onClick={() => scrollToId('contact')}
                   className="cursor-pointer bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center"
                   initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -167,8 +155,7 @@ const HomePage = () => {
                 transition={{ duration: 0.5, delay: 0.8, ease: easeOutExpo }}
               >
                 <p className="text-sm text-[#006B3F] font-bold">
-                  Raising leaders, shaping vision, influencing society through
-                  Christ
+                  Raising leaders, shaping vision, influencing society through Christ
                 </p>
               </motion.div>
 
@@ -184,9 +171,7 @@ const HomePage = () => {
                   </div>
                   <div className="text-2xl font-bold text-[#006B3F]">3x</div>
                 </div>
-                <div className="text-sm text-slate-600 font-bold">
-                  Weekly Services
-                </div>
+                <div className="text-sm text-slate-600 font-bold">Weekly Services</div>
               </motion.div>
             </div>
           </div>
@@ -200,15 +185,12 @@ const HomePage = () => {
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, ease: easeOutExpo }}
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-              Worship With Us
-            </h2>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">Worship With Us</h2>
             <p className="text-slate-600 mt-4">
-              Experience vibrant worship, powerful teaching, and genuine
-              community
+              Experience vibrant worship, powerful teaching, and genuine community
             </p>
           </motion.div>
 
@@ -219,7 +201,7 @@ const HomePage = () => {
                 className="p-8 rounded-3xl border bg-white hover:shadow-lg transition-shadow"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true, margin: '-50px' }}
                 transition={{
                   duration: 0.5,
                   delay: index * 0.2,
@@ -231,17 +213,15 @@ const HomePage = () => {
                 </div>
 
                 <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                <div className="text-sm text-[#006B3F] font-semibold mb-2">
-                  {service.day}
-                </div>
+                <div className="text-sm text-[#006B3F] font-semibold mb-2">{service.day}</div>
                 <div className="text-slate-600 font-medium">{service.time}</div>
 
                 <button
-                  onClick={() => scrollToId("map")}
-                  className="mt-6 text-[#006B3F] font-bold flex items-center"
+                  onClick={() => scrollToId('map')}
+                  className=" cursor-pointer mt-6 text-[#006B3F] font-bold flex items-center"
                 >
                   Get Directions
-                  <ArrowRight className="ml-2 w-4 h-4" />
+                  <ArrowRight className=" ml-2 w-4 h-4" />
                 </button>
               </motion.div>
             ))}
@@ -251,10 +231,6 @@ const HomePage = () => {
 
       <Suspense fallback={null}>
         <About />
-      </Suspense>
-
-      <Suspense fallback={null}>
-        <UpcomingEvents />
       </Suspense>
 
       <Suspense fallback={null}>

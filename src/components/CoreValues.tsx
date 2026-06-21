@@ -1,5 +1,5 @@
-import { CORE_VALUES } from "@/data/coreValuesData";
-import { motion } from "framer-motion";
+import { CORE_VALUES } from '@/data/coreValuesData';
+import { motion } from 'framer-motion';
 
 const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 
@@ -11,7 +11,7 @@ const CoreValues = () => {
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5, ease: easeOutExpo }}
             className="inline-block px-4 py-2 rounded-full bg-[#006B3F]/10 text-[#006B3F] text-sm font-bold uppercase tracking-wider mb-4"
           >
@@ -21,7 +21,7 @@ const CoreValues = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5, delay: 0.1, ease: easeOutExpo }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4"
           >
@@ -31,7 +31,7 @@ const CoreValues = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.5, delay: 0.2, ease: easeOutExpo }}
             className="text-slate-600 text-md md:text-lg max-w-2xl mx-auto"
           >
@@ -45,7 +45,7 @@ const CoreValues = () => {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: '-50px' }}
               transition={{
                 duration: 0.5,
                 delay: index * 0.2,
@@ -58,9 +58,7 @@ const CoreValues = () => {
               >
                 <value.icon className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-3">
-                {value.title}
-              </h3>
+              <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-3">{value.title}</h3>
               <p className="text-md md:text-lg text-slate-600 leading-relaxed">
                 {value.description}
               </p>

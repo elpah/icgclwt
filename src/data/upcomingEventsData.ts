@@ -4,8 +4,9 @@ export const UPCOMING_EVENTS = [
     title: '40 Days of Power',
     date: '25 June - 3 August',
     // time: '5:00 PM Daily',
-desc: 'A 40-day journey of prayer, worship, and spiritual empowerment, designed to deepen your faith and ignite a fresh encounter with God.'
-,    image: 'https://res.cloudinary.com/dvwpuenzk/image/upload/v1781939936/40_Days_of_power_q9d9ul.avif',
+    desc: 'A 40-day journey of prayer, worship, and spiritual empowerment, designed to deepen your faith and ignite a fresh encounter with God.',
+    image:
+      'https://res.cloudinary.com/dvwpuenzk/image/upload/v1781939936/40_Days_of_power_q9d9ul.avif',
     category: 'Fasting',
     link: '#',
   },

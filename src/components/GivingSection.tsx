@@ -1,11 +1,11 @@
-import { useMemo } from "react";
-import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
+import { useMemo } from 'react';
+import { motion } from 'framer-motion';
+import { Heart } from 'lucide-react';
 
 const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 
 const GivingSection = () => {
-  const moneyNumber = useMemo(() => "024 595 3629", []);
+  const moneyNumber = useMemo(() => '024 595 3629', []);
 
   return (
     <section id="giving" className="py-24 bg-white relative overflow-hidden">
@@ -13,7 +13,7 @@ const GivingSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.7, ease: easeOutExpo }}
           className="bg-linear-to-br from-[#006B3F] via-emerald-700 to-[#006B3F] rounded-3xl overflow-hidden shadow-2xl"
         >
@@ -22,7 +22,7 @@ const GivingSection = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.5, ease: easeOutExpo }}
                 className="bg-[#FFD700]/20 backdrop-blur-sm w-16 h-16 rounded-xl flex items-center justify-center mb-6"
               >
@@ -32,7 +32,7 @@ const GivingSection = () => {
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.5, delay: 0.1, ease: easeOutExpo }}
                 className="text-3xl md:text-4xl font-bold mb-6 leading-tight"
               >
@@ -42,19 +42,18 @@ const GivingSection = () => {
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.5, delay: 0.2, ease: easeOutExpo }}
                 className="text-slate-200 mb-10 leading-relaxed text-lg"
               >
-                Your generosity helps us reach people locally and globally with
-                the transforming message of Christ. Thank you for your faithful
-                support.
+                Your generosity helps us reach people locally and globally with the transforming
+                message of Christ. Thank you for your faithful support.
               </motion.p>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.5, delay: 0.3, ease: easeOutExpo }}
                 className="space-y-4 mb-8"
               >
@@ -73,9 +72,7 @@ const GivingSection = () => {
                     <div className="w-full border-t border-white/20" />
                   </div>
                   <div className="relative flex justify-center text-sm">
-                    <span className="px-4 bg-[#006B3F] text-slate-300 font-bold">
-                      OR
-                    </span>
+                    <span className="px-4 bg-[#006B3F] text-slate-300 font-bold">OR</span>
                   </div>
                 </div>
               </motion.div>
@@ -83,19 +80,13 @@ const GivingSection = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.5, delay: 0.4, ease: easeOutExpo }}
                 className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20"
               >
-                <div className="text-slate-300 text-sm mb-2 font-medium">
-                  Mobile Money
-                </div>
-                <div className="text-white text-2xl font-bold mb-1">
-                  {moneyNumber}
-                </div>
-                <div className="text-[#FFD700] text-sm font-bold">
-                  ICGC Living Word Temple
-                </div>
+                <div className="text-slate-300 text-sm mb-2 font-medium">Mobile Money</div>
+                <div className="text-white text-2xl font-bold mb-1">{moneyNumber}</div>
+                <div className="text-[#FFD700] text-sm font-bold">ICGC Living Word Temple</div>
               </motion.div>
             </div>
 
@@ -113,16 +104,12 @@ const GivingSection = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
+                  viewport={{ once: true, margin: '-50px' }}
                   transition={{ duration: 0.5, delay: 0.5, ease: easeOutExpo }}
                   className="bg-white/95 backdrop-blur-md rounded-2xl p-5 shadow-xl"
                 >
-                  <div className="text-3xl font-bold text-[#006B3F] mb-1">
-                    100+
-                  </div>
-                  <div className="text-sm text-slate-600 font-medium">
-                    Lives Impacted Monthly
-                  </div>
+                  <div className="text-3xl font-bold text-[#006B3F] mb-1">100+</div>
+                  <div className="text-sm text-slate-600 font-medium">Lives Impacted Monthly</div>
                 </motion.div>
               </div>
             </div>

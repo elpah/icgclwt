@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Church, Facebook, Twitter, Instagram, Youtube, Clock, ArrowRight } from 'lucide-react';
+import { href } from 'react-router-dom';
 const Footer = () => {
   return (
     <footer className="bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 text-white pt-20 pb-10 relative overflow-hidden">
@@ -40,30 +41,29 @@ const Footer = () => {
             </p>
             <div className="flex space-x-3">
               {[
-                { name: 'Facebook', Icon: Facebook },
+                {
+                  name: 'Facebook',
+                  Icon: Facebook,
+                  href: 'https://www.facebook.com/ICGCLivingWordTemple/',
+                },
                 { name: 'Twitter', Icon: Twitter },
-                { name: 'Instagram', Icon: Instagram },
+                {
+                  name: 'Instagram',
+                  Icon: Instagram,
+                  href: 'https://www.instagram.com/icgc_lwt/',
+                },
                 { name: 'YouTube', Icon: Youtube },
-              ].map(({ name, Icon }, i) => (
+              ].map(({ name, Icon, href }, i) => (
                 <a
                   key={i}
-                  href="#"
+                  href={href}
+                  target="_blank"
                   aria-label={`Follow us on ${name}`}
                   className="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#FFD700] hover:bg-slate-700 transition-all"
                 >
                   <Icon className="w-5 h-5" />
                 </a>
               ))}
-              {/* {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                   aria-label={`Follow us on ${}`}
-                  className="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#FFD700] hover:bg-slate-700 transition-all"
-                >
-                  <Icon className="w-5 h-5" />
-                </a>
-              ))} */}
             </div>
           </div>
 

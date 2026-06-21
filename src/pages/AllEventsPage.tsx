@@ -1,14 +1,14 @@
-import { useMemo } from "react";
-import { Calendar } from "lucide-react";
+import { useMemo } from 'react';
+import { Calendar } from 'lucide-react';
 
-import EventCard from "@/components/EventCard";
-import { UPCOMING_EVENTS } from "@/data/upcomingEventsData";
+import EventCard from '@/components/EventCard';
+import { UPCOMING_EVENTS } from '@/data/upcomingEventsData';
 
 const AllEventsPage = () => {
   const events = UPCOMING_EVENTS;
 
   const categoryCount = useMemo(() => {
-    return new Set(events.map((e) => e.category)).size;
+    return new Set(events.map(e => e.category)).size;
   }, [events]);
 
   return (
@@ -33,9 +33,8 @@ const AllEventsPage = () => {
             </h1>
 
             <p className="text-lg md:text-xl text-slate-200 max-w-3xl mx-auto leading-relaxed">
-              Experience powerful worship, transformative teaching, and
-              life-changing encounters with God at our upcoming events and
-              conferences.
+              Experience powerful worship, transformative teaching, and life-changing encounters
+              with God at our upcoming events and conferences.
             </p>
           </div>
         </div>
@@ -45,30 +44,18 @@ const AllEventsPage = () => {
           <div className="bg-white rounded-3xl p-8 shadow-lg mb-16 border border-slate-100">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
-                <div className="text-4xl font-bold text-[#006B3F] mb-2">
-                  {events.length}
-                </div>
-                <div className="text-slate-600 font-semibold">
-                  Upcoming Events
-                </div>
+                <div className="text-4xl font-bold text-[#006B3F] mb-2">{events.length}</div>
+                <div className="text-slate-600 font-semibold">Upcoming Events</div>
               </div>
 
               <div className="text-center">
-                <div className="text-4xl font-bold text-[#006B3F] mb-2">
-                  {categoryCount}
-                </div>
-                <div className="text-slate-600 font-semibold">
-                  Event Categories
-                </div>
+                <div className="text-4xl font-bold text-[#006B3F] mb-2">{categoryCount}</div>
+                <div className="text-slate-600 font-semibold">Event Categories</div>
               </div>
 
               <div className="text-center">
-                <div className="text-4xl font-bold text-[#006B3F] mb-2">
-                  Free
-                </div>
-                <div className="text-slate-600 font-semibold">
-                  All Events Open to All
-                </div>
+                <div className="text-4xl font-bold text-[#006B3F] mb-2">Free</div>
+                <div className="text-slate-600 font-semibold">All Events Open to All</div>
               </div>
             </div>
           </div>
@@ -82,9 +69,7 @@ const AllEventsPage = () => {
             <div className="text-center py-20">
               <div className="bg-white rounded-3xl p-12 shadow-lg max-w-2xl mx-auto">
                 <Calendar className="w-20 h-20 text-slate-300 mx-auto mb-6" />
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                  No Events Scheduled
-                </h3>
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">No Events Scheduled</h3>
                 <p className="text-slate-600">
                   Check back soon for upcoming events and conferences.
                 </p>

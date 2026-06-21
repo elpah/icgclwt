@@ -1,22 +1,16 @@
-import React, { useMemo } from "react";
-import { ArrowLeft, Clock, MapPin, Calendar } from "lucide-react";
-import { useNavigate, useParams } from "react-router-dom";
-import { MINISTRIES_DATA } from "../data/MinistriesData";
+import React, { useMemo } from 'react';
+import { ArrowLeft, Clock, MapPin, Calendar } from 'lucide-react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { MINISTRIES_DATA } from '../data/MinistriesData';
 
 const MinistryPage: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
-  const ministry = useMemo(() => MINISTRIES_DATA.find((min) => min.id === id), [
-    id,
-  ]);
+  const ministry = useMemo(() => MINISTRIES_DATA.find(min => min.id === id), [id]);
 
   if (!ministry) {
-    return (
-      <p className="text-center py-20 text-xl text-red-500">
-        Ministry not found
-      </p>
-    );
+    return <p className="text-center py-20 text-xl text-red-500">Ministry not found</p>;
   }
 
   return (
@@ -36,9 +30,7 @@ const MinistryPage: React.FC = () => {
         <div className="absolute inset-0 flex items-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <button
-              onClick={() =>
-                navigate("/", { state: { scrollTo: "ministries" } })
-              }
+              onClick={() => navigate('/', { state: { scrollTo: 'ministries' } })}
               className="flex items-center space-x-2 text-white mb-6 hover:text-[#FFD700] transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -53,9 +45,7 @@ const MinistryPage: React.FC = () => {
               </div>
 
               <div>
-                <h1 className="text-5xl md:text-6xl font-bold text-white mb-2">
-                  {ministry.name}
-                </h1>
+                <h1 className="text-5xl md:text-6xl font-bold text-white mb-2">{ministry.name}</h1>
                 <p className="text-slate-200 text-lg">{ministry.description}</p>
               </div>
             </div>
@@ -67,18 +57,12 @@ const MinistryPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2 space-y-12">
             <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-100">
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">
-                Our Vision
-              </h2>
-              <p className="text-slate-600 leading-relaxed text-lg">
-                {ministry.vision}
-              </p>
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Vision</h2>
+              <p className="text-slate-600 leading-relaxed text-lg">{ministry.vision}</p>
             </div>
 
             <div>
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">
-                Gallery
-              </h2>
+              <h2 className="text-3xl font-bold text-slate-900 mb-6">Gallery</h2>
 
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {ministry.gallery.map((image, index) => (
@@ -109,15 +93,10 @@ const MinistryPage: React.FC = () => {
 
               <div className="space-y-4">
                 {ministry.meetings.map((meeting, index) => (
-                  <div
-                    key={index}
-                    className="pb-4 border-b border-slate-100 last:border-0"
-                  >
+                  <div key={index} className="pb-4 border-b border-slate-100 last:border-0">
                     <div className="flex items-center space-x-2 mb-2">
                       <Calendar className="w-4 h-4 text-[#FFD700]" />
-                      <span className="font-bold text-slate-900">
-                        {meeting.day}
-                      </span>
+                      <span className="font-bold text-slate-900">{meeting.day}</span>
                     </div>
 
                     <div className="text-sm text-slate-600 ml-6">
@@ -132,13 +111,9 @@ const MinistryPage: React.FC = () => {
               </div>
 
               <div className="mt-6 pt-6 border-t border-slate-200">
-                <h4 className="font-bold text-slate-900 mb-2">
-                  Ministry Leader
-                </h4>
+                <h4 className="font-bold text-slate-900 mb-2">Ministry Leader</h4>
                 <p className="text-slate-600 mb-1">{ministry.leader}</p>
-                <p className="text-sm text-[#006B3F] font-semibold">
-                  {ministry.contact}
-                </p>
+                <p className="text-sm text-[#006B3F] font-semibold">{ministry.contact}</p>
               </div>
 
               <button className="w-full mt-6 bg-linear-to-r from-[#006B3F] to-emerald-600 text-white py-4 rounded-2xl font-bold hover:shadow-xl transition-all">

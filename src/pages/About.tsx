@@ -1,4 +1,4 @@
-import { Heart, BookOpen, Music, Users } from 'lucide-react';
+import { Heart, BookOpen, Award, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import CoreValues from '@/components/CoreValues';
 import MeetThePastor from '@/components/MeetThePastor';
@@ -7,27 +7,27 @@ const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 
 const VALUES = [
   {
-    icon: Heart,
-    title: 'Family',
-    desc: 'A community where you belong',
+    icon: BookOpen,
+    title: 'Practical Christianity',
+    desc: 'Applying God’s Word to everyday life',
     color: 'from-red-500 to-pink-500',
   },
   {
-    icon: BookOpen,
-    title: 'The Word',
-    desc: 'Sound biblical teaching',
+    icon: Heart,
+    title: 'Human Dignity',
+    desc: 'Valuing and empowering every person',
     color: 'from-blue-500 to-cyan-500',
   },
   {
-    icon: Music,
-    title: 'Worship',
-    desc: 'Engaging praise & worship',
+    icon: Users,
+    title: 'Leadership',
+    desc: 'Developing leaders who transform society',
     color: 'from-purple-500 to-indigo-500',
   },
   {
-    icon: Users,
-    title: 'Impact',
-    desc: 'Reaching out to our city',
+    icon: Award,
+    title: 'Excellence',
+    desc: 'Pursuing the highest standards for God’s glory',
     color: 'from-green-500 to-emerald-500',
   },
 ];

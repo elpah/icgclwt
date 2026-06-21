@@ -1,13 +1,5 @@
-import { motion } from "framer-motion";
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Facebook,
-  Twitter,
-  Instagram,
-  Youtube,
-} from "lucide-react";
+import { motion } from 'framer-motion';
+import { MapPin, Phone, Mail, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
 
 const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 
@@ -21,7 +13,7 @@ const ContactSection = () => {
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.5, ease: easeOutExpo }}
               className="inline-block px-4 py-1.5 rounded-full bg-[#006B3F]/10 text-[#006B3F] text-sm font-bold uppercase tracking-wider mb-6"
             >
@@ -31,7 +23,7 @@ const ContactSection = () => {
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.5, delay: 0.1, ease: easeOutExpo }}
               className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight"
             >
@@ -41,36 +33,36 @@ const ContactSection = () => {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.5, delay: 0.2, ease: easeOutExpo }}
               className="text-slate-600 mb-10 text-md lg:text-lg leading-relaxed"
             >
-              We'd love to hear from you! Whether you have questions, need
-              prayer, or want to know more about our church, we're here to help.
+              We'd love to hear from you! Whether you have questions, need prayer, or want to know
+              more about our church, we're here to help.
             </motion.p>
 
             <div className="space-y-6">
               {[
                 {
                   icon: MapPin,
-                  title: "Location",
-                  content: "Living Word Temple, Winneba, Ghana",
-                  color: "from-red-500 to-pink-500",
-                  link: "https://maps.google.com",
+                  title: 'Location',
+                  content: 'Living Word Temple, Winneba, Ghana',
+                  color: 'from-red-500 to-pink-500',
+                  link: 'https://maps.google.com',
                 },
                 {
                   icon: Phone,
-                  title: "Phone",
-                  content: "+233 (0) 24 595 3629",
-                  color: "from-green-500 to-emerald-500",
-                  link: "tel:+233245953629",
+                  title: 'Phone',
+                  content: '+233 (0) 24 595 3629',
+                  color: 'from-green-500 to-emerald-500',
+                  link: 'tel:+233245953629',
                 },
                 {
                   icon: Mail,
-                  title: "Email",
-                  content: "info@icgclivingwordtemple.com",
-                  color: "from-blue-500 to-cyan-500",
-                  link: "mailto:info@icgclivingwordtemple.com",
+                  title: 'Email',
+                  content: 'info@icgclivingwordtemple.com',
+                  color: 'from-blue-500 to-cyan-500',
+                  link: 'mailto:info@icgclivingwordtemple.com',
                 },
               ].map((item, index) => (
                 <motion.a
@@ -80,7 +72,7 @@ const ContactSection = () => {
                   rel="noopener noreferrer"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
+                  viewport={{ once: true, margin: '-50px' }}
                   transition={{
                     duration: 0.5,
                     delay: index * 0.1,
@@ -95,9 +87,7 @@ const ContactSection = () => {
                     <item.icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p className="font-bold text-slate-900 mb-1">
-                      {item.title}
-                    </p>
+                    <p className="font-bold text-slate-900 mb-1">{item.title}</p>
                     <p className="text-slate-600">{item.content}</p>
                   </div>
                 </motion.a>
@@ -107,45 +97,43 @@ const ContactSection = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.5, delay: 0.3, ease: easeOutExpo }}
               className="mt-12"
             >
-              <h3 className="font-bold text-slate-900 mb-6 text-lg">
-                Connect With Us
-              </h3>
+              <h3 className="font-bold text-slate-900 mb-6 text-lg">Connect With Us</h3>
               <div className="flex space-x-4">
                 {[
                   {
                     Icon: Facebook,
-                    color: "hover:bg-blue-500",
-                    link: "https://facebook.com/icgc",
-                    name: "facebook",
+                    color: 'hover:bg-blue-500',
+                    link: 'https://facebook.com/icgc',
+                    name: 'facebook',
                   },
                   {
                     Icon: Twitter,
-                    color: "hover:bg-sky-500",
-                    link: "https://twitter.com/icgc",
-                    name: "twitter",
+                    color: 'hover:bg-sky-500',
+                    link: 'https://twitter.com/icgc',
+                    name: 'twitter',
                   },
                   {
                     Icon: Instagram,
-                    color: "hover:bg-pink-500",
-                    link: "https://instagram.com/icgc",
-                    name: "instagram",
+                    color: 'hover:bg-pink-500',
+                    link: 'https://instagram.com/icgc',
+                    name: 'instagram',
                   },
                   {
                     Icon: Youtube,
-                    color: "hover:bg-red-500",
-                    link: "https://youtube.com/@icgc",
-                    name: "youtube",
+                    color: 'hover:bg-red-500',
+                    link: 'https://youtube.com/@icgc',
+                    name: 'youtube',
                   },
                 ].map(({ Icon, color, link, name }, index) => (
                   <motion.a
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
+                    viewport={{ once: true, margin: '-50px' }}
                     transition={{
                       duration: 0.5,
                       delay: 0.4 + index * 0.1,
@@ -167,7 +155,7 @@ const ContactSection = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.5, delay: 0.3, ease: easeOutExpo }}
               className="mt-12 bg-linear-to-br from-slate-50 to-white rounded-2xl p-6 border-2 border-slate-100"
             >
@@ -183,9 +171,7 @@ const ContactSection = () => {
                 </p>
                 <p className="flex justify-between">
                   <span>Sunday:</span>
-                  <span className="font-semibold">
-                    Closed (Worship Services)
-                  </span>
+                  <span className="font-semibold">Closed (Worship Services)</span>
                 </p>
               </div>
             </motion.div>
@@ -195,20 +181,15 @@ const ContactSection = () => {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.7, ease: easeOutExpo }}
             className="bg-white py-10 px-5 md:p-10 rounded-2xl shadow-2xl border-2 border-slate-100"
           >
-            <p className="text-2xl font-bold mb-8 text-slate-900">
-              Send us a Message
-            </p>
+            <p className="text-2xl font-bold mb-8 text-slate-900">Send us a Message</p>
             <form className="space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label
-                    htmlFor="fullName"
-                    className="text-sm font-bold text-slate-700"
-                  >
+                  <label htmlFor="fullName" className="text-sm font-bold text-slate-700">
                     Name
                   </label>
                   <input
@@ -221,10 +202,7 @@ const ContactSection = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label
-                    htmlFor="email"
-                    className="text-sm font-bold text-slate-700"
-                  >
+                  <label htmlFor="email" className="text-sm font-bold text-slate-700">
                     Email
                   </label>
                   <input
@@ -238,10 +216,7 @@ const ContactSection = () => {
                 </div>
               </div>
               <div className="space-y-2">
-                <label
-                  htmlFor="phone"
-                  className="text-sm font-bold text-slate-700"
-                >
+                <label htmlFor="phone" className="text-sm font-bold text-slate-700">
                   Phone
                 </label>
                 <input
@@ -254,10 +229,7 @@ const ContactSection = () => {
                 />
               </div>
               <div className="space-y-2">
-                <label
-                  htmlFor="subject"
-                  className="text-sm font-bold text-slate-700"
-                >
+                <label htmlFor="subject" className="text-sm font-bold text-slate-700">
                   Subject
                 </label>
                 <input
@@ -269,10 +241,7 @@ const ContactSection = () => {
                 />
               </div>
               <div className="space-y-2">
-                <label
-                  htmlFor="message"
-                  className="text-sm font-bold text-slate-700"
-                >
+                <label htmlFor="message" className="text-sm font-bold text-slate-700">
                   Message
                 </label>
                 <textarea
@@ -299,7 +268,7 @@ const ContactSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.7, ease: easeOutExpo }}
             className="rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-100"
           >
