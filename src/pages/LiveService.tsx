@@ -1,27 +1,12 @@
-import {
-  PlayCircle,
-  ArrowRight,
-  Video,
-  Mic2,
-  Clock,
-  Users,
-  Music,
-  BookOpen,
-  Heart,
-} from 'lucide-react';
+import { PlayCircle, ArrowRight, Video, Mic2, Clock, Users, Music, BookOpen, Heart } from 'lucide-react';
+import SectionEyebrow from '@/components/SectionEyebrow';
 
 const SERVICE_TIMES = [
   {
     day: 'Sundays',
-    time: '7:30 AM - 10:00 AM',
-    title: 'First Service',
-    description: 'Early morning worship with powerful preaching and prayer',
-  },
-  {
-    day: 'Sundays',
-    time: '10:30 AM - 1:00 PM',
-    title: 'Second Service',
-    description: 'Main celebration service with full choir and orchestra',
+    time: '8:00 AM - 10:30 AM',
+    title: 'Sunday Service',
+    description: 'Worship with powerful preaching and prayer',
   },
   {
     day: 'Wednesdays',
@@ -61,22 +46,27 @@ const WHAT_TO_EXPECT = [
 const LiveService = () => {
   return (
     <div className="min-h-screen bg-slate-50 pt-24">
-      <section className="py-24 bg-white">
+      <section className="py-12 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="px-4 py-2 rounded-full bg-red-500/10 text-red-600 text-sm font-bold uppercase tracking-wider mb-4 flex items-center justify-center gap-2 w-fit mx-auto">
-              <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-              Live Streaming
-            </span>
+          <div className="text-center mb-8 md:mb-10">
+            <div className="flex flex-col items-center gap-2.5 mb-3">
+              <span className="flex items-center gap-2 text-[11px] md:text-xs font-semibold tracking-[0.22em] uppercase text-red-600">
+                <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
+                Live Streaming
+              </span>
+              <span className="h-px w-8 bg-[#FFD700]" aria-hidden="true" />
+            </div>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Watch Our Services</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 tracking-tight">
+              Watch Our Services
+            </h2>
 
-            <p className="text-slate-600 max-w-2xl mx-auto text-lg">
+            <p className="text-slate-600 max-w-2xl mx-auto text-base md:text-lg">
               Join us online for powerful worship, biblical teaching, and life-transforming messages
             </p>
           </div>
           <div className="max-w-6xl mx-auto">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-video bg-slate-900 mb-10">
+            <div className="relative rounded-2xl overflow-hidden shadow-md aspect-video bg-slate-900 mb-8">
               <iframe
                 src="https://www.youtube.com/embed/CVCBKZRJf_8"
                 title="Live Service"
@@ -85,75 +75,75 @@ const LiveService = () => {
                 className="absolute inset-0 w-full h-full"
               />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
               {[
                 {
                   icon: PlayCircle,
                   title: 'Join Live Service',
                   desc: 'Experience real-time worship and receive fresh word from God',
                   btn: 'Watch Now',
-                  style: 'from-[#006B3F] to-emerald-700 text-[#FFD700]',
+                  featured: true,
                 },
                 {
                   icon: Video,
                   title: 'Past Messages',
                   desc: 'Catch up on previous services and teachings',
                   btn: 'View Archive',
-                  style: 'bg-white text-slate-900',
+                  featured: false,
                 },
                 {
                   icon: Mic2,
                   title: 'Podcast',
                   desc: 'Listen to sermons on the go',
                   btn: 'Subscribe',
-                  style: 'bg-white text-slate-900',
+                  featured: false,
                 },
-              ].map((card, i) => (
+              ].map(card => (
                 <div
-                  key={i}
-                  className={`rounded-2xl p-8 shadow-lg cursor-pointer group ${
-                    card.style.includes('from')
-                      ? 'text-white bg-linear-to-br from-[#006B3F] to-emerald-700'
-                      : 'bg-white border border-slate-100'
+                  key={card.title}
+                  className={`rounded-2xl p-5 md:p-6 cursor-pointer group transition-shadow duration-300 ${
+                    card.featured
+                      ? 'text-white bg-linear-to-br from-[#006B3F] to-emerald-700 shadow-sm'
+                      : 'bg-white border border-slate-100 shadow-sm hover:shadow-md'
                   }`}
                 >
-                  <div className="flex justify-between mb-4">
-                    <div className="bg-white/20 rounded-xl p-3">
-                      <card.icon className="w-7 h-7" />
+                  <div className="flex justify-between mb-3">
+                    <div className={`${card.featured ? 'bg-white/20' : 'bg-slate-100'} rounded-lg p-2.5`}>
+                      <card.icon className="w-5 h-5" />
                     </div>
                   </div>
 
-                  <h3 className="text-2xl font-bold mb-2">{card.title}</h3>
+                  <h3 className="text-lg font-bold mb-1.5">{card.title}</h3>
+                  <p className="mb-3 text-sm opacity-80">{card.desc}</p>
 
-                  <p className="mb-4 opacity-80">{card.desc}</p>
-
-                  <div className="flex items-center font-semibold group-hover:translate-x-2 transition-transform">
+                  <div className="flex items-center font-semibold text-sm group-hover:translate-x-1 transition-transform duration-300">
                     {card.btn}
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </div>
                 </div>
               ))}
             </div>
-            <div className="bg-linear-to-br from-slate-50 to-white rounded-3xl py-8 px-4 md:px-4 md:py-16 border border-slate-100">
-              <h3 className="text-3xl font-bold text-center mb-10">Service Times</h3>
+            <div className="bg-slate-50 rounded-2xl py-7 px-4 md:p-8 border border-slate-100">
+              <SectionEyebrow>Gatherings</SectionEyebrow>
+              <h3 className="text-xl md:text-2xl font-bold text-center mb-6 tracking-tight">
+                Service Times
+              </h3>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {SERVICE_TIMES.map(service => (
                   <div
                     key={service.title}
-                    className="bg-white rounded-2xl p-6 shadow-md border border-slate-100"
+                    className="bg-white rounded-xl p-5 shadow-sm border border-slate-100"
                   >
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="bg-emerald-600 rounded-xl p-2">
-                        <Clock className="w-5 h-5 text-[#FFD700]" />
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="bg-emerald-600 rounded-lg p-2">
+                        <Clock className="w-4 h-4 text-[#FFD700]" />
                       </div>
-                      <h4 className="font-bold">{service.title}</h4>
+                      <h4 className="font-semibold text-sm">{service.title}</h4>
                     </div>
 
-                    <p className="text-emerald-700 font-semibold">{service.day}</p>
-
-                    <p className="text-slate-600 mb-2">{service.time}</p>
-
+                    <p className="text-emerald-700 font-semibold text-sm">{service.day}</p>
+                    <p className="text-slate-600 mb-1.5 text-sm">{service.time}</p>
                     <p className="text-sm text-slate-500">{service.description}</p>
                   </div>
                 ))}
@@ -162,24 +152,29 @@ const LiveService = () => {
           </div>
         </div>
       </section>
-      <section className="py-24 bg-slate-50">
+      <section className="py-12 md:py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl  font-bold mb-4">What to Expect</h2>
-
-            <p className="text-slate-600 text-lg">Your first visit with us</p>
+          <div className="text-center mb-8 md:mb-10">
+            <SectionEyebrow>First Visit</SectionEyebrow>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 tracking-tight">
+              What to Expect
+            </h2>
+            <p className="text-slate-600 text-base md:text-lg">Your first visit with us</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {WHAT_TO_EXPECT.map((item, i) => (
-              <div key={item.title} className="bg-white rounded-2xl p-8 shadow-lg text-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {WHAT_TO_EXPECT.map(item => (
+              <div
+                key={item.title}
+                className="bg-white rounded-2xl p-5 shadow-sm text-center border border-slate-100"
+              >
                 <div
-                  className={`w-16 h-16 mx-auto mb-6 rounded-2xl bg-linear-to-br ${item.color} flex items-center justify-center`}
+                  className={`w-11 h-11 mx-auto mb-4 rounded-xl bg-linear-to-br ${item.color} flex items-center justify-center`}
                 >
-                  <item.icon className="w-7 h-7 text-white" />
+                  <item.icon className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                <p className="text-slate-600">{item.description}</p>
+                <h3 className="text-base font-bold mb-2">{item.title}</h3>
+                <p className="text-slate-600 text-sm">{item.description}</p>
               </div>
             ))}
           </div>

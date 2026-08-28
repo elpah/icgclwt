@@ -13,6 +13,16 @@ const NAV_LINKS = [
   { name: 'Contact', href: 'contact' },
 ];
 
+const HOME_SECTIONS = ['home', 'about', 'ministries', 'contact'] as const;
+
+function getRouteActive(pathname: string) {
+  if (pathname === '/events' || pathname.startsWith('/event-details')) return 'events';
+  if (pathname.startsWith('/ministries')) return 'ministries';
+  if (pathname === '/live-service') return 'live';
+  if (pathname === '/') return 'home';
+  return '';
+}
+
 const Navigation = () => {
   const location = useLocation();
   const isHome = location.pathname === '/';
@@ -20,6 +30,7 @@ const Navigation = () => {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeHref, setActiveHref] = useState(() => getRouteActive(location.pathname));
   const scrollRef = useRef(0);
 
   useEffect(() => {
@@ -36,6 +47,50 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!isHome) {
+      setActiveHref(getRouteActive(location.pathname));
+      return;
+    }
+
+    const updateActiveSection = () => {
+      const spyOffset = 110;
+      let current: string = 'home';
+
+      for (const id of HOME_SECTIONS) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top - spyOffset <= 0) {
+          current = id;
+        }
+      }
+
+      setActiveHref(current);
+    };
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        updateActiveSection();
+        ticking = false;
+      });
+    };
+
+    updateActiveSection();
+    const retry = window.setTimeout(updateActiveSection, 400);
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+
+    return () => {
+      window.clearTimeout(retry);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, [isHome, location.pathname, location.state]);
+
   const handleNavClick = useCallback(
     (target: string) => {
       if (target === 'live-service') {
@@ -49,6 +104,8 @@ const Navigation = () => {
         return;
       }
 
+      setActiveHref(target);
+
       const scrollToSection = () => {
         if (target === 'home') {
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -60,35 +117,41 @@ const Navigation = () => {
 
       if (isHome) {
         scrollToSection();
-      } else {
+      } else if (target === 'home') {
         navigate('/');
-        setTimeout(scrollToSection, 150);
+      } else {
+        navigate('/', { state: { scrollTo: target } });
       }
       setMobileMenuOpen(false);
     },
     [isHome, navigate]
   );
 
-  const navTextColor = isScrolled || !isHome || mobileMenuOpen ? 'text-slate-700' : 'text-white';
+  const lightNav = isScrolled || !isHome || mobileMenuOpen;
+  const navTextColor = lightNav ? 'text-slate-700' : 'text-white';
+  const logoTextColor = lightNav ? 'text-[#006B3F]' : 'text-white';
+  const logoSubColor = lightNav ? 'text-slate-500' : 'text-slate-200';
+  const iconColor = lightNav ? 'text-slate-900' : 'text-white';
 
-  const logoTextColor = isScrolled || !isHome || mobileMenuOpen ? 'text-[#006B3F]' : 'text-white';
+  const linkClass = (href: string) => {
+    const isActive = activeHref === href;
+    const color = isActive ? (lightNav ? 'text-[#006B3F]' : 'text-[#FFD700]') : navTextColor;
 
-  const logoSubColor =
-    isScrolled || !isHome || mobileMenuOpen ? 'text-slate-500' : 'text-slate-200';
-
-  const iconColor = isScrolled || !isHome || mobileMenuOpen ? 'text-slate-900' : 'text-white';
+    return `relative cursor-pointer text-sm font-semibold transition-colors duration-300 hover:text-[#FFD700] ${color} after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-[2px] after:rounded-full after:transition-colors after:duration-300 ${
+      isActive ? 'after:bg-[#FFD700]' : 'after:bg-transparent'
+    }`;
+  };
 
   return (
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled || !isHome
-            ? 'bg-white/95 backdrop-blur-md shadow-lg py-3'
-            : 'bg-transparent py-6'
+            ? 'bg-white/95 backdrop-blur-md shadow-sm py-3'
+            : 'bg-transparent py-5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Logo */}
           <motion.div
             initial={{ opacity: 0, x: -25 }}
             animate={{ opacity: 1, x: 0 }}
@@ -115,7 +178,6 @@ const Navigation = () => {
             </div>
           </motion.div>
 
-          {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
             {NAV_LINKS.map((link, index) => (
               <motion.button
@@ -124,7 +186,8 @@ const Navigation = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, ease: easeOutExpo }}
                 onClick={() => handleNavClick(link.href)}
-                className={`cursor-pointer text-sm font-semibold transition-colors hover:text-[#FFD700] ${navTextColor}`}
+                className={linkClass(link.href)}
+                aria-current={activeHref === link.href ? 'page' : undefined}
               >
                 {link.name}
               </motion.button>
@@ -134,17 +197,15 @@ const Navigation = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: 0.5, ease: easeOutExpo }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => navigate('/live-service')}
-              className="bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-6 py-2.5 rounded-full font-bold text-sm shadow-lg hover:shadow-xl flex items-center space-x-2"
+              className="bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-5 py-2 rounded-full font-semibold text-sm shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center space-x-2 min-h-10"
             >
               <PlayCircle className="w-4 h-4" />
               <span>Watch Live</span>
             </motion.button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2 rounded-md"
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
@@ -155,11 +216,9 @@ const Navigation = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -169,7 +228,6 @@ const Navigation = () => {
               onClick={() => setMobileMenuOpen(false)}
             />
 
-            {/* Drawer */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
@@ -177,7 +235,6 @@ const Navigation = () => {
               transition={{ duration: 0.35, ease: easeOutExpo }}
               className="fixed top-0 right-0 bottom-0 z-50 w-80 max-w-[85vw] bg-white md:hidden pt-24 px-6 shadow-2xl"
             >
-              {/* Close button inside drawer */}
               <button
                 onClick={() => setMobileMenuOpen(false)}
                 className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 transition"
@@ -197,23 +254,31 @@ const Navigation = () => {
                 }}
                 className="flex flex-col space-y-6"
               >
-                {NAV_LINKS.map(link => (
-                  <motion.button
-                    key={link.name}
-                    variants={{
-                      hidden: { opacity: 0, x: 20 },
-                      show: {
-                        opacity: 1,
-                        x: 0,
-                        transition: { ease: easeOutExpo },
-                      },
-                    }}
-                    onClick={() => handleNavClick(link.href)}
-                    className="text-xl font-semibold text-slate-800 border-b border-slate-100 pb-3 text-left"
-                  >
-                    {link.name}
-                  </motion.button>
-                ))}
+                {NAV_LINKS.map(link => {
+                  const isActive = activeHref === link.href;
+                  return (
+                    <motion.button
+                      key={link.name}
+                      variants={{
+                        hidden: { opacity: 0, x: 20 },
+                        show: {
+                          opacity: 1,
+                          x: 0,
+                          transition: { ease: easeOutExpo },
+                        },
+                      }}
+                      onClick={() => handleNavClick(link.href)}
+                      aria-current={isActive ? 'page' : undefined}
+                      className={`text-xl font-semibold pb-3 text-left border-b-2 transition-colors duration-300 ${
+                        isActive
+                          ? 'text-[#006B3F] border-[#FFD700]'
+                          : 'text-slate-800 border-slate-100'
+                      }`}
+                    >
+                      {link.name}
+                    </motion.button>
+                  );
+                })}
 
                 <motion.button
                   variants={{

@@ -1,120 +1,81 @@
-import { useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Heart } from 'lucide-react';
+import SectionEyebrow from '@/components/SectionEyebrow';
+import { fadeUp, staggerTransition, viewportOnce } from '@/lib/motion';
 
-const easeOutExpo = [0.22, 1, 0.36, 1] as const;
+const MONEY_NUMBER = '024 595 3629';
 
 const GivingSection = () => {
-  const moneyNumber = useMemo(() => '024 595 3629', []);
-
   return (
-    <section id="giving" className="py-24 bg-white relative overflow-hidden">
+    <section id="giving" className="py-16 md:py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.7, ease: easeOutExpo }}
-          className="bg-linear-to-br from-[#006B3F] via-emerald-700 to-[#006B3F] rounded-3xl overflow-hidden shadow-2xl"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="py-10 px-5 md:p-10 text-white">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.5, ease: easeOutExpo }}
-                className="bg-[#FFD700]/20 backdrop-blur-sm w-16 h-16 rounded-xl flex items-center justify-center mb-6"
-              >
-                <Heart className="w-8 h-8 text-[#FFD700]" />
-              </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+          <div>
+            <motion.div {...fadeUp} transition={staggerTransition(0, 0.1, 0)}>
+              <SectionEyebrow align="left">Giving</SectionEyebrow>
+            </motion.div>
 
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.5, delay: 0.1, ease: easeOutExpo }}
-                className="text-3xl md:text-4xl font-bold mb-6 leading-tight"
-              >
-                Partner With Us
-              </motion.h2>
+            <motion.h2
+              {...fadeUp}
+              transition={staggerTransition(1, 0.1, 0)}
+              className="text-2xl sm:text-3xl lg:text-[2.35rem] font-bold text-slate-900 tracking-tight leading-tight mb-4"
+            >
+              Partner With Us
+            </motion.h2>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.5, delay: 0.2, ease: easeOutExpo }}
-                className="text-slate-200 mb-10 leading-relaxed text-lg"
-              >
-                Your generosity helps us reach people locally and globally with the transforming
-                message of Christ. Thank you for your faithful support.
-              </motion.p>
+            <motion.p
+              {...fadeUp}
+              transition={staggerTransition(2, 0.1, 0)}
+              className="text-slate-600 text-sm md:text-[0.95rem] leading-relaxed max-w-xl mb-7"
+            >
+              Your generosity helps us reach people locally and globally with the transforming
+              message of Christ. Thank you for your faithful support.
+            </motion.p>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.5, delay: 0.3, ease: easeOutExpo }}
-                className="space-y-4 mb-8"
-              >
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ duration: 0.25 }}
-                  className="cursor-pointer w-full bg-linear-to-r from-[#FFD700] to-[#feb200] text-[#006B3F] py-5 rounded-2xl font-bold text-lg hover:shadow-2xl flex items-center justify-center shadow-lg group"
-                >
-                  Give Online
-                  <Heart className="ml-2 w-5 h-5 fill-current group-hover:scale-110 transition-transform" />
-                </motion.button>
+            <motion.button
+              {...fadeUp}
+              transition={staggerTransition(3, 0.1, 0)}
+              className="cursor-pointer w-full sm:w-auto bg-[#FFD700] hover:bg-[#FDB813] text-[#006B3F] px-8 py-3 rounded-full font-semibold text-sm md:text-base min-h-12 inline-flex items-center justify-center transition-colors duration-300"
+            >
+              Give Online
+            </motion.button>
 
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-white/20" />
-                  </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="px-4 bg-[#006B3F] text-slate-300 font-bold">OR</span>
-                  </div>
-                </div>
-              </motion.div>
+            <motion.div
+              {...fadeUp}
+              transition={staggerTransition(4, 0.1, 0)}
+              className="mt-8 pt-6 border-t border-slate-200 max-w-xl"
+            >
+              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#006B3F] mb-2">
+                Mobile Money
+              </p>
+              <p className="text-2xl md:text-[1.65rem] font-semibold text-slate-900 tracking-wide tabular-nums">
+                {MONEY_NUMBER}
+              </p>
+              <p className="text-sm text-slate-500 mt-1">ICGC Living Word Temple</p>
+            </motion.div>
+          </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.5, delay: 0.4, ease: easeOutExpo }}
-                className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20"
-              >
-                <div className="text-slate-300 text-sm mb-2 font-medium">Mobile Money</div>
-                <div className="text-white text-2xl font-bold mb-1">{moneyNumber}</div>
-                <div className="text-[#FFD700] text-sm font-bold">ICGC Living Word Temple</div>
-              </motion.div>
-            </div>
-
-            <div className="relative min-h-125">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={viewportOnce}
+            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+            className="relative"
+          >
+            <div className="relative">
+              <div
+                className="hidden lg:block absolute bottom-0 right-0 w-16 h-16 border-b border-r border-[#FFD700]"
+                aria-hidden="true"
+              />
               <img
                 src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb8?auto=format&fit=crop&q=80&w=800"
                 alt="Giving"
                 loading="lazy"
                 decoding="async"
-                className="absolute inset-0 w-full h-full object-cover"
+                className="w-full h-56 sm:h-72 lg:h-[22rem] object-cover"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-[#006B3F] via-[#006B3F]/20 to-transparent" />
-
-              <div className="absolute bottom-8 left-8 right-8">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-50px' }}
-                  transition={{ duration: 0.5, delay: 0.5, ease: easeOutExpo }}
-                  className="bg-white/95 backdrop-blur-md rounded-2xl p-5 shadow-xl"
-                >
-                  <div className="text-3xl font-bold text-[#006B3F] mb-1">100+</div>
-                  <div className="text-sm text-slate-600 font-medium">Lives Impacted Monthly</div>
-                </motion.div>
-              </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,9 +1,24 @@
-import { motion } from 'framer-motion';
-import { Church, Facebook, Twitter, Instagram, Youtube, Clock, ArrowRight } from 'lucide-react';
-import { href } from 'react-router-dom';
+import { Facebook, Twitter, Instagram, Youtube, Clock } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+const SOCIAL_LINKS = [
+  {
+    name: 'Facebook',
+    Icon: Facebook,
+    href: 'https://www.facebook.com/ICGCLivingWordTemple/',
+  },
+  { name: 'Twitter', Icon: Twitter },
+  {
+    name: 'Instagram',
+    Icon: Instagram,
+    href: 'https://www.instagram.com/icgc_lwt/',
+  },
+  { name: 'YouTube', Icon: Youtube },
+];
+
 const Footer = () => {
   return (
-    <footer className="bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 text-white pt-20 pb-10 relative overflow-hidden">
+    <footer className="bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 text-white pt-14 md:pt-16 pb-8 relative overflow-hidden">
       <div className="absolute inset-0 opacity-5">
         <div
           className="absolute inset-0"
@@ -36,35 +51,9 @@ const Footer = () => {
                 </p>
               </div>
             </div>
-            <p className="text-slate-400 text-sm leading-relaxed mb-6">
+            <p className="text-slate-400 text-sm leading-relaxed">
               Raising leaders, shaping vision, and influencing society through Christ.
             </p>
-            <div className="flex space-x-3">
-              {[
-                {
-                  name: 'Facebook',
-                  Icon: Facebook,
-                  href: 'https://www.facebook.com/ICGCLivingWordTemple/',
-                },
-                { name: 'Twitter', Icon: Twitter },
-                {
-                  name: 'Instagram',
-                  Icon: Instagram,
-                  href: 'https://www.instagram.com/icgc_lwt/',
-                },
-                { name: 'YouTube', Icon: Youtube },
-              ].map(({ name, Icon, href }, i) => (
-                <a
-                  key={i}
-                  href={href}
-                  target="_blank"
-                  aria-label={`Follow us on ${name}`}
-                  className="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#FFD700] hover:bg-slate-700 transition-all"
-                >
-                  <Icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
           </div>
 
           <div>
@@ -112,11 +101,7 @@ const Footer = () => {
             <ul className="space-y-3 text-slate-400 text-sm">
               <li className="flex items-start">
                 <Clock className="w-4 h-4 mr-2 mt-0.5 text-[#FFD700]" />
-                Sunday Morning: 7:30 AM
-              </li>
-              <li className="flex items-start">
-                <Clock className="w-4 h-4 mr-2 mt-0.5 text-[#FFD700]" />
-                Sunday Celebration: 10:30 AM
+                Sunday Service: 8:00 AM - 10:30 AM
               </li>
               <li className="flex items-start">
                 <Clock className="w-4 h-4 mr-2 mt-0.5 text-[#FFD700]" />
@@ -126,26 +111,21 @@ const Footer = () => {
           </div>
 
           <div>
-            <p className="font-bold mb-6 text-white uppercase tracking-wider text-sm">Subscribe</p>
-            <p className="text-slate-400 text-sm mb-4">Stay updated with our weekly newsletter.</p>
-            <div className="flex space-x-2">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="bg-slate-800 border-2 border-slate-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFD700] focus:border-transparent w-full text-white placeholder-slate-500"
-              />
-              <motion.button
-                aria-label="Subscribe"
-                whileHover={{
-                  scale: 1.05,
-                }}
-                whileTap={{
-                  scale: 0.95,
-                }}
-                className="bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] p-3 rounded-xl hover:shadow-lg transition-all"
-              >
-                <ArrowRight className="w-5 h-5" />
-              </motion.button>
+            <p className="font-bold mb-6 text-white uppercase tracking-wider text-sm">Socials</p>
+            <p className="text-slate-400 text-sm mb-4">Stay updated with our weekly activities.</p>
+            <div className="flex space-x-3">
+              {SOCIAL_LINKS.map(({ name, Icon, href }) => (
+                <a
+                  key={name}
+                  href={href}
+                  target={href ? '_blank' : undefined}
+                  rel={href ? 'noopener noreferrer' : undefined}
+                  aria-label={`Follow us on ${name}`}
+                  className="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#FFD700] hover:bg-slate-700 transition-all"
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
             </div>
           </div>
         </div>
@@ -153,12 +133,12 @@ const Footer = () => {
         <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
           <p>© {new Date().getFullYear()} ICGC Living Word Temple. All Rights Reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">
+            <Link to="/privacy-policy" className="hover:text-white transition-colors">
               Privacy Policy
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
+            </Link>
+            <Link to="/terms-of-service" className="hover:text-white transition-colors">
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>

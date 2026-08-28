@@ -47,12 +47,7 @@ export const MINISTRIES_DATA = [
     meetings: [
       {
         day: 'Sunday',
-        time: '7:30 AM - 10:00 AM',
-        location: "Children's Wing",
-      },
-      {
-        day: 'Sunday',
-        time: '10:30 AM - 1:00 PM',
+        time: '8:00 AM - 10:30 AM',
         location: "Children's Wing",
       },
     ],

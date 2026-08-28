@@ -1,6 +1,7 @@
 import './global.css';
 
 import { lazy, Suspense, useEffect } from 'react';
+import { MotionConfig } from 'framer-motion';
 import { Theme } from './settings/types';
 import Navigation from './components/Navigation';
 import { Route, Routes, useLocation } from 'react-router-dom';
@@ -11,6 +12,8 @@ const LiveService = lazy(() => import('./pages/LiveService'));
 const MinistryPage = lazy(() => import('./pages/MinistryPage'));
 const EventDetailsPage = lazy(() => import('./pages/EventDetailsPage'));
 const AllEventsPage = lazy(() => import('./pages/AllEventsPage'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 
 const theme: Theme = 'light';
 
@@ -35,24 +38,25 @@ function App() {
   setTheme(theme);
 
   return (
-    <div
-      className="app-container
-"
-    >
-      <Navigation />
-      <div className="content">
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/live-service" element={<LiveService />} />
-            <Route path="/ministries/:id" element={<MinistryPage />} />
-            <Route path="/events" element={<AllEventsPage />} />
-            <Route path="/event-details/:id" element={<EventDetailsPage />} />
-          </Routes>
-        </Suspense>
+    <MotionConfig reducedMotion="user">
+      <div className="app-container">
+        <Navigation />
+        <div className="content">
+          <Suspense fallback={<div className="px-4 py-24 text-center text-slate-500">Loading...</div>}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/live-service" element={<LiveService />} />
+              <Route path="/ministries/:id" element={<MinistryPage />} />
+              <Route path="/events" element={<AllEventsPage />} />
+              <Route path="/event-details/:id" element={<EventDetailsPage />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+            </Routes>
+          </Suspense>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </MotionConfig>
   );
 }
 

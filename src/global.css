@@ -19,3 +19,11 @@ body {
   max-width: 100%;
   box-sizing: border-box;
 }
+
+.content {
+  width: 100%;
+}
+
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
