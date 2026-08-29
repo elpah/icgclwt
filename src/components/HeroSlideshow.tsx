@@ -3,7 +3,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { easeOutExpo } from '@/lib/motion';
 
-const slideModules = import.meta.glob<{ default: string }>(
+const slideModules = import.meta.glob<string>(
   '../../public/images/cover_images_smaller/*.{jpg,jpeg,png,webp}',
   { eager: true, query: '?url', import: 'default' }
 );

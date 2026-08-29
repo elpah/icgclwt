@@ -14,7 +14,7 @@ const NAV_LINKS = [
   { name: 'Contact', href: 'contact' },
 ];
 
-const HOME_SECTIONS = ['home', 'about', 'ministries', 'contact'] as const;
+const HOME_SECTIONS = ['home', 'about', 'contact'] as const;
 
 function getRouteActive(pathname: string) {
   if (pathname === '/events' || pathname.startsWith('/event-details')) return 'events';
@@ -107,6 +107,11 @@ const Navigation = () => {
       }
       if (target === 'gallery') {
         navigate('/gallery');
+        setMobileMenuOpen(false);
+        return;
+      }
+      if (target === 'ministries') {
+        navigate('/ministries');
         setMobileMenuOpen(false);
         return;
       }

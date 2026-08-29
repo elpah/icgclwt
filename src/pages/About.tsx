@@ -113,23 +113,6 @@ const About = () => {
 
                 <div className="absolute inset-0 bg-linear-to-t from-[#006B3F]/20 to-transparent" />
               </motion.div>
-
-              <motion.div
-                className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-md rounded-xl p-4 shadow-md z-20"
-                {...fadeUp}
-                transition={staggerTransition(2, 0.1, 0.2)}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="bg-linear-to-br from-[#006B3F] to-emerald-600 rounded-lg p-2.5">
-                    <Heart className="w-5 h-5 text-[#FFD700]" />
-                  </div>
-
-                  <div>
-                    <div className="text-xl font-bold text-slate-900">20+</div>
-                    <div className="text-sm text-slate-600 font-medium">Years of Ministry</div>
-                  </div>
-                </div>
-              </motion.div>
             </div>
           </div>
         </div>

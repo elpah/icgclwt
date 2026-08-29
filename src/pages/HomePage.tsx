@@ -15,9 +15,6 @@ const About = lazy(() => import("./About"));
 const QuoteSection = lazy(() => import("@/components/QuoteSection"));
 const GivingSection = lazy(() => import("@/components/GivingSection"));
 const ContactSection = lazy(() => import("@/components/ContactSection"));
-const JoinMinistriesSection = lazy(() =>
-  import("@/components/MinistrySection/JoinMinistriesSection"),
-);
 
 const SERVICE_TIMES = [
   {
@@ -216,10 +213,6 @@ const HomePage = () => {
 
       <Suspense fallback={null}>
         <QuoteSection />
-      </Suspense>
-
-      <Suspense fallback={null}>
-        <JoinMinistriesSection />
       </Suspense>
 
       <Suspense fallback={null}>

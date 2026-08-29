@@ -50,7 +50,7 @@ const MinistryPage = () => {
         <div className="absolute inset-0 flex items-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16">
             <button
-              onClick={() => navigate('/', { state: { scrollTo: 'ministries' } })}
+              onClick={() => navigate('/ministries')}
               className="flex items-center space-x-2 text-white mb-5 hover:text-[#FFD700] transition-colors duration-300 min-h-10"
             >
               <ArrowLeft className="w-4 h-4" />

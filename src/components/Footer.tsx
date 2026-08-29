@@ -86,12 +86,12 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/ministries"
                   className="hover:text-[#FFD700] transition-colors hover:translate-x-1 inline-block"
                 >
                   Serve in a Ministry
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
