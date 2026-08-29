@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { name: 'Home', href: 'home' },
   { name: 'About', href: 'about' },
   { name: 'Events', href: 'events' },
+  { name: 'Gallery', href: 'gallery' },
   { name: 'Ministries', href: 'ministries' },
   { name: 'Contact', href: 'contact' },
 ];
@@ -17,6 +18,7 @@ const HOME_SECTIONS = ['home', 'about', 'ministries', 'contact'] as const;
 
 function getRouteActive(pathname: string) {
   if (pathname === '/events' || pathname.startsWith('/event-details')) return 'events';
+  if (pathname === '/gallery') return 'gallery';
   if (pathname.startsWith('/ministries')) return 'ministries';
   if (pathname === '/live-service') return 'live';
   if (pathname === '/') return 'home';
@@ -103,6 +105,11 @@ const Navigation = () => {
         setMobileMenuOpen(false);
         return;
       }
+      if (target === 'gallery') {
+        navigate('/gallery');
+        setMobileMenuOpen(false);
+        return;
+      }
 
       setActiveHref(target);
 
@@ -178,7 +185,7 @@ const Navigation = () => {
             </div>
           </motion.div>
 
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-5 lg:space-x-8">
             {NAV_LINKS.map((link, index) => (
               <motion.button
                 key={link.name}
@@ -199,7 +206,7 @@ const Navigation = () => {
               transition={{ duration: 0.4, delay: 0.5, ease: easeOutExpo }}
               whileTap={{ scale: 0.98 }}
               onClick={() => navigate('/live-service')}
-              className="bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-5 py-2 rounded-full font-semibold text-sm shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center space-x-2 min-h-10"
+              className="cursor-pointer bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-5 py-2 rounded-full font-semibold text-sm shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center space-x-2 min-h-10"
             >
               <PlayCircle className="w-4 h-4" />
               <span>Watch Live</span>
@@ -293,7 +300,7 @@ const Navigation = () => {
                     navigate('/live-service');
                     setMobileMenuOpen(false);
                   }}
-                  className="bg-linear-to-r from-[#006B3F] to-emerald-700 text-[#FFD700] w-full py-4 rounded-xl font-bold text-lg shadow-xl"
+                  className="cursor-pointer bg-linear-to-r from-[#006B3F] to-emerald-700 text-[#FFD700] w-full py-4 rounded-xl font-bold text-lg shadow-xl"
                 >
                   Join Service Online
                 </motion.button>

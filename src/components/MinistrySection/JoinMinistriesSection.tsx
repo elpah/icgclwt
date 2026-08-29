@@ -24,7 +24,7 @@ const JoinMinistriesSection = () => {
           <motion.p
             {...fadeUp}
             transition={staggerTransition(2, 0.1, 0)}
-            className="text-slate-600 max-w-2xl mx-auto text-base md:text-lg"
+            className="text-slate-600 max-w-2xl mx-auto text-sm md:text-[0.95rem] leading-relaxed"
           >
             Discover a place where you can grow, serve, and make a difference
           </motion.p>
@@ -40,7 +40,7 @@ const JoinMinistriesSection = () => {
           <div className="max-w-4xl mx-auto text-center">
             <h3 className="text-2xl md:text-3xl font-bold mb-4 tracking-tight">Why Join a Ministry?</h3>
 
-            <p className="text-slate-200 text-base md:text-lg mb-8 leading-relaxed">
+            <p className="text-slate-200 text-sm md:text-[0.95rem] mb-8 leading-relaxed">
               Ministries are the heartbeat of our church. When you join a ministry, you're not just
               volunteering—you're discovering your purpose, using your gifts, and impacting lives
               for eternity.

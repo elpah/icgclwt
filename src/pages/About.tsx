@@ -58,7 +58,7 @@ const About = () => {
               <motion.p
                 {...fadeUp}
                 transition={staggerTransition(2, 0.1, 0)}
-                className="text-slate-600 mb-4 leading-relaxed text-base md:text-lg"
+                className="text-slate-600 mb-4 leading-relaxed text-sm md:text-[0.95rem]"
               >
                 International Central Gospel Church (ICGC) is a Christian organization,
                 multi-cultural in nature, but primarily for the empowerment of the African person.
@@ -67,7 +67,7 @@ const About = () => {
               <motion.p
                 {...fadeUp}
                 transition={staggerTransition(3, 0.1, 0)}
-                className="text-slate-600 mb-6 leading-relaxed text-base md:text-lg"
+                className="text-slate-600 mb-6 leading-relaxed text-sm md:text-[0.95rem]"
               >
                 Living Word Temple is a vibrant branch of the ICGC family, dedicated to building
                 people of integrity and excellence.

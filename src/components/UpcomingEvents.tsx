@@ -29,7 +29,7 @@ const UpcomingEvents = () => {
             <motion.p
               {...fadeUp}
               transition={staggerTransition(2, 0.1, 0)}
-              className="text-slate-600 text-base md:text-lg"
+              className="text-slate-600 text-sm md:text-[0.95rem] leading-relaxed"
             >
               Join our upcoming activities and special events
             </motion.p>

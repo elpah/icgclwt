@@ -30,7 +30,7 @@ const AllEventsPage = () => {
               </span>
             </h1>
 
-            <p className="text-base md:text-lg text-slate-200 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-sm md:text-[0.95rem] text-slate-200 max-w-2xl mx-auto leading-relaxed">
               Experience powerful worship, transformative teaching, and life-changing encounters
               with God at our upcoming events and conferences.
             </p>

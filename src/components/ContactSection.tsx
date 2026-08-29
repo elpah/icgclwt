@@ -24,7 +24,7 @@ const ContactSection = () => {
             <motion.p
               {...fadeUp}
               transition={staggerTransition(2, 0.1, 0)}
-              className="text-slate-600 mb-8 text-base md:text-lg leading-relaxed"
+              className="text-slate-600 mb-8 text-sm md:text-[0.95rem] leading-relaxed"
             >
               We'd love to hear from you! Whether you have questions, need prayer, or want to know
               more about our church, we're here to help.

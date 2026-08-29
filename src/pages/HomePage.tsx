@@ -1,36 +1,42 @@
-import { useEffect, lazy, Suspense, useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Clock, Calendar, ArrowRight, Video } from 'lucide-react';
-import { motion } from 'framer-motion';
-import SectionEyebrow from '@/components/SectionEyebrow';
-import { fadeUp, heroTransition, staggerTransition, viewportOnce } from '@/lib/motion';
+import { useEffect, lazy, Suspense, useCallback } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Clock, ArrowRight, Video } from "lucide-react";
+import { motion } from "framer-motion";
+import SectionEyebrow from "@/components/SectionEyebrow";
+import HeroSlideshow from "@/components/HeroSlideshow";
+import {
+  fadeUp,
+  heroTransition,
+  staggerTransition,
+  viewportOnce,
+} from "@/lib/motion";
 
-const About = lazy(() => import('./About'));
-const QuoteSection = lazy(() => import('@/components/QuoteSection'));
-const GivingSection = lazy(() => import('@/components/GivingSection'));
-const ContactSection = lazy(() => import('@/components/ContactSection'));
-const JoinMinistriesSection = lazy(
-  () => import('@/components/MinistrySection/JoinMinistriesSection')
+const About = lazy(() => import("./About"));
+const QuoteSection = lazy(() => import("@/components/QuoteSection"));
+const GivingSection = lazy(() => import("@/components/GivingSection"));
+const ContactSection = lazy(() => import("@/components/ContactSection"));
+const JoinMinistriesSection = lazy(() =>
+  import("@/components/MinistrySection/JoinMinistriesSection"),
 );
 
 const SERVICE_TIMES = [
   {
-    id: 'sunday',
-    day: 'Sundays',
-    time: '8:00 AM - 10:30 AM',
-    title: 'Sunday Service',
+    id: "sunday",
+    day: "Sundays",
+    time: "8:00 AM - 10:30 AM",
+    title: "Sunday Service",
   },
   {
-    id: 'wednesday',
-    day: 'Wednesday',
-    time: '6:00 PM - 8:00 PM',
-    title: 'Teaching Service',
+    id: "wednesday",
+    day: "Wednesday",
+    time: "6:00 PM - 8:00 PM",
+    title: "Teaching Service",
   },
   {
-    id: 'friday',
-    day: 'Friday',
-    time: '6:00 PM - 8:00 PM',
-    title: 'Prayer Service',
+    id: "friday",
+    day: "Friday",
+    time: "6:00 PM - 8:00 PM",
+    title: "Prayer Service",
   },
 ];
 
@@ -38,11 +44,11 @@ const HomePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const scrollToId = useCallback(id => {
+  const scrollToId = useCallback((id) => {
     const el = document.getElementById(id);
     if (!el) return;
     requestAnimationFrame(() => {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }, []);
 
@@ -53,18 +59,21 @@ const HomePage = () => {
   }, [location.state?.scrollTo, scrollToId]);
 
   const goToLiveService = useCallback(() => {
-    navigate('/live-service');
+    navigate("/live-service");
   }, [navigate]);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
-      <section id="home" className="relative min-h-[100svh] flex items-center overflow-hidden bg-linear-to-br from-slate-900 via-[#006B3F] to-emerald-900">
+      <section
+        id="home"
+        className="relative min-h-[100svh] flex items-center overflow-hidden bg-linear-to-br from-slate-900 via-[#006B3F] to-emerald-900"
+      >
         <div className="absolute inset-0 z-0 opacity-20">
           <img
-            src="/images/church_cover_image.webp"
+            src="/images/church_cover_image.jpg"
             alt="Church Hero"
-            width={1920}
-            height={1080}
+            width={2040}
+            height={1360}
             loading="eager"
             fetchPriority="high"
             decoding="async"
@@ -73,7 +82,7 @@ const HomePage = () => {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 pb-16 md:pt-28 md:pb-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] gap-10 lg:gap-10 items-center">
             <div className="text-white">
               <motion.h1
                 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-5"
@@ -89,18 +98,18 @@ const HomePage = () => {
               </motion.h1>
 
               <motion.p
-                className="text-base md:text-lg text-slate-300 max-w-xl mb-8 leading-relaxed"
+                className="text-sm md:text-base text-slate-300 max-w-xl mb-8 leading-relaxed"
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={heroTransition(0.32)}
               >
-                A message-centered, mission-oriented community where lives are transformed and
-                leaders are raised.
+                A message-centered, mission-oriented community where lives are
+                transformed and leaders are raised.
               </motion.p>
 
               <div className="flex flex-col sm:flex-row gap-3">
                 <motion.button
-                  onClick={() => scrollToId('contact')}
+                  onClick={() => scrollToId("contact")}
                   className="cursor-pointer bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-6 py-3 rounded-full font-semibold text-base flex items-center justify-center min-h-12 transition-shadow duration-300 hover:shadow-md"
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -123,49 +132,26 @@ const HomePage = () => {
               </div>
             </div>
 
-            <div className="hidden lg:block relative">
+            <div className="hidden md:block relative mt-4 lg:mt-0 pt-10">
               <motion.div
-                className="relative overflow-hidden rounded-2xl shadow-lg"
+                className="relative"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={heroTransition(0.25)}
               >
-                <img
-                  src="/images/church_cover_smaller.webp"
-                  alt="Church Worship"
-                  width={800}
-                  height={450}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-96 object-cover"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent rounded-2xl" />
-              </motion.div>
+                <HeroSlideshow />
 
-              <motion.div
-                className="absolute -top-5 -right-5 bg-linear-to-br from-[#FFD700] to-[#FDB813] rounded-xl p-4 shadow-md w-56"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={heroTransition(0.7)}
-              >
-                <p className="text-sm text-[#006B3F] font-semibold leading-snug">
-                  Raising leaders, shaping vision, influencing society through Christ
-                </p>
-              </motion.div>
-
-              <motion.div
-                className="absolute -bottom-5 -left-5 bg-white rounded-xl p-4 shadow-md w-44"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={heroTransition(0.82)}
-              >
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="bg-[#006B3F]/10 p-2 rounded-lg">
-                    <Calendar className="w-4 h-4 text-[#006B3F]" />
-                  </div>
-                  <div className="text-xl font-bold text-[#006B3F]">3x</div>
-                </div>
-                <div className="text-sm text-slate-600 font-semibold">Weekly Services</div>
+                <motion.div
+                  className="absolute top-0 right-6 z-20 -translate-y-1/2 bg-linear-to-br from-[#FFD700] to-[#FDB813] rounded-xl p-4 shadow-md w-56"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={heroTransition(0.7)}
+                >
+                  <p className="text-sm text-[#006B3F] font-semibold leading-snug">
+                    Raising leaders, shaping vision, influencing society through
+                    Christ
+                  </p>
+                </motion.div>
               </motion.div>
             </div>
           </div>
@@ -183,8 +169,9 @@ const HomePage = () => {
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
               Worship With Us
             </h2>
-            <p className="text-slate-600 mt-3 text-base md:text-lg">
-              Experience vibrant worship, powerful teaching, and genuine community
+            <p className="text-slate-600 mt-3 text-sm md:text-[0.95rem] leading-relaxed">
+              Experience vibrant worship, powerful teaching, and genuine
+              community
             </p>
           </motion.div>
 
@@ -203,11 +190,15 @@ const HomePage = () => {
                 </div>
 
                 <h3 className="text-lg font-bold mb-1">{service.title}</h3>
-                <div className="text-sm text-[#006B3F] font-semibold mb-1">{service.day}</div>
-                <div className="text-slate-600 text-sm font-medium">{service.time}</div>
+                <div className="text-sm text-[#006B3F] font-semibold mb-1">
+                  {service.day}
+                </div>
+                <div className="text-slate-600 text-sm font-medium">
+                  {service.time}
+                </div>
 
                 <button
-                  onClick={() => scrollToId('map')}
+                  onClick={() => scrollToId("map")}
                   className="cursor-pointer mt-4 text-[#006B3F] font-semibold text-sm flex items-center min-h-10"
                 >
                   Get Directions
@@ -235,7 +226,11 @@ const HomePage = () => {
         <GivingSection />
       </Suspense>
 
-      <Suspense fallback={<div className="p-10 text-center text-slate-500">Loading...</div>}>
+      <Suspense
+        fallback={
+          <div className="p-10 text-center text-slate-500">Loading...</div>
+        }
+      >
         <ContactSection />
       </Suspense>
     </div>

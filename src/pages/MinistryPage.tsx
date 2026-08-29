@@ -2,12 +2,33 @@ import { useMemo } from 'react';
 import { ArrowLeft, Clock, MapPin, Calendar } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { MINISTRIES_DATA } from '../data/MinistriesData';
+import { toGalleryImages } from '@/data/galleryData';
+import ImageGallery from '@/components/gallery/ImageGallery';
+
+function whatsappLink(phone: string) {
+  const digits = phone.replace(/\D/g, '');
+  const international = digits.startsWith('233') ? digits : digits.replace(/^0/, '233');
+  return `https://wa.me/${international}`;
+}
 
 const MinistryPage = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
   const ministry = useMemo(() => MINISTRIES_DATA.find(min => min.id === id), [id]);
+  const galleryImages = useMemo(
+    () =>
+      ministry
+        ? toGalleryImages(ministry.gallery, {
+            idPrefix: ministry.id,
+            alt: ministry.name,
+            title: ministry.name,
+            category: 'Ministries',
+            ministry: ministry.id,
+          })
+        : [],
+    [ministry]
+  );
 
   if (!ministry) {
     return <p className="text-center py-20 text-xl text-red-500">Ministry not found</p>;
@@ -47,7 +68,7 @@ const MinistryPage = () => {
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 tracking-tight">
                   {ministry.name}
                 </h1>
-                <p className="text-slate-200 text-sm md:text-base">{ministry.description}</p>
+                <p className="text-slate-200 text-sm md:text-[0.95rem]">{ministry.description}</p>
               </div>
             </div>
           </div>
@@ -61,27 +82,14 @@ const MinistryPage = () => {
               <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-3 tracking-tight">
                 Our Vision
               </h2>
-              <p className="text-slate-600 leading-relaxed text-base">{ministry.vision}</p>
+              <p className="text-slate-600 leading-relaxed text-sm md:text-[0.95rem]">{ministry.vision}</p>
             </div>
 
             <div>
               <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-4 tracking-tight">
                 Gallery
               </h2>
-
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {ministry.gallery.map((image, index) => (
-                  <div key={image} className="relative h-36 md:h-40 rounded-xl overflow-hidden">
-                    <img
-                      src={image}
-                      alt={`Gallery ${index + 1}`}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                    />
-                  </div>
-                ))}
-              </div>
+              <ImageGallery images={galleryImages} layout="grid" />
             </div>
           </div>
 
@@ -116,13 +124,17 @@ const MinistryPage = () => {
 
               <div className="mt-5 pt-5 border-t border-slate-200">
                 <h4 className="font-semibold text-slate-900 mb-1 text-sm">Ministry Leader</h4>
-                <p className="text-slate-600 mb-0.5 text-sm">{ministry.leader}</p>
-                <p className="text-sm text-[#006B3F] font-semibold">{ministry.contact}</p>
+                <p className="text-slate-600 text-sm">{ministry.leader}</p>
               </div>
 
-              <button className="w-full mt-5 bg-linear-to-r from-[#006B3F] to-emerald-600 text-white py-3 rounded-full font-semibold text-sm min-h-12 hover:shadow-md transition-shadow duration-300">
-                Join This Ministry
-              </button>
+              <a
+                href={whatsappLink(ministry.phone)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full mt-5 bg-linear-to-r from-[#006B3F] to-emerald-600 text-white py-3 rounded-full font-semibold text-sm min-h-12 hover:shadow-md transition-shadow duration-300 inline-flex items-center justify-center"
+              >
+                Contact Ministry Leader
+              </a>
             </div>
           </div>
         </div>

@@ -61,7 +61,7 @@ const LiveService = () => {
               Watch Our Services
             </h2>
 
-            <p className="text-slate-600 max-w-2xl mx-auto text-base md:text-lg">
+            <p className="text-slate-600 max-w-2xl mx-auto text-sm md:text-[0.95rem] leading-relaxed">
               Join us online for powerful worship, biblical teaching, and life-transforming messages
             </p>
           </div>
@@ -159,7 +159,7 @@ const LiveService = () => {
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 tracking-tight">
               What to Expect
             </h2>
-            <p className="text-slate-600 text-base md:text-lg">Your first visit with us</p>
+            <p className="text-slate-600 text-sm md:text-[0.95rem] leading-relaxed">Your first visit with us</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

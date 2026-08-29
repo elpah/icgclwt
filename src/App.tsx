@@ -12,6 +12,7 @@ const LiveService = lazy(() => import('./pages/LiveService'));
 const MinistryPage = lazy(() => import('./pages/MinistryPage'));
 const EventDetailsPage = lazy(() => import('./pages/EventDetailsPage'));
 const AllEventsPage = lazy(() => import('./pages/AllEventsPage'));
+const GalleryPage = lazy(() => import('./pages/GalleryPage'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 
@@ -48,6 +49,7 @@ function App() {
               <Route path="/live-service" element={<LiveService />} />
               <Route path="/ministries/:id" element={<MinistryPage />} />
               <Route path="/events" element={<AllEventsPage />} />
+              <Route path="/gallery" element={<GalleryPage />} />
               <Route path="/event-details/:id" element={<EventDetailsPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />

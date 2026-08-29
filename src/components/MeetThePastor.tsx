@@ -55,7 +55,7 @@ const MeetThePastor = () => {
             <motion.h2
               {...fadeUp}
               transition={staggerTransition(2, 0.1, 0)}
-              className="text-2xl sm:text-3xl lg:text-[2.35rem] font-bold text-slate-900 tracking-tight leading-tight mb-1.5"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-1.5"
             >
               Rev. Reuben K Obeng
             </motion.h2>

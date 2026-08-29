@@ -23,7 +23,7 @@ const CoreValues = () => {
           <motion.p
             {...fadeUp}
             transition={staggerTransition(2, 0.1, 0)}
-            className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto"
+            className="text-slate-600 text-sm md:text-[0.95rem] leading-relaxed max-w-2xl mx-auto"
           >
             Our core values guide everything we do as a church family
           </motion.p>
@@ -45,7 +45,7 @@ const CoreValues = () => {
                 <value.icon className="w-5 h-5 text-white" />
               </div>
               <h3 className="text-base md:text-lg font-bold text-slate-900 mb-2">{value.title}</h3>
-              <p className="text-sm md:text-base text-slate-600 leading-relaxed">
+              <p className="text-sm text-slate-600 leading-relaxed">
                 {value.description}
               </p>
             </motion.div>

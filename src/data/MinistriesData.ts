@@ -1,4 +1,4 @@
-import { Music, Heart, PlayCircle, Users, GraduationCap, Church, MapPin } from 'lucide-react';
+import { Music, Heart, PlayCircle, GraduationCap, Church, MapPin } from 'lucide-react';
 
 export const MINISTRIES_DATA = [
   {
@@ -32,7 +32,7 @@ export const MINISTRIES_DATA = [
       'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=600',
     ],
     leader: 'Bro. Emmanuel Mensah',
-    contact: 'info@icgclivingwordtemple.com',
+    phone: '024 595 3629',
   },
   {
     id: 'children',
@@ -60,7 +60,7 @@ export const MINISTRIES_DATA = [
       'https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&q=80&w=600',
     ],
     leader: 'Sis. Grace Asante',
-    contact: 'info@icgclivingwordtemple.com',
+    phone: '024 595 3629',
   },
   {
     id: 'media',
@@ -98,40 +98,7 @@ export const MINISTRIES_DATA = [
       'https://images.unsplash.com/photo-1499673610122-01c7122c5dcb?auto=format&fit=crop&q=80&w=600',
     ],
     leader: 'Bro. Kwame Boateng',
-    contact: 'info@icgclivingwordtemple.com',
-  },
-  {
-    id: 'hospitality',
-    name: 'Hospitality',
-    icon: Users,
-    color: 'from-orange-500 to-amber-500',
-    description: 'Creating a welcoming atmosphere for all',
-    headerImage:
-      'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&q=80&w=1920',
-    vision:
-      'To embody the love of Christ through warm hospitality, ensuring every person who walks through our doors feels welcomed, valued, and cared for as part of the church family.',
-    meetings: [
-      {
-        day: 'Sunday',
-        time: '6:30 AM - 2:00 PM',
-        location: 'Welcome Desk',
-      },
-      {
-        day: '1st Saturday',
-        time: '10:00 AM - 12:00 PM',
-        location: 'Fellowship Hall',
-      },
-    ],
-    gallery: [
-      'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1591115765373-5207764f72e7?auto=format&fit=crop&q=80&w=600',
-    ],
-    leader: 'Sis. Abena Osei',
-    contact: 'info@icgclivingwordtemple.com',
+    phone: '024 595 3629',
   },
   {
     id: 'youth',
@@ -164,7 +131,7 @@ export const MINISTRIES_DATA = [
       'https://images.unsplash.com/photo-1525026198548-4baa812f1183?auto=format&fit=crop&q=80&w=600',
     ],
     leader: 'Pastor Daniel Owusu',
-    contact: 'info@icgclivingwordtemple.com',
+    phone: '024 595 3629',
   },
   {
     id: 'men',
@@ -197,7 +164,7 @@ export const MINISTRIES_DATA = [
       'https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&q=80&w=600',
     ],
     leader: 'Elder Joseph Antwi',
-    contact: 'info@icgclivingwordtemple.com',
+    phone: '024 595 3629',
   },
   {
     id: 'women',
@@ -230,7 +197,7 @@ export const MINISTRIES_DATA = [
       'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&fit=crop&q=80&w=600',
     ],
     leader: 'Sis. Akosua Adjei',
-    contact: 'info@icgclivingwordtemple.com',
+    phone: '024 595 3629',
   },
   {
     id: 'outreach',
@@ -263,6 +230,6 @@ export const MINISTRIES_DATA = [
       'https://images.unsplash.com/photo-1532629345422-7515f3d16bb8?auto=format&fit=crop&q=80&w=600',
     ],
     leader: 'Bro. Samuel Nkrumah',
-    contact: 'info@icgclivingwordtemple.com',
+    phone: '024 595 3629',
   },
 ];
