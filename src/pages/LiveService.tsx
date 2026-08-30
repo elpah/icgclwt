@@ -108,7 +108,7 @@ const LiveService = () => {
                   }`}
                 >
                   <div className="flex justify-between mb-3">
-                    <div className={`${card.featured ? 'bg-white/20' : 'bg-slate-100'} rounded-lg p-2.5`}>
+                    <div className={`${card.featured ? 'bg-white/20' : 'bg-slate-100'} rounded-md p-2.5`}>
                       <card.icon className="w-5 h-5" />
                     </div>
                   </div>
@@ -136,7 +136,7 @@ const LiveService = () => {
                     className="bg-white rounded-xl p-5 shadow-sm border border-slate-100"
                   >
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="bg-emerald-600 rounded-lg p-2">
+                      <div className="bg-emerald-600 rounded-md p-2">
                         <Clock className="w-4 h-4 text-[#FFD700]" />
                       </div>
                       <h4 className="font-semibold text-sm">{service.title}</h4>
@@ -169,7 +169,7 @@ const LiveService = () => {
                 className="bg-white rounded-2xl p-5 shadow-sm text-center border border-slate-100"
               >
                 <div
-                  className={`w-11 h-11 mx-auto mb-4 rounded-xl bg-linear-to-br ${item.color} flex items-center justify-center`}
+                  className={`w-11 h-11 mx-auto mb-4 rounded-md bg-linear-to-br ${item.color} flex items-center justify-center`}
                 >
                   <item.icon className="w-5 h-5 text-white" />
                 </div>

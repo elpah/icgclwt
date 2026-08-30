@@ -1,8 +1,6 @@
-import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import SectionEyebrow from '@/components/SectionEyebrow';
-import { fadeUp, staggerTransition, viewportOnce } from '@/lib/motion';
 
 const QUALIFICATIONS = [
   'Master of Art - Peace and Development Studies',
@@ -19,13 +17,7 @@ const MeetThePastor = () => {
     <section className="py-16 md:py-20 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
-          <motion.figure
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={viewportOnce}
-            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-[90%]"
-          >
+          <figure className="relative w-[90%]">
             <div className="relative lg:pr-4 lg:pb-4">
               <div
                 className="hidden lg:block absolute bottom-0 right-0 w-16 h-16 border-b border-r border-[#FFD700]"
@@ -34,62 +26,38 @@ const MeetThePastor = () => {
               <img
                 src="/images/rev_obeng.webp"
                 alt="Rev. Reuben K Obeng, Head Pastor"
-                className="w-full h-[24rem] sm:h-[28rem] lg:h-[34rem] object-cover object-[center_12%]"
+                className="w-full h-[24rem] sm:h-[28rem] lg:h-[34rem] object-cover object-[center_12%] -scale-x-100"
               />
             </div>
-          </motion.figure>
+          </figure>
 
           <div>
-            <motion.div {...fadeUp} transition={staggerTransition(0, 0.1, 0)}>
-              <SectionEyebrow align="left">Leadership</SectionEyebrow>
-            </motion.div>
+            <SectionEyebrow align="left">Leadership</SectionEyebrow>
 
-            <motion.p
-              {...fadeUp}
-              transition={staggerTransition(1, 0.1, 0)}
-              className="text-sm text-slate-500 mb-2"
-            >
-              Meet Our Head Pastor
-            </motion.p>
+            <p className="text-sm text-slate-500 mb-2">Meet Our Head Pastor</p>
 
-            <motion.h2
-              {...fadeUp}
-              transition={staggerTransition(2, 0.1, 0)}
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-1.5"
-            >
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight mb-1.5">
               Rev. Reuben K Obeng
-            </motion.h2>
+            </h2>
 
-            <motion.p
-              {...fadeUp}
-              transition={staggerTransition(3, 0.1, 0)}
-              className="text-[#006B3F] font-medium text-sm md:text-base tracking-wide mb-5"
-            >
+            <p className="text-[#006B3F] font-medium text-sm md:text-base tracking-wide mb-5">
               DSM & Head Pastor
-            </motion.p>
+            </p>
 
-            <motion.div
-              {...fadeUp}
-              transition={staggerTransition(4, 0.1, 0)}
-              className="space-y-3 text-slate-600 text-sm md:text-[0.95rem] leading-relaxed"
-            >
+            <div className="space-y-3 text-slate-600 text-sm md:text-[0.95rem] leading-relaxed">
               <p>
-                Rev. Obeng has been serving as the Head Pastor of ICGC Living Word Temple for over
-                15 years. His passion for teaching God's Word and raising up leaders has transformed
-                countless lives.
+                Rev. Obeng has been serving as a pastor with ICGC for over 15 years and currently
+                serves as the Head Pastor of ICGC Living Word Temple. His passion for teaching
+                God&apos;s Word and raising up leaders has transformed countless lives.
               </p>
               <p>
                 With a heart for the local community and a vision for global impact, Rev. Obeng
-                leads our congregation with wisdom, compassion, and unwavering faith in God's
+                leads our congregation with wisdom, compassion, and unwavering faith in God&apos;s
                 promises.
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div
-              {...fadeUp}
-              transition={staggerTransition(5, 0.1, 0)}
-              className="mt-6 pt-5 border-t border-slate-200"
-            >
+            <div className="mt-6 pt-5 border-t border-slate-200">
               <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#006B3F] mb-3">
                 Qualifications & Education
               </p>
@@ -101,17 +69,15 @@ const MeetThePastor = () => {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
 
-            <motion.button
-              {...fadeUp}
-              transition={staggerTransition(6, 0.1, 0)}
+            <button
               className="cursor-pointer mt-7 bg-[#006B3F] hover:bg-emerald-800 text-white px-6 py-3 rounded-full font-semibold text-sm transition-colors duration-300 inline-flex items-center min-h-12"
-              onClick={() => navigate('/', { state: { scrollTo: 'contact' } })}
+              onClick={() => navigate('/contact')}
             >
               Schedule a Meeting
               <ArrowRight className="ml-2 w-4 h-4" />
-            </motion.button>
+            </button>
           </div>
         </div>
       </div>

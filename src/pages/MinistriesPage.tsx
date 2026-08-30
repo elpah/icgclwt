@@ -1,9 +1,7 @@
-import { motion } from 'framer-motion';
 import { Target, Users, Zap } from 'lucide-react';
 import SectionEyebrow from '@/components/SectionEyebrow';
 import MinistryCoverCard from '@/components/MinistrySection/MinistryCoverCard';
 import { MINISTRIES_DATA } from '@/data/MinistriesData';
-import { fadeUp, staggerTransition, viewportOnce } from '@/lib/motion';
 
 const WHY_JOIN = [
   {
@@ -52,54 +50,40 @@ const MinistriesPage = () => {
       <section className="py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-            {MINISTRIES_DATA.map((ministry, index) => (
-              <motion.div
-                key={ministry.id}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={viewportOnce}
-                transition={staggerTransition(index % 6, 0.06, 0.04)}
-              >
+            {MINISTRIES_DATA.map(ministry => (
+              <div key={ministry.id}>
                 <MinistryCoverCard ministry={ministry} />
-              </motion.div>
+              </div>
             ))}
           </div>
 
-          <motion.div
-            {...fadeUp}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-12 md:mt-16 bg-linear-to-br from-[#006B3F] to-emerald-700 rounded-2xl py-8 px-5 md:p-10 text-white"
-          >
+          <div className="mt-12 md:mt-16 bg-linear-to-br from-[#006B3F] to-emerald-700 rounded-2xl py-8 px-5 md:p-10 text-white">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-2xl md:text-3xl font-bold mb-4 tracking-tight">
                 Why Join a Ministry?
               </h2>
               <p className="text-slate-200 text-sm md:text-[0.95rem] mb-8 leading-relaxed">
                 Ministries are the heartbeat of our church. When you join a ministry, you're not
-                just volunteering—you're discovering your purpose, using your gifts, and impacting
+                just volunteering. You're discovering your purpose, using your gifts, and impacting
                 lives for eternity.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {WHY_JOIN.map((item, index) => (
-                  <motion.div
+                {WHY_JOIN.map(item => (
+                  <div
                     key={item.title}
-                    initial={{ opacity: 0, y: 14 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={viewportOnce}
-                    transition={staggerTransition(index, 0.08, 0.05)}
                     className="bg-white/10 rounded-xl p-5 border border-white/15"
                   >
-                    <div className="bg-white/15 w-10 h-10 rounded-lg flex items-center justify-center mx-auto mb-3">
+                    <div className="bg-white/15 w-10 h-10 rounded-md flex items-center justify-center mx-auto mb-3">
                       <item.icon className="w-5 h-5" />
                     </div>
                     <h3 className="font-semibold text-base mb-1">{item.title}</h3>
                     <p className="text-slate-200 text-sm">{item.description}</p>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

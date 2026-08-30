@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Calendar, MapPin, ArrowRight, Users, Heart, Share2, Clock } from 'lucide-react';
 
 import { UPCOMING_EVENTS } from '@/data/upcomingEventsData';
+import { CHURCH_ADDRESS, CHURCH_DIGITAL_ADDRESS } from '@/data/churchInfo';
 import EventCard from '@/components/EventCard';
 import SectionEyebrow from '@/components/SectionEyebrow';
 
@@ -37,7 +38,7 @@ const EventDetailsPage = () => {
     const url = window.location.href;
     const shareData = {
       title: event.title,
-      text: `${event.title} — ${event.date} at ICGC Living Word Temple`,
+      text: `${event.title}, ${event.date} at ICGC Living Word Temple`,
       url,
     };
 
@@ -89,7 +90,7 @@ const EventDetailsPage = () => {
 
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-[#FFD700]" />
-                  <span>ICGC Living Word Temple</span>
+                  <span>{CHURCH_ADDRESS}</span>
                 </div>
               </div>
             </div>
@@ -133,7 +134,11 @@ const EventDetailsPage = () => {
                 )}
                 <li className="flex items-start gap-2.5">
                   <MapPin className="w-4 h-4 mt-0.5 text-[#FFD700] shrink-0" />
-                  <span>ICGC Living Word Temple</span>
+                  <span>
+                    {CHURCH_ADDRESS}
+                    <br />
+                    Digital address: {CHURCH_DIGITAL_ADDRESS}
+                  </span>
                 </li>
               </ul>
 

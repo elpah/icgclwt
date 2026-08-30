@@ -1,43 +1,26 @@
-import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
-import SectionEyebrow from '@/components/SectionEyebrow';
-import { fadeUp, staggerTransition, viewportOnce } from '@/lib/motion';
+import {
+  CHURCH_ADDRESS,
+  CHURCH_DIGITAL_ADDRESS,
+  CHURCH_MAPS_EMBED_URL,
+  CHURCH_MAPS_URL,
+} from '@/data/churchInfo';
 
 const ContactSection = () => {
   return (
-    <section id="contact" className="py-16 md:py-20 bg-white">
+    <section className="py-12 md:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
           <div>
-            <motion.div {...fadeUp} transition={staggerTransition(0, 0.1, 0)}>
-              <SectionEyebrow align="left">Contact</SectionEyebrow>
-            </motion.div>
-
-            <motion.h2
-              {...fadeUp}
-              transition={staggerTransition(1, 0.1, 0)}
-              className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-3 leading-tight tracking-tight"
-            >
-              Get in Touch
-            </motion.h2>
-
-            <motion.p
-              {...fadeUp}
-              transition={staggerTransition(2, 0.1, 0)}
-              className="text-slate-600 mb-8 text-sm md:text-[0.95rem] leading-relaxed"
-            >
-              We'd love to hear from you! Whether you have questions, need prayer, or want to know
-              more about our church, we're here to help.
-            </motion.p>
-
-            <div className="space-y-4">
+            <div className="flex flex-col md:flex-row md:flex-wrap gap-4 md:gap-x-8 md:gap-y-4">
               {[
                 {
                   icon: MapPin,
                   title: 'Location',
-                  content: 'Living Word Temple, Winneba, Ghana',
+                  content: CHURCH_ADDRESS,
+                  detail: `Digital address: ${CHURCH_DIGITAL_ADDRESS}`,
                   color: 'from-red-500 to-pink-500',
-                  link: 'https://maps.google.com',
+                  link: CHURCH_MAPS_URL,
                 },
                 {
                   icon: Phone,
@@ -53,37 +36,30 @@ const ContactSection = () => {
                   color: 'from-blue-500 to-cyan-500',
                   link: 'mailto:info@icgclivingwordtemple.com',
                 },
-              ].map((item, index) => (
-                <motion.a
+              ].map(item => (
+                <a
                   key={item.title}
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={viewportOnce}
-                  transition={staggerTransition(index, 0.08, 0.05)}
-                  className="flex items-start space-x-3 group cursor-pointer"
+                  className="flex items-start gap-3 group cursor-pointer min-w-0 md:min-w-[14rem] md:flex-1"
                 >
-                  <div
-                    className={`bg-linear-to-br ${item.color} p-2.5 rounded-lg group-hover:scale-105 transition-transform duration-300`}
-                  >
+                  <div className={`bg-linear-to-br ${item.color} p-2.5 rounded-md shrink-0`}>
                     <item.icon className="w-4 h-4 text-white" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="font-semibold text-slate-900 text-sm mb-0.5">{item.title}</p>
-                    <p className="text-slate-600 text-sm">{item.content}</p>
+                    <p className="text-slate-600 text-sm break-words">{item.content}</p>
+                    {item.detail ? (
+                      <p className="text-slate-500 text-sm mt-0.5">{item.detail}</p>
+                    ) : null}
                   </div>
-                </motion.a>
+                </a>
               ))}
             </div>
 
-            <motion.div
-              {...fadeUp}
-              transition={staggerTransition(3, 0.1, 0.1)}
-              className="mt-8"
-            >
-              <h3 className="font-semibold text-slate-900 mb-4 text-base">Connect With Us</h3>
+            <div className="mt-8">
+              <h2 className="font-semibold text-slate-900 mb-4 text-base">Connect With Us</h2>
               <div className="flex space-x-3">
                 {[
                   {
@@ -117,19 +93,15 @@ const ContactSection = () => {
                     href={link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm border border-slate-100 text-slate-400 ${color} hover:text-white hover:border-transparent transition-colors duration-300`}
+                    className={`w-10 h-10 bg-white rounded-md flex items-center justify-center shadow-sm border border-slate-100 text-slate-400 ${color} hover:text-white hover:border-transparent transition-colors duration-300`}
                   >
                     <Icon className="w-4 h-4" />
                   </a>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              {...fadeUp}
-              transition={staggerTransition(4, 0.1, 0.1)}
-              className="mt-8 bg-slate-50 rounded-xl p-5 border border-slate-100"
-            >
+            <div className="mt-8 bg-slate-50 rounded-xl p-5 border border-slate-100">
               <p className="font-semibold text-slate-900 mb-3 text-sm">Office Hours</p>
               <div className="space-y-1.5 text-slate-600 text-sm">
                 <p className="flex justify-between gap-4">
@@ -145,14 +117,10 @@ const ContactSection = () => {
                   <span className="font-medium text-right">Closed (Worship Services)</span>
                 </p>
               </div>
-            </motion.div>
+            </div>
           </div>
 
-          <motion.div
-            {...fadeUp}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-            className="bg-white py-6 px-5 md:p-8 rounded-2xl shadow-sm border border-slate-100"
-          >
+          <div className="bg-white py-6 px-5 md:p-8 rounded-2xl shadow-sm border border-slate-100">
             <p className="text-xl font-bold mb-5 text-slate-900">Send us a Message</p>
             <form className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -227,17 +195,13 @@ const ContactSection = () => {
                 Submit Message
               </button>
             </form>
-          </motion.div>
+          </div>
         </div>
 
-        <div id="map" className="mt-12 md:mt-14">
-          <motion.div
-            {...fadeUp}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-2xl overflow-hidden shadow-sm border border-slate-100"
-          >
+        <div id="map" className="scroll-mt-24 mt-12 md:mt-14">
+          <div className="rounded-2xl overflow-hidden shadow-sm border border-slate-100">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.8059385883547!2d-0.1618419!3d5.6037168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMzYnMTMuNCJOIDDCsDA5JzQyLjYiVw!5e0!3m2!1sen!2sgh!4v1234567890123"
+              src={CHURCH_MAPS_EMBED_URL}
               width="100%"
               height="320"
               style={{ border: 0 }}
@@ -247,7 +211,7 @@ const ContactSection = () => {
               title="ICGC Living Word Temple Location"
               className="w-full h-64 md:h-80"
             />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

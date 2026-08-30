@@ -14,20 +14,23 @@ const EventDetailsPage = lazy(() => import('./pages/EventDetailsPage'));
 const AllEventsPage = lazy(() => import('./pages/AllEventsPage'));
 const GalleryPage = lazy(() => import('./pages/GalleryPage'));
 const MinistriesPage = lazy(() => import('./pages/MinistriesPage'));
+const About = lazy(() => import('./pages/About'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 
 const theme: Theme = 'light';
 
 function App() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    if (hash) return;
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     });
-  }, [pathname]);
+  }, [pathname, hash]);
 
   function setTheme(theme: Theme) {
     if (theme === 'dark') {
@@ -52,6 +55,8 @@ function App() {
               <Route path="/ministries/:id" element={<MinistryPage />} />
               <Route path="/events" element={<AllEventsPage />} />
               <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<ContactPage />} />
               <Route path="/event-details/:id" element={<EventDetailsPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />

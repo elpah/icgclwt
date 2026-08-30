@@ -71,7 +71,7 @@ const ImageLightbox = ({ images, index, onClose, onIndexChange }: ImageLightboxP
             type="button"
             onClick={onClose}
             aria-label="Close image"
-            className="cursor-pointer absolute top-4 right-4 sm:top-6 sm:right-6 z-30 w-11 h-11 rounded-full bg-white/10 text-white hover:bg-white/20 flex items-center justify-center transition-colors"
+            className="cursor-pointer absolute top-4 right-4 sm:top-6 sm:right-6 z-30 w-11 h-11 rounded-md bg-white/10 text-white hover:bg-white/20 flex items-center justify-center transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -85,7 +85,7 @@ const ImageLightbox = ({ images, index, onClose, onIndexChange }: ImageLightboxP
                   onIndexChange((currentIndex - 1 + images.length) % images.length);
                 }}
                 aria-label="Previous image"
-                className="cursor-pointer absolute left-2 sm:left-5 z-30 w-11 h-11 rounded-full bg-[#006B3F] text-[#FFD700] hover:bg-emerald-800 flex items-center justify-center transition-colors"
+                className="cursor-pointer absolute left-2 sm:left-5 z-30 w-11 h-11 rounded-md bg-[#006B3F] text-[#FFD700] hover:bg-emerald-800 flex items-center justify-center transition-colors"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -96,7 +96,7 @@ const ImageLightbox = ({ images, index, onClose, onIndexChange }: ImageLightboxP
                   onIndexChange((currentIndex + 1) % images.length);
                 }}
                 aria-label="Next image"
-                className="cursor-pointer absolute right-2 sm:right-5 z-30 w-11 h-11 rounded-full bg-[#006B3F] text-[#FFD700] hover:bg-emerald-800 flex items-center justify-center transition-colors"
+                className="cursor-pointer absolute right-2 sm:right-5 z-30 w-11 h-11 rounded-md bg-[#006B3F] text-[#FFD700] hover:bg-emerald-800 flex items-center justify-center transition-colors"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>

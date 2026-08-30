@@ -102,7 +102,7 @@ export const MINISTRIES_DATA = [
   },
   {
     id: 'youth',
-    name: 'Youth & Teens',
+    name: 'New Generation',
     icon: GraduationCap,
     color: 'from-indigo-500 to-blue-500',
     description: 'Empowering the next generation',
@@ -135,7 +135,7 @@ export const MINISTRIES_DATA = [
   },
   {
     id: 'men',
-    name: 'Men of Valor',
+    name: 'Mighty Men of Valor',
     icon: Church,
     color: 'from-emerald-500 to-green-500',
     description: 'Building strong men of God',

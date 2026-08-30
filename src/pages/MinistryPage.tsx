@@ -59,7 +59,7 @@ const MinistryPage = () => {
 
             <div className="flex items-center space-x-4">
               <div
-                className={`w-12 h-12 md:w-14 md:h-14 bg-linear-to-br ${ministry.color} rounded-xl flex items-center justify-center shrink-0`}
+                className={`w-12 h-12 md:w-14 md:h-14 bg-linear-to-br ${ministry.color} rounded-md flex items-center justify-center shrink-0`}
               >
                 <ministry.icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
               </div>

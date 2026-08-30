@@ -1,4 +1,5 @@
 import LegalDocument from '@/components/LegalDocument';
+import { CHURCH_ADDRESS, CHURCH_DIGITAL_ADDRESS } from '@/data/churchInfo';
 
 const PrivacyPolicy = () => {
   return (
@@ -95,9 +96,9 @@ const PrivacyPolicy = () => {
           contact ICGC Living Word Temple, a branch of International Central Gospel Church:
         </p>
         <p>
-          ICGC Living Word Temple
+          {CHURCH_ADDRESS}
           <br />
-          Winneba, Ghana
+          Digital address: {CHURCH_DIGITAL_ADDRESS}
           <br />
           Email:{' '}
           <a

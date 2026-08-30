@@ -1,12 +1,10 @@
 import { MINISTRIES_DATA } from './MinistriesData';
 
 export const GALLERY_CATEGORIES = [
-  'Church',
-  'Worship',
-  'Services',
-  'Events',
+  'Church Life',
   'Ministries',
   'Outreach',
+  'Events',
 ] as const;
 
 export type GalleryCategory = (typeof GALLERY_CATEGORIES)[number];
@@ -25,7 +23,6 @@ export const GALLERY_FILTERS = ['All', ...GALLERY_CATEGORIES] as const;
 export type GalleryFilter = (typeof GALLERY_FILTERS)[number];
 
 const MINISTRY_CATEGORY: Record<string, GalleryCategory> = {
-  worship: 'Worship',
   outreach: 'Outreach',
 };
 
@@ -62,35 +59,35 @@ const CHURCH_IMAGES: GalleryImage[] = [
     src: '/images/church_cover_image.jpg',
     alt: 'ICGC Living Word Temple sanctuary',
     title: 'Living Word Temple',
-    category: ['Church', 'Services'],
+    category: 'Church Life',
   },
   {
     id: 'church-worship',
     src: '/images/cover_images_smaller/cover_image_5.jpg',
     alt: 'Congregation gathered in worship',
     title: 'Sunday Worship',
-    category: ['Worship', 'Services'],
+    category: 'Church Life',
   },
   {
     id: 'church-family',
     src: 'https://res.cloudinary.com/dvwpuenzk/image/upload/v1781938363/icgc_banner_kfyfxr.avif',
     alt: 'ICGC Living Word Temple church family',
     title: 'Church Family',
-    category: 'Church',
+    category: 'Church Life',
   },
   {
     id: 'church-pastor',
     src: '/images/rev_obeng.webp',
     alt: 'Rev. Reuben K Obeng, Head Pastor',
     title: 'Rev. Reuben K Obeng',
-    category: 'Church',
+    category: 'Church Life',
   },
   {
     id: 'sunday-service',
     src: 'https://res.cloudinary.com/dvwpuenzk/image/upload/v1787967714/sunday_service_lwt_ld62po.jpg',
     alt: 'Sunday service at Living Word Temple',
     title: 'Sunday Service',
-    category: ['Services', 'Events'],
+    category: ['Church Life', 'Events'],
     date: 'Every Sunday',
   },
 ];

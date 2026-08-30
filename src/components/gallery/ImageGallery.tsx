@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
 import GalleryFilters from './GalleryFilters';
 import GalleryImageCard from './GalleryImage';
 import ImageLightbox from './ImageLightbox';
@@ -10,7 +9,6 @@ import {
   type GalleryImage,
 } from '@/data/galleryData';
 import { cn } from '@/lib/utils';
-import { staggerTransition, viewportOnce } from '@/lib/motion';
 
 interface ImageGalleryProps {
   images: GalleryImage[];
@@ -34,6 +32,17 @@ const ImageGallery = ({
     );
   }, [images]);
 
+  const filterCounts = useMemo(() => {
+    return Object.fromEntries(
+      availableFilters.map(item => [
+        item,
+        item === 'All'
+          ? images.length
+          : images.filter(image => imageMatchesFilter(image, item)).length,
+      ])
+    ) as Partial<Record<GalleryFilter, number>>;
+  }, [availableFilters, images]);
+
   const visibleImages = useMemo(
     () => images.filter(image => imageMatchesFilter(image, filter)),
     [filter, images]
@@ -47,7 +56,12 @@ const ImageGallery = ({
   return (
     <div className={className}>
       {showFilters && availableFilters.length > 1 && (
-        <GalleryFilters filters={availableFilters} active={filter} onChange={handleFilterChange} />
+        <GalleryFilters
+          filters={availableFilters}
+          active={filter}
+          counts={filterCounts}
+          onChange={handleFilterChange}
+        />
       )}
 
       {visibleImages.length === 0 ? (
@@ -61,12 +75,8 @@ const ImageGallery = ({
           )}
         >
           {visibleImages.map((image, index) => (
-            <motion.div
+            <div
               key={image.id}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={viewportOnce}
-              transition={staggerTransition(index % 8, 0.05, 0.02)}
               className={layout === 'masonry' ? 'mb-3 break-inside-avoid' : 'relative'}
             >
               <GalleryImageCard
@@ -74,7 +84,7 @@ const ImageGallery = ({
                 layout={layout}
                 onSelect={() => setActiveIndex(index)}
               />
-            </motion.div>
+            </div>
           ))}
         </div>
       )}

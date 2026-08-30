@@ -9,7 +9,7 @@ export const viewportOnce = {
 } as const;
 
 export const fadeUp = {
-  initial: { opacity: 0, y: 16 },
+  initial: { opacity: 0, y: 12 },
   whileInView: { opacity: 1, y: 0 },
   viewport: viewportOnce,
 } as const;
@@ -21,18 +21,18 @@ export const fadeIn = {
 } as const;
 
 export const transitionBase: Transition = {
-  duration: 0.75,
+  duration: 0.58,
   ease: easeOutExpo,
 };
 
 export const heroTransition = (delay = 0): Transition => ({
-  duration: 0.85,
+  duration: 0.65,
   delay,
   ease: easeOutExpo,
 });
 
-export const staggerTransition = (index: number, step = 0.1, base = 0.08): Transition => ({
-  duration: 0.7,
+export const staggerTransition = (index: number, step = 0.07, base = 0.04): Transition => ({
+  duration: 0.52,
   delay: base + index * step,
   ease: easeOutExpo,
 });

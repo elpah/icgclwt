@@ -62,12 +62,12 @@ const Footer = () => {
             </h1>
             <ul className="space-y-3 text-slate-400 text-sm">
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/about#statement-of-faith"
                   className="hover:text-[#FFD700] transition-colors hover:translate-x-1 inline-block"
                 >
                   Our Beliefs
-                </a>
+                </Link>
               </li>
               <li>
                 <a
@@ -78,12 +78,12 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/contact"
                   className="hover:text-[#FFD700] transition-colors hover:translate-x-1 inline-block"
                 >
                   Request Prayer
-                </a>
+                </Link>
               </li>
               <li>
                 <Link
@@ -121,7 +121,7 @@ const Footer = () => {
                   target={href ? '_blank' : undefined}
                   rel={href ? 'noopener noreferrer' : undefined}
                   aria-label={`Follow us on ${name}`}
-                  className="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#FFD700] hover:bg-slate-700 transition-all"
+                  className="w-10 h-10 bg-slate-800 rounded-md flex items-center justify-center text-slate-400 hover:text-[#FFD700] hover:bg-slate-700 transition-all"
                 >
                   <Icon className="w-5 h-5" />
                 </a>

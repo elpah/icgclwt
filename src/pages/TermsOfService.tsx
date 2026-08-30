@@ -1,4 +1,5 @@
 import LegalDocument from '@/components/LegalDocument';
+import { CHURCH_ADDRESS, CHURCH_DIGITAL_ADDRESS } from '@/data/churchInfo';
 
 const TermsOfService = () => {
   return (
@@ -99,7 +100,9 @@ const TermsOfService = () => {
           Temple:
         </p>
         <p>
-          Living Word Temple, Winneba, Ghana
+          {CHURCH_ADDRESS}
+          <br />
+          Digital address: {CHURCH_DIGITAL_ADDRESS}
           <br />
           Email:{' '}
           <a
