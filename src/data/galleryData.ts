@@ -1,4 +1,5 @@
 import { MINISTRIES_DATA } from './MinistriesData';
+import { getGeneralGallerySources } from './ministryAssets';
 
 export const GALLERY_CATEGORIES = [
   'Church Life',
@@ -92,6 +93,13 @@ const CHURCH_IMAGES: GalleryImage[] = [
   },
 ];
 
+const GENERAL_IMAGES: GalleryImage[] = toGalleryImages(getGeneralGallerySources(), {
+  idPrefix: 'general',
+  alt: 'Life at ICGC Living Word Temple',
+  title: 'Church Life',
+  category: 'Church Life',
+});
+
 const MINISTRY_IMAGES: GalleryImage[] = MINISTRIES_DATA.flatMap(ministry =>
   toGalleryImages(ministry.gallery, {
     idPrefix: ministry.id,
@@ -102,4 +110,8 @@ const MINISTRY_IMAGES: GalleryImage[] = MINISTRIES_DATA.flatMap(ministry =>
   })
 );
 
-export const GALLERY_IMAGES: GalleryImage[] = [...CHURCH_IMAGES, ...MINISTRY_IMAGES];
+export const GALLERY_IMAGES: GalleryImage[] = [
+  ...CHURCH_IMAGES,
+  ...GENERAL_IMAGES,
+  ...MINISTRY_IMAGES,
+];

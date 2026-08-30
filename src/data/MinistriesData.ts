@@ -1,6 +1,7 @@
 import { Music, Heart, PlayCircle, GraduationCap, Church, MapPin } from 'lucide-react';
+import { getLocalMinistryImages } from './ministryAssets';
 
-export const MINISTRIES_DATA = [
+const BASE_MINISTRIES = [
   {
     id: 'worship',
     name: 'Worship Team',
@@ -233,3 +234,14 @@ export const MINISTRIES_DATA = [
     phone: '024 595 3629',
   },
 ];
+
+export const MINISTRIES_DATA = BASE_MINISTRIES.map(ministry => {
+  const local = getLocalMinistryImages(ministry.id);
+  if (!local) return ministry;
+
+  return {
+    ...ministry,
+    ...(local.headerImage ? { headerImage: local.headerImage } : {}),
+    ...(local.gallery.length > 0 ? { gallery: local.gallery } : {}),
+  };
+});
