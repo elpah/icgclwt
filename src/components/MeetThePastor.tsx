@@ -2,14 +2,6 @@ import { ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import SectionEyebrow from '@/components/SectionEyebrow';
 
-const QUALIFICATIONS = [
-  'Master of Art - Peace and Development Studies',
-  'Master of Art - Human Right and Human Resource Development',
-  'Bachelor of Art -Theology',
-  'Certificate in Counselling from Central University, Accra',
-  '15+ Years of Pastoral Ministry',
-];
-
 const MeetThePastor = () => {
   const navigate = useNavigate();
 
@@ -46,29 +38,19 @@ const MeetThePastor = () => {
 
             <div className="space-y-3 text-slate-600 text-sm md:text-[0.95rem] leading-relaxed">
               <p>
-                Rev. Obeng has been serving as a pastor with ICGC for over 15 years and currently
-                serves as the Head Pastor of ICGC Living Word Temple. His passion for teaching
-                God&apos;s Word and raising up leaders has transformed countless lives.
+                Rev. Obeng has served as a pastor with ICGC for over 29 years and currently
+                serves as the District Supervising Minister for the Winneba District, where he
+                oversees approximately 30 churches and pastors. He also serves as the Head Pastor
+                of ICGC Living Word Temple. His passion for teaching God&apos;s Word, developing
+                leaders, and serving the community has transformed countless lives.
               </p>
               <p>
-                With a heart for the local community and a vision for global impact, Rev. Obeng
-                leads our congregation with wisdom, compassion, and unwavering faith in God&apos;s
-                promises.
+                He holds Master&apos;s degrees in Peace and Development Studies, Human Rights, and
+                Human Resource Development, as well as a Bachelor&apos;s degree in Theology. He
+                also holds a Certificate in Counselling from Central University, Accra. With a
+                heart for the local community and a vision for global impact, Rev. Obeng leads
+                with wisdom, compassion, and unwavering faith in God&apos;s promises.
               </p>
-            </div>
-
-            <div className="mt-6 pt-5 border-t border-slate-200">
-              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#006B3F] mb-3">
-                Qualifications & Education
-              </p>
-              <ul className="space-y-2">
-                {QUALIFICATIONS.map(item => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-slate-600">
-                    <span className="mt-[0.55rem] h-px w-3 shrink-0 bg-[#FFD700]" aria-hidden="true" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
 
             <button
