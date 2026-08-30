@@ -56,14 +56,14 @@ export function toGalleryImages(
 const CHURCH_IMAGES: GalleryImage[] = [
   {
     id: 'church-sanctuary',
-    src: '/images/church_cover_image.jpg',
+    src: '/images/church_cover_image.webp',
     alt: 'ICGC Living Word Temple sanctuary',
     title: 'Living Word Temple',
     category: 'Church Life',
   },
   {
     id: 'church-worship',
-    src: '/images/cover_images_smaller/cover_image_5.jpg',
+    src: '/images/cover_images_smaller/cover_image_5.webp',
     alt: 'Congregation gathered in worship',
     title: 'Sunday Worship',
     category: 'Church Life',

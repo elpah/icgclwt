@@ -11,11 +11,11 @@ import { fadeUp, heroTransition, staggerTransition, viewportOnce } from "@/lib/m
 
 const HOME_PHOTOS = [
   {
-    src: "/images/church_cover_image.jpg",
+    src: "/images/church_cover_image.webp",
     alt: "ICGC Living Word Temple sanctuary",
   },
   {
-    src: "/images/cover_images_smaller/cover_image_5.jpg",
+    src: "/images/cover_images_smaller/cover_image_5.webp",
     alt: "Congregation gathered in worship",
   },
   {
@@ -23,7 +23,7 @@ const HOME_PHOTOS = [
     alt: "Sunday service at Living Word Temple",
   },
   {
-    src: "/images/cover_images_smaller/cover_image_2.jpg",
+    src: "/images/cover_images_smaller/cover_image_2.webp",
     alt: "A moment from Living Word Temple",
   },
 ];
@@ -71,7 +71,7 @@ const HomePage = () => {
       >
         <div className="absolute inset-0 z-0 opacity-20">
           <img
-            src="/images/church_cover_image.jpg"
+            src="/images/church_cover_image.webp"
             alt="Church Hero"
             width={2040}
             height={1360}
