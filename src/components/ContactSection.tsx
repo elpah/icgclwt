@@ -1,3 +1,4 @@
+import { FormEvent, useState } from 'react';
 import { MapPin, Phone, Mail, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
 import {
   CHURCH_ADDRESS,
@@ -7,6 +8,47 @@ import {
 } from '@/data/churchInfo';
 
 const ContactSection = () => {
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [feedback, setFeedback] = useState('');
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setStatus('sending');
+    setFeedback('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: formData.get('fullName'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          subject: formData.get('subject'),
+          message: formData.get('message'),
+        }),
+      });
+
+      const result = (await response.json().catch(() => null)) as { error?: string } | null;
+
+      if (!response.ok) {
+        setStatus('error');
+        setFeedback(result?.error || 'We could not send your message. Please try again.');
+        return;
+      }
+
+      form.reset();
+      setStatus('success');
+      setFeedback('Thank you. Your message has been sent.');
+    } catch {
+      setStatus('error');
+      setFeedback('We could not send your message. Please try again.');
+    }
+  };
+
   return (
     <section className="py-12 md:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -122,7 +164,7 @@ const ContactSection = () => {
 
           <div className="bg-white py-6 px-5 md:p-8 rounded-2xl shadow-sm border border-slate-100">
             <p className="text-xl font-bold mb-5 text-slate-900">Send us a Message</p>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label htmlFor="fullName" className="text-sm font-semibold text-slate-700">
@@ -133,6 +175,7 @@ const ContactSection = () => {
                     name="fullName"
                     autoComplete="name"
                     type="text"
+                    required
                     className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-colors"
                     placeholder="Your name"
                   />
@@ -146,6 +189,7 @@ const ContactSection = () => {
                     name="email"
                     autoComplete="email"
                     type="email"
+                    required
                     className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-colors"
                     placeholder="Your email"
                   />
@@ -184,15 +228,27 @@ const ContactSection = () => {
                   id="message"
                   name="message"
                   rows={4}
+                  required
                   className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-colors resize-none"
                   placeholder="Your message..."
                 />
               </div>
+              {feedback ? (
+                <p
+                  className={`text-sm ${
+                    status === 'success' ? 'text-[#006B3F]' : 'text-red-600'
+                  }`}
+                  role="status"
+                >
+                  {feedback}
+                </p>
+              ) : null}
               <button
-                type="button"
-                className="cursor-pointer w-full bg-linear-to-r from-[#006B3F] to-emerald-600 text-white py-3 rounded-full font-semibold text-base min-h-12 hover:shadow-md transition-shadow duration-300"
+                type="submit"
+                disabled={status === 'sending'}
+                className="cursor-pointer w-full bg-linear-to-r from-[#006B3F] to-emerald-600 text-white py-3 rounded-full font-semibold text-base min-h-12 hover:shadow-md transition-shadow duration-300 disabled:cursor-not-allowed disabled:opacity-70"
               >
-                Submit Message
+                {status === 'sending' ? 'Sending...' : 'Submit Message'}
               </button>
             </form>
           </div>
