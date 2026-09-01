@@ -3,6 +3,10 @@ import SectionEyebrow from '@/components/SectionEyebrow';
 import { fadeUp, staggerTransition, viewportOnce } from '@/lib/motion';
 
 const MONEY_NUMBER = '024 595 3629';
+const BANK_NAME = 'Bank name';
+const BANK_ACCOUNT_NAME = 'ICGC Living Word Temple';
+const BANK_ACCOUNT_NUMBER = '0000000000';
+const BANK_BRANCH = 'Branch';
 
 const GivingSection = () => {
   return (
@@ -34,6 +38,13 @@ const GivingSection = () => {
             <motion.button
               {...fadeUp}
               transition={staggerTransition(3, 0.1, 0)}
+              type="button"
+              onClick={() =>
+                document.getElementById('giving-details')?.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'start',
+                })
+              }
               className="cursor-pointer w-full sm:w-auto bg-[#FFD700] hover:bg-[#FDB813] text-[#006B3F] px-8 py-3 rounded-full font-semibold text-sm md:text-base min-h-12 inline-flex items-center justify-center transition-colors duration-300"
             >
               Give Online
@@ -42,15 +53,31 @@ const GivingSection = () => {
             <motion.div
               {...fadeUp}
               transition={staggerTransition(4, 0.1, 0)}
-              className="mt-8 pt-6 border-t border-slate-200 max-w-xl"
+              id="giving-details"
+              className="scroll-mt-24 mt-8 pt-6 border-t border-slate-200 max-w-xl space-y-6"
             >
-              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#006B3F] mb-2">
-                Mobile Money
-              </p>
-              <p className="text-2xl md:text-[1.65rem] font-semibold text-slate-900 tracking-wide tabular-nums">
-                {MONEY_NUMBER}
-              </p>
-              <p className="text-sm text-slate-500 mt-1">ICGC Living Word Temple</p>
+              <div>
+                <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#006B3F] mb-2">
+                  Mobile Money
+                </p>
+                <p className="text-2xl md:text-[1.65rem] font-semibold text-slate-900 tracking-wide tabular-nums">
+                  {MONEY_NUMBER}
+                </p>
+                <p className="text-sm text-slate-500 mt-1">{BANK_ACCOUNT_NAME}</p>
+              </div>
+
+              <div>
+                <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#006B3F] mb-2">
+                  Bank Account
+                </p>
+                <p className="text-2xl md:text-[1.65rem] font-semibold text-slate-900 tracking-wide tabular-nums">
+                  {BANK_ACCOUNT_NUMBER}
+                </p>
+                <p className="text-sm text-slate-500 mt-1">{BANK_ACCOUNT_NAME}</p>
+                <p className="text-sm text-slate-500">
+                  {BANK_NAME}, {BANK_BRANCH}
+                </p>
+              </div>
             </motion.div>
           </div>
 
@@ -67,8 +94,8 @@ const GivingSection = () => {
                 aria-hidden="true"
               />
               <img
-                src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb8?auto=format&fit=crop&q=80&w=800"
-                alt="Giving"
+                src="/images/church_cover_image.webp"
+                alt="ICGC Living Word Temple"
                 loading="lazy"
                 decoding="async"
                 className="w-full h-56 sm:h-72 lg:h-[22rem] object-cover"

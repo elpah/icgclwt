@@ -15,15 +15,23 @@ const MinistryCoverCard = ({ ministry }: MinistryCoverCardProps) => {
       className="group relative block cursor-pointer overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 aspect-[4/5] bg-slate-200"
       aria-label={`${ministry.name}, learn more`}
     >
-      <img
-        src={ministry.headerImage}
-        alt=""
-        width={800}
-        height={1000}
-        loading="lazy"
-        decoding="async"
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-      />
+      {ministry.headerImage ? (
+        <img
+          src={ministry.headerImage}
+          alt=""
+          width={800}
+          height={1000}
+          loading="lazy"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        />
+      ) : (
+        <div
+          className={`absolute inset-0 bg-linear-to-br ${ministry.color} flex items-center justify-center`}
+        >
+          <ministry.icon className="w-12 h-12 text-white/90" />
+        </div>
+      )}
       <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/25 to-transparent" />
 
       <div className="absolute inset-x-0 bottom-0 p-4 md:p-5">

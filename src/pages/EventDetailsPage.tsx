@@ -6,6 +6,7 @@ import { UPCOMING_EVENTS } from '@/data/upcomingEventsData';
 import { CHURCH_ADDRESS, CHURCH_DIGITAL_ADDRESS } from '@/data/churchInfo';
 import EventCard from '@/components/EventCard';
 import SectionEyebrow from '@/components/SectionEyebrow';
+import NotFound from '@/pages/NotFound';
 
 async function copyPageUrl(url: string) {
   try {
@@ -57,11 +58,7 @@ const EventDetailsPage = () => {
   }, [event]);
 
   if (!event) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-slate-600">
-        Event not found
-      </div>
-    );
+    return <NotFound />;
   }
 
   return (

@@ -3,6 +3,8 @@ const FOLDER_TO_MINISTRY: Record<string, string> = {
   media: 'media',
   men: 'men',
   pvv: 'women',
+  newbreed: 'youth',
+  outreach: 'outreach',
 };
 
 const assetModules = import.meta.glob<string>(

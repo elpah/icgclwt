@@ -5,7 +5,6 @@ import SectionEyebrow from '@/components/SectionEyebrow';
 import {
   CORE_VALUES,
   ICGC_MISSION,
-  ICGC_VISION,
   LOGO_MEANING,
   STATEMENT_OF_FAITH,
 } from '@/data/aboutData';
@@ -41,7 +40,7 @@ const About = () => {
               About
               <br />
               <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FFD700] via-yellow-400 to-[#FFD700]">
-                Living Word Temple
+                Living Word Temple, Winneba
               </span>
             </h1>
 
@@ -73,8 +72,8 @@ const About = () => {
               </p>
 
               <p className="text-slate-600 leading-relaxed text-sm md:text-[0.95rem]">
-                Living Word Temple is a vibrant branch of the ICGC family, dedicated to building
-                people of integrity and excellence.
+                Living Word Temple, Winneba is a vibrant branch of the ICGC family, dedicated to
+                building people of integrity and excellence.
               </p>
             </div>
 
@@ -103,15 +102,15 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 lg:gap-24 items-center">
             <div>
               <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#FFD700] mb-5">
-                The Vision
+                Our Vision
               </p>
               <h2 className="text-3xl sm:text-4xl md:text-[2.75rem] font-bold leading-[1.15] tracking-tight mb-6">
-                <span className="text-[#FFD700]">Establish the</span>
+                <span className="text-[#FFD700]">To Establish the</span>
                 <br />
                 <span className="text-white italic font-semibold">house of God</span>
               </h2>
-              <p className="text-slate-200 text-sm md:text-[0.95rem] leading-relaxed max-w-md">
-                {ICGC_VISION}
+              <p className="text-slate-200 text-sm md:text-lg lg:text-xl leading-relaxed max-w-lg">
+                through the development of Model New Testament Christians and churches.
               </p>
               <p className="mt-5 text-[11px] font-semibold tracking-[0.2em] uppercase text-[#FFD700]">
                 Acts 2:42
@@ -120,7 +119,7 @@ const About = () => {
 
             <div className="md:border-l md:border-[#FFD700]/25 md:pl-10 lg:pl-16 xl:pl-20">
               <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#FFD700] mb-5">
-                The Mission
+                Our Mission
               </p>
               <p className="text-white text-xl md:text-2xl lg:text-[1.7rem] font-medium leading-snug max-w-lg">
                 {ICGC_MISSION}

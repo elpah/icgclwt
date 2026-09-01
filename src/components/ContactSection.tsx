@@ -1,10 +1,15 @@
 import { FormEvent, useState } from 'react';
-import { MapPin, Phone, Mail, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
+import { MapPin, Phone, Mail, Facebook, Instagram, Youtube } from 'lucide-react';
+import TikTokIcon from '@/components/TikTokIcon';
 import {
   CHURCH_ADDRESS,
   CHURCH_DIGITAL_ADDRESS,
+  CHURCH_FACEBOOK_URL,
+  CHURCH_INSTAGRAM_URL,
   CHURCH_MAPS_EMBED_URL,
   CHURCH_MAPS_URL,
+  CHURCH_TIKTOK_URL,
+  CHURCH_YOUTUBE_URL,
 } from '@/data/churchInfo';
 
 const ContactSection = () => {
@@ -107,34 +112,34 @@ const ContactSection = () => {
                   {
                     Icon: Facebook,
                     color: 'hover:bg-blue-500',
-                    link: 'https://facebook.com/icgc',
+                    link: CHURCH_FACEBOOK_URL,
                     name: 'facebook',
                   },
                   {
-                    Icon: Twitter,
-                    color: 'hover:bg-sky-500',
-                    link: 'https://twitter.com/icgc',
-                    name: 'twitter',
+                    Icon: TikTokIcon,
+                    color: 'hover:bg-slate-900',
+                    link: CHURCH_TIKTOK_URL,
+                    name: 'tiktok',
                   },
                   {
                     Icon: Instagram,
                     color: 'hover:bg-pink-500',
-                    link: 'https://instagram.com/icgc',
+                    link: CHURCH_INSTAGRAM_URL,
                     name: 'instagram',
                   },
                   {
                     Icon: Youtube,
                     color: 'hover:bg-red-500',
-                    link: 'https://youtube.com/@icgc',
+                    link: CHURCH_YOUTUBE_URL,
                     name: 'youtube',
                   },
                 ].map(({ Icon, color, link, name }) => (
                   <a
                     key={name}
                     aria-label={name}
-                    href={link}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={link || undefined}
+                    target={link ? '_blank' : undefined}
+                    rel={link ? 'noopener noreferrer' : undefined}
                     className={`w-10 h-10 bg-white rounded-md flex items-center justify-center shadow-sm border border-slate-100 text-slate-400 ${color} hover:text-white hover:border-transparent transition-colors duration-300`}
                   >
                     <Icon className="w-4 h-4" />
@@ -149,10 +154,6 @@ const ContactSection = () => {
                 <p className="flex justify-between gap-4">
                   <span>Monday - Friday:</span>
                   <span className="font-medium">9:00 AM - 5:00 PM</span>
-                </p>
-                <p className="flex justify-between gap-4">
-                  <span>Saturday:</span>
-                  <span className="font-medium">10:00 AM - 2:00 PM</span>
                 </p>
                 <p className="flex justify-between gap-4">
                   <span>Sunday:</span>

@@ -1,5 +1,16 @@
-import { PlayCircle, ArrowRight, Video, Mic2, Clock, Users, Music, BookOpen, Heart } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Clock, ExternalLink } from 'lucide-react';
 import SectionEyebrow from '@/components/SectionEyebrow';
+import PlatformSelector from '@/components/live/PlatformSelector';
+import YouTubePlayer from '@/components/live/YouTubePlayer';
+import FacebookPlayer from '@/components/live/FacebookPlayer';
+import MessageArchive from '@/components/live/MessageArchive';
+import {
+  LIVE_STREAM_CONFIG,
+  type LivePlatform,
+  type PastMessage,
+  type YoutubeFeedResponse,
+} from '@/data/liveStreamConfig';
 
 const SERVICE_TIMES = [
   {
@@ -9,174 +20,169 @@ const SERVICE_TIMES = [
     description: 'Worship with powerful preaching and prayer',
   },
   {
-    day: 'Wednesdays',
-    time: '6:00 PM - 8:00 PM',
-    title: 'Mid-week Service',
+    day: 'Thursdays',
+    time: '6:00 PM',
+    title: 'Teaching Service',
     description: 'Bible study, prayer, and fellowship',
   },
 ];
 
-const WHAT_TO_EXPECT = [
-  {
-    icon: Users,
-    title: 'Warm Welcome',
-    description: 'Our hospitality team will greet you and help you feel at home',
-    color: 'from-blue-500 to-cyan-500',
-  },
-  {
-    icon: Music,
-    title: 'Uplifting Worship',
-    description: 'Experience powerful praise and worship led by our talented team',
-    color: 'from-purple-500 to-indigo-500',
-  },
-  {
-    icon: BookOpen,
-    title: 'Biblical Teaching',
-    description: "Receive practical, life-changing messages from God's Word",
-    color: 'from-green-500 to-emerald-500',
-  },
-  {
-    icon: Heart,
-    title: 'Genuine Community',
-    description: 'Connect with friendly people who care about your spiritual journey',
-    color: 'from-red-500 to-pink-500',
-  },
-];
+const EMPTY_YOUTUBE_FEED: YoutubeFeedResponse = {
+  configured: false,
+  liveStatus: 'unknown',
+  liveVideoId: null,
+  latestVideoId: null,
+  channelId: null,
+  pastMessages: [],
+};
 
 const LiveService = () => {
+  const [platform, setPlatform] = useState<LivePlatform>(LIVE_STREAM_CONFIG.defaultPlatform);
+  const [youtubeFeed, setYoutubeFeed] = useState<YoutubeFeedResponse>(EMPTY_YOUTUBE_FEED);
+  const [youtubeLoading, setYoutubeLoading] = useState(true);
+  const [selectedVideoId, setSelectedVideoId] = useState('');
+  const youtube = LIVE_STREAM_CONFIG.youtube;
+  const facebook = LIVE_STREAM_CONFIG.facebook;
+  const watchHref = platform === 'youtube' ? youtube.channelUrl : facebook.pageUrl;
+  const watchLabel = platform === 'youtube' ? 'Watch on YouTube' : 'Watch on Facebook';
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const load = () => {
+      fetch('/api/youtube')
+        .then(async response => {
+          if (!response.ok) {
+            throw new Error('YouTube feed failed');
+          }
+          return (await response.json()) as YoutubeFeedResponse;
+        })
+        .then(feed => {
+          if (!cancelled) setYoutubeFeed(feed);
+        })
+        .catch(() => {
+          if (!cancelled) setYoutubeFeed(EMPTY_YOUTUBE_FEED);
+        })
+        .finally(() => {
+          if (!cancelled) setYoutubeLoading(false);
+        });
+    };
+
+    load();
+    const timer = window.setInterval(load, 120_000);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
+  }, []);
+
+  const youtubeVideoId =
+    selectedVideoId ||
+    youtubeFeed.liveVideoId?.trim() ||
+    youtube.liveVideoId.trim() ||
+    youtubeFeed.latestVideoId?.trim() ||
+    '';
+  const youtubeChannelId = youtubeFeed.channelId?.trim() || youtube.channelId.trim();
+  const youtubeIsLive =
+    youtubeFeed.liveStatus === 'live' && youtubeVideoId === (youtubeFeed.liveVideoId ?? '');
+  const youtubeMessages: PastMessage[] = youtubeFeed.pastMessages.length
+    ? youtubeFeed.pastMessages
+    : LIVE_STREAM_CONFIG.pastMessages.filter(message => message.platform === 'youtube');
+  const facebookMessages = LIVE_STREAM_CONFIG.pastMessages.filter(
+    message => message.platform === 'facebook'
+  );
+  const archiveMessages = platform === 'youtube' ? youtubeMessages : facebookMessages;
+
   return (
     <div className="min-h-screen bg-slate-50 pt-24">
       <section className="py-12 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 md:mb-10">
-            <div className="flex flex-col items-center gap-2.5 mb-3">
-              <span className="flex items-center gap-2 text-[11px] md:text-xs font-semibold tracking-[0.22em] uppercase text-red-600">
-                <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
-                Live Streaming
-              </span>
-              <span className="h-px w-8 bg-[#FFD700]" aria-hidden="true" />
-            </div>
-
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 tracking-tight">
+            <SectionEyebrow>Watch Live</SectionEyebrow>
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 tracking-tight">
               Watch Our Services
-            </h2>
-
+            </h1>
             <p className="text-slate-600 max-w-2xl mx-auto text-sm md:text-[0.95rem] leading-relaxed">
-              Join us online for powerful worship, biblical teaching, and life-transforming messages
+              Join us online for powerful worship, biblical teaching, and life-transforming
+              messages.
             </p>
           </div>
-          <div className="max-w-6xl mx-auto">
-            <div className="relative rounded-2xl overflow-hidden shadow-md aspect-video bg-slate-900 mb-8">
-              <iframe
-                src="https://www.youtube.com/embed/CVCBKZRJf_8"
-                title="Live Service"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full"
+
+          <PlatformSelector value={platform} onChange={setPlatform} />
+
+          <div
+            id="watch-player"
+            className="relative rounded-2xl overflow-hidden shadow-md aspect-video bg-slate-900 mt-6 mb-5"
+          >
+            {platform === 'youtube' && youtubeIsLive ? (
+              <span className="absolute top-3 left-3 z-10 rounded-full bg-red-600 px-2.5 py-1 text-[11px] font-semibold tracking-wide uppercase text-white">
+                Live
+              </span>
+            ) : null}
+            {platform === 'youtube' ? (
+              <YouTubePlayer
+                videoId={youtubeVideoId}
+                channelId={youtubeChannelId}
+                channelUrl={youtube.channelUrl}
+                loading={youtubeLoading}
               />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-              {[
-                {
-                  icon: PlayCircle,
-                  title: 'Join Live Service',
-                  desc: 'Experience real-time worship and receive fresh word from God',
-                  btn: 'Watch Now',
-                  featured: true,
-                },
-                {
-                  icon: Video,
-                  title: 'Past Messages',
-                  desc: 'Catch up on previous services and teachings',
-                  btn: 'View Archive',
-                  featured: false,
-                },
-                {
-                  icon: Mic2,
-                  title: 'Podcast',
-                  desc: 'Listen to sermons on the go',
-                  btn: 'Subscribe',
-                  featured: false,
-                },
-              ].map(card => (
-                <div
-                  key={card.title}
-                  className={`rounded-2xl p-5 md:p-6 cursor-pointer group transition-shadow duration-300 ${
-                    card.featured
-                      ? 'text-white bg-linear-to-br from-[#006B3F] to-emerald-700 shadow-sm'
-                      : 'bg-white border border-slate-100 shadow-sm hover:shadow-md'
-                  }`}
-                >
-                  <div className="flex justify-between mb-3">
-                    <div className={`${card.featured ? 'bg-white/20' : 'bg-slate-100'} rounded-md p-2.5`}>
-                      <card.icon className="w-5 h-5" />
-                    </div>
-                  </div>
+            ) : (
+              <FacebookPlayer videoUrl={facebook.liveVideoUrl.trim()} pageUrl={facebook.pageUrl} />
+            )}
+          </div>
 
-                  <h3 className="text-lg font-bold mb-1.5">{card.title}</h3>
-                  <p className="mb-3 text-sm opacity-80">{card.desc}</p>
-
-                  <div className="flex items-center font-semibold text-sm group-hover:translate-x-1 transition-transform duration-300">
-                    {card.btn}
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="bg-slate-50 rounded-2xl py-7 px-4 md:p-8 border border-slate-100">
-              <SectionEyebrow>Gatherings</SectionEyebrow>
-              <h3 className="text-xl md:text-2xl font-bold text-center mb-6 tracking-tight">
-                Service Times
-              </h3>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {SERVICE_TIMES.map(service => (
-                  <div
-                    key={service.title}
-                    className="bg-white rounded-xl p-5 shadow-sm border border-slate-100"
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="bg-emerald-600 rounded-md p-2">
-                        <Clock className="w-4 h-4 text-[#FFD700]" />
-                      </div>
-                      <h4 className="font-semibold text-sm">{service.title}</h4>
-                    </div>
-
-                    <p className="text-emerald-700 font-semibold text-sm">{service.day}</p>
-                    <p className="text-slate-600 mb-1.5 text-sm">{service.time}</p>
-                    <p className="text-sm text-slate-500">{service.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="mb-10 flex justify-center">
+            <a
+              href={watchHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer inline-flex items-center gap-2 text-[#006B3F] hover:text-emerald-800 font-semibold text-sm min-h-10"
+            >
+              {watchLabel}
+              <ExternalLink className="w-4 h-4" />
+            </a>
           </div>
         </div>
       </section>
-      <section className="py-12 md:py-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 md:mb-10">
-            <SectionEyebrow>First Visit</SectionEyebrow>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 tracking-tight">
-              What to Expect
-            </h2>
-            <p className="text-slate-600 text-sm md:text-[0.95rem] leading-relaxed">Your first visit with us</p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {WHAT_TO_EXPECT.map(item => (
-              <div
-                key={item.title}
-                className="bg-white rounded-2xl p-5 shadow-sm text-center border border-slate-100"
-              >
+      <MessageArchive
+        platform={platform}
+        messages={archiveMessages}
+        loading={platform === 'youtube' && youtubeLoading}
+        onSelectMessage={message => {
+          if (message.platform !== 'youtube') return;
+          setSelectedVideoId(message.videoId);
+          document.getElementById('watch-player')?.scrollIntoView({ behavior: 'smooth' });
+        }}
+      />
+
+      <section id="service-times" className="scroll-mt-24 py-12 md:py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-slate-50 rounded-2xl py-7 px-4 md:p-8 border border-slate-100">
+            <SectionEyebrow>Gatherings</SectionEyebrow>
+            <h2 className="text-xl md:text-2xl font-bold text-center mb-6 tracking-tight">
+              Service Times
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {SERVICE_TIMES.map(service => (
                 <div
-                  className={`w-11 h-11 mx-auto mb-4 rounded-md bg-linear-to-br ${item.color} flex items-center justify-center`}
+                  key={service.title}
+                  className="bg-white rounded-xl p-5 shadow-sm border border-slate-100"
                 >
-                  <item.icon className="w-5 h-5 text-white" />
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="bg-emerald-600 rounded-md p-2">
+                      <Clock className="w-4 h-4 text-[#FFD700]" />
+                    </div>
+                    <h3 className="font-semibold text-sm">{service.title}</h3>
+                  </div>
+                  <p className="text-emerald-700 font-semibold text-sm">{service.day}</p>
+                  <p className="text-slate-600 mb-1.5 text-sm">{service.time}</p>
+                  <p className="text-sm text-slate-500">{service.description}</p>
                 </div>
-                <h3 className="text-base font-bold mb-2">{item.title}</h3>
-                <p className="text-slate-600 text-sm">{item.description}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>

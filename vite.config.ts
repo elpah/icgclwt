@@ -7,7 +7,8 @@ import {
   isMailConfigured,
   parseContactPayload,
   sendContactEmail,
-} from './server/contactMail';
+} from './api/contact';
+import { getYoutubeFeed } from './api/youtube';
 
 function readJsonBody(req: IncomingMessage) {
   return new Promise<unknown>((resolve, reject) => {
@@ -78,13 +79,30 @@ function contactApiPlugin(): {
       });
   };
 
+  const handleYoutube: Connect.NextHandleFunction = (req, res) => {
+    if (req.method !== 'GET') {
+      writeJson(res, 405, { error: 'Method not allowed' });
+      return;
+    }
+
+    void getYoutubeFeed()
+      .then(feed => {
+        writeJson(res, 200, feed);
+      })
+      .catch(() => {
+        writeJson(res, 500, { error: 'YouTube is unavailable right now.' });
+      });
+  };
+
   return {
-    name: 'contact-api',
+    name: 'site-api',
     configureServer(server) {
       server.middlewares.use('/api/contact', handleContact);
+      server.middlewares.use('/api/youtube', handleYoutube);
     },
     configurePreviewServer(server) {
       server.middlewares.use('/api/contact', handleContact);
+      server.middlewares.use('/api/youtube', handleYoutube);
     },
   };
 }

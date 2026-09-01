@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { MINISTRIES_DATA } from '../data/MinistriesData';
 import { toGalleryImages } from '@/data/galleryData';
 import ImageGallery from '@/components/gallery/ImageGallery';
+import NotFound from '@/pages/NotFound';
 
 function whatsappLink(phone: string) {
   const digits = phone.replace(/\D/g, '');
@@ -31,19 +32,23 @@ const MinistryPage = () => {
   );
 
   if (!ministry) {
-    return <p className="text-center py-20 text-xl text-red-500">Ministry not found</p>;
+    return <NotFound />;
   }
 
   return (
     <div className="min-h-screen bg-slate-50">
       <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden">
-        <img
-          src={ministry.headerImage}
-          alt={ministry.name}
-          loading="lazy"
-          decoding="async"
-          className="w-full h-full object-cover"
-        />
+        {ministry.headerImage ? (
+          <img
+            src={ministry.headerImage}
+            alt={ministry.name}
+            loading="eager"
+            decoding="async"
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className={`absolute inset-0 bg-linear-to-br ${ministry.color}`} />
+        )}
 
         <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/40 to-slate-50" />
 
@@ -51,7 +56,7 @@ const MinistryPage = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16">
             <button
               onClick={() => navigate('/ministries')}
-              className="flex items-center space-x-2 text-white mb-5 hover:text-[#FFD700] transition-colors duration-300 min-h-10"
+              className="cursor-pointer flex items-center space-x-2 text-white mb-5 hover:text-[#FFD700] transition-colors duration-300 min-h-10"
             >
               <ArrowLeft className="w-4 h-4" />
               <span className="font-semibold text-sm">Back to Ministries</span>
@@ -80,49 +85,57 @@ const MinistryPage = () => {
           <div className="lg:col-span-2 space-y-8">
             <div className="bg-white rounded-2xl p-5 md:p-7 shadow-sm border border-slate-100">
               <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-3 tracking-tight">
-                Our Vision
+                About this ministry
               </h2>
-              <p className="text-slate-600 leading-relaxed text-sm md:text-[0.95rem]">{ministry.vision}</p>
+              <p className="text-slate-600 leading-relaxed text-sm md:text-[0.95rem]">
+                {ministry.about}
+              </p>
             </div>
 
-            <div>
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-4 tracking-tight">
-                Gallery
-              </h2>
-              <ImageGallery images={galleryImages} layout="grid" />
-            </div>
+            {galleryImages.length > 0 ? (
+              <div>
+                <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-4 tracking-tight">
+                  Gallery
+                </h2>
+                <ImageGallery images={galleryImages} layout="grid" />
+              </div>
+            ) : null}
           </div>
 
           <div>
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 lg:sticky lg:top-24">
-              <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center">
-                <Clock className="w-5 h-5 mr-2 text-[#006B3F]" />
-                Meeting Times
-              </h3>
+              {ministry.meetings.length > 0 ? (
+                <>
+                  <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center">
+                    <Clock className="w-5 h-5 mr-2 text-[#006B3F]" />
+                    Meeting Times
+                  </h3>
 
-              <div className="space-y-3">
-                {ministry.meetings.map(meeting => (
-                  <div
-                    key={`${meeting.day}-${meeting.time}`}
-                    className="pb-3 border-b border-slate-100 last:border-0"
-                  >
-                    <div className="flex items-center space-x-2 mb-1">
-                      <Calendar className="w-3.5 h-3.5 text-[#FFD700]" />
-                      <span className="font-semibold text-slate-900 text-sm">{meeting.day}</span>
-                    </div>
+                  <div className="space-y-3">
+                    {ministry.meetings.map(meeting => (
+                      <div
+                        key={`${meeting.day}-${meeting.time}`}
+                        className="pb-3 border-b border-slate-100 last:border-0"
+                      >
+                        <div className="flex items-center space-x-2 mb-1">
+                          <Calendar className="w-3.5 h-3.5 text-[#FFD700]" />
+                          <span className="font-semibold text-slate-900 text-sm">{meeting.day}</span>
+                        </div>
 
-                    <div className="text-sm text-slate-600 ml-5">
-                      <p>{meeting.time}</p>
-                      <p className="flex items-center mt-0.5">
-                        <MapPin className="w-3 h-3 mr-1 text-slate-400" />
-                        {meeting.location}
-                      </p>
-                    </div>
+                        <div className="text-sm text-slate-600 ml-5">
+                          <p>{meeting.time}</p>
+                          <p className="flex items-center mt-0.5">
+                            <MapPin className="w-3 h-3 mr-1 text-slate-400" />
+                            {meeting.location}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </>
+              ) : null}
 
-              <div className="mt-5 pt-5 border-t border-slate-200">
+              <div className={ministry.meetings.length > 0 ? 'mt-5 pt-5 border-t border-slate-200' : ''}>
                 <h4 className="font-semibold text-slate-900 mb-1 text-sm">Ministry Leader</h4>
                 <p className="text-slate-600 text-sm">{ministry.leader}</p>
               </div>

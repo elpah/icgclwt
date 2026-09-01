@@ -4,6 +4,7 @@ import { lazy, Suspense, useEffect } from 'react';
 import { MotionConfig } from 'framer-motion';
 import { Theme } from './settings/types';
 import Navigation from './components/Navigation';
+import BackToTop from './components/BackToTop';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -16,8 +17,11 @@ const GalleryPage = lazy(() => import('./pages/GalleryPage'));
 const MinistriesPage = lazy(() => import('./pages/MinistriesPage'));
 const About = lazy(() => import('./pages/About'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
+const GivePage = lazy(() => import('./pages/GivePage'));
+const GiveYourLifeToChrist = lazy(() => import('./pages/GiveYourLifeToChrist'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 const theme: Theme = 'light';
 
@@ -57,13 +61,17 @@ function App() {
               <Route path="/gallery" element={<GalleryPage />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/give" element={<GivePage />} />
+              <Route path="/give-your-life-to-christ" element={<GiveYourLifeToChrist />} />
               <Route path="/event-details/:id" element={<EventDetailsPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
         </div>
         <Footer />
+        <BackToTop />
       </div>
     </MotionConfig>
   );

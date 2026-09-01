@@ -1,25 +1,8 @@
-import { Target, Users, Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import SectionEyebrow from '@/components/SectionEyebrow';
 import MinistryCoverCard from '@/components/MinistrySection/MinistryCoverCard';
 import { MINISTRIES_DATA } from '@/data/MinistriesData';
-
-const WHY_JOIN = [
-  {
-    icon: Target,
-    title: 'Find Your Purpose',
-    description: 'Discover how God has uniquely gifted you',
-  },
-  {
-    icon: Users,
-    title: 'Build Community',
-    description: 'Form meaningful relationships with others',
-  },
-  {
-    icon: Zap,
-    title: 'Make an Impact',
-    description: 'Use your talents to change lives',
-  },
-];
 
 const MinistriesPage = () => {
   return (
@@ -67,21 +50,13 @@ const MinistriesPage = () => {
                 just volunteering. You're discovering your purpose, using your gifts, and impacting
                 lives for eternity.
               </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {WHY_JOIN.map(item => (
-                  <div
-                    key={item.title}
-                    className="bg-white/10 rounded-xl p-5 border border-white/15"
-                  >
-                    <div className="bg-white/15 w-10 h-10 rounded-md flex items-center justify-center mx-auto mb-3">
-                      <item.icon className="w-5 h-5" />
-                    </div>
-                    <h3 className="font-semibold text-base mb-1">{item.title}</h3>
-                    <p className="text-slate-200 text-sm">{item.description}</p>
-                  </div>
-                ))}
-              </div>
+              <Link
+                to="/contact"
+                className="cursor-pointer inline-flex items-center justify-center bg-[#FFD700] hover:bg-[#FDB813] text-[#006B3F] px-7 py-3 rounded-full font-semibold text-sm min-h-12"
+              >
+                Join a Ministry
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
             </div>
           </div>
         </div>

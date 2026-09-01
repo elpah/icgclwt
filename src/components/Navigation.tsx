@@ -11,12 +11,14 @@ const NAV_LINKS = [
   { name: 'Events', href: 'events' },
   { name: 'Gallery', href: 'gallery' },
   { name: 'Ministries', href: 'ministries' },
+  { name: 'Give', href: 'give' },
   { name: 'Contact', href: 'contact' },
 ];
 
 const HOME_SECTIONS = ['home'] as const;
 
 function getRouteActive(pathname: string) {
+  if (pathname === '/give') return 'give';
   if (pathname === '/contact') return 'contact';
   if (pathname === '/about') return 'about';
   if (pathname === '/events' || pathname.startsWith('/event-details')) return 'events';
@@ -122,6 +124,11 @@ const Navigation = () => {
       }
       if (target === 'about') {
         navigate('/about');
+        setMobileMenuOpen(false);
+        return;
+      }
+      if (target === 'give') {
+        navigate('/give');
         setMobileMenuOpen(false);
         return;
       }

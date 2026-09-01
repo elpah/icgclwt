@@ -33,6 +33,7 @@ const HOME_MINISTRIES = ["men", "women", "youth"]
   .filter((ministry): ministry is (typeof MINISTRIES_DATA)[number] => Boolean(ministry));
 
 const QuoteSection = lazy(() => import("@/components/QuoteSection"));
+const SalvationCta = lazy(() => import("@/components/SalvationCta"));
 const GivingSection = lazy(() => import("@/components/GivingSection"));
 
 const SERVICE_TIMES = [
@@ -43,9 +44,9 @@ const SERVICE_TIMES = [
     title: "Sunday Service",
   },
   {
-    id: "wednesday",
-    day: "Wednesday",
-    time: "6:00 PM - 8:00 PM",
+    id: "thursday",
+    day: "Thursday",
+    time: "6:00 PM",
     title: "Teaching Service",
   },
   {
@@ -237,7 +238,7 @@ const HomePage = () => {
                 empowerment of the African person.
               </p>
               <p className="text-slate-600 leading-relaxed text-sm md:text-[0.95rem]">
-                Living Word Temple is a vibrant branch of the ICGC family,
+                Living Word Temple, Winneba is a vibrant branch of the ICGC family,
                 dedicated to building people of integrity and excellence.
               </p>
               <button
@@ -344,6 +345,10 @@ const HomePage = () => {
 
       <Suspense fallback={null}>
         <QuoteSection />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <SalvationCta />
       </Suspense>
 
       <Suspense fallback={null}>

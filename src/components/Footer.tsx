@@ -1,19 +1,26 @@
-import { Facebook, Twitter, Instagram, Youtube, Clock } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import TikTokIcon from '@/components/TikTokIcon';
+import {
+  CHURCH_FACEBOOK_URL,
+  CHURCH_INSTAGRAM_URL,
+  CHURCH_TIKTOK_URL,
+  CHURCH_YOUTUBE_URL,
+} from '@/data/churchInfo';
 
 const SOCIAL_LINKS = [
   {
     name: 'Facebook',
     Icon: Facebook,
-    href: 'https://www.facebook.com/ICGCLivingWordTemple/',
+    href: CHURCH_FACEBOOK_URL,
   },
-  { name: 'Twitter', Icon: Twitter },
+  { name: 'TikTok', Icon: TikTokIcon, href: CHURCH_TIKTOK_URL || undefined },
   {
     name: 'Instagram',
     Icon: Instagram,
-    href: 'https://www.instagram.com/icgc_lwt/',
+    href: CHURCH_INSTAGRAM_URL,
   },
-  { name: 'YouTube', Icon: Youtube },
+  { name: 'YouTube', Icon: Youtube, href: CHURCH_YOUTUBE_URL },
 ];
 
 const Footer = () => {
@@ -23,7 +30,7 @@ const Footer = () => {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: 'radial-linear(circle, white 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
             backgroundSize: '40px 40px',
           }}
         />
@@ -45,7 +52,7 @@ const Footer = () => {
               </div>
 
               <div>
-                <h1 className="font-bold text-lg leading-tight">ICGC</h1>
+                <p className="font-bold text-lg leading-tight">ICGC</p>
                 <p className="text-[10px] font-bold tracking-widest uppercase text-slate-400">
                   Living Word Temple
                 </p>
@@ -57,9 +64,9 @@ const Footer = () => {
           </div>
 
           <div>
-            <h1 className="font-bold mb-6 text-white uppercase tracking-wider text-sm">
+            <p className="font-bold mb-6 text-white uppercase tracking-wider text-sm">
               Quick Links
-            </h1>
+            </p>
             <ul className="space-y-3 text-slate-400 text-sm">
               <li>
                 <Link
@@ -68,14 +75,6 @@ const Footer = () => {
                 >
                   Our Beliefs
                 </Link>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-[#FFD700] transition-colors hover:translate-x-1 inline-block"
-                >
-                  Find a Life Group
-                </a>
               </li>
               <li>
                 <Link
@@ -105,7 +104,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start">
                 <Clock className="w-4 h-4 mr-2 mt-0.5 text-[#FFD700]" />
-                Wednesday Bible Study: 6:00 PM
+                Thursday Teaching Service: 6:00 PM
               </li>
             </ul>
           </div>
