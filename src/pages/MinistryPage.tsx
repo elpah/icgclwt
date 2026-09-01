@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { ArrowLeft, Clock, MapPin, Calendar } from 'lucide-react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { MINISTRIES_DATA } from '../data/MinistriesData';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { MINISTRIES_DATA, MINISTRY_ID_ALIASES } from '../data/MinistriesData';
 import { toGalleryImages } from '@/data/galleryData';
 import ImageGallery from '@/components/gallery/ImageGallery';
 import NotFound from '@/pages/NotFound';
@@ -15,8 +15,12 @@ function whatsappLink(phone: string) {
 const MinistryPage = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+  const canonicalId = id ? (MINISTRY_ID_ALIASES[id] ?? id) : id;
 
-  const ministry = useMemo(() => MINISTRIES_DATA.find(min => min.id === id), [id]);
+  const ministry = useMemo(
+    () => MINISTRIES_DATA.find(min => min.id === canonicalId),
+    [canonicalId]
+  );
   const galleryImages = useMemo(
     () =>
       ministry
@@ -30,6 +34,10 @@ const MinistryPage = () => {
         : [],
     [ministry]
   );
+
+  if (id && MINISTRY_ID_ALIASES[id]) {
+    return <Navigate to={`/ministries/${MINISTRY_ID_ALIASES[id]}`} replace />;
+  }
 
   if (!ministry) {
     return <NotFound />;

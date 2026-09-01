@@ -1,7 +1,6 @@
 import {
   Music,
   Heart,
-  PlayCircle,
   GraduationCap,
   Church,
   MapPin,
@@ -9,7 +8,6 @@ import {
   Home,
   HandHeart,
   Megaphone,
-  Clapperboard,
   Handshake,
   Hammer,
   Briefcase,
@@ -19,15 +17,20 @@ import { getLocalMinistryImages } from './ministryAssets';
 
 const CHURCH_PHONE = '024 595 3629';
 
+export const MINISTRY_ID_ALIASES: Record<string, string> = {
+  worship: 'music-media',
+  media: 'music-media',
+};
+
 const BASE_MINISTRIES = [
   {
-    id: 'worship',
-    name: 'Music Team',
+    id: 'music-media',
+    name: 'Music and Media',
     icon: Music,
     color: 'from-blue-500 to-cyan-500',
-    description: "Leading the congregation into God's presence through music",
+    description: 'Serving through music and media',
     about:
-      'The Music Team leads the congregation in song during services, helping us praise God together. They prepare before gatherings and support worship on Sundays and other church meetings.',
+      'Music and Media leads the congregation in song during services and supports sound, visuals, and live streaming so people in the auditorium and online can take part. The team prepares before gatherings, records church messages, and helps services be heard and seen clearly.',
     meetings: [
       {
         day: 'Sunday',
@@ -35,12 +38,27 @@ const BASE_MINISTRIES = [
         location: 'Main Sanctuary',
       },
       {
+        day: 'Sunday',
+        time: '6:00 AM - 2:00 PM',
+        location: 'Media Room',
+      },
+      {
+        day: 'Wednesday',
+        time: '5:00 PM - 9:00 PM',
+        location: 'Media Room',
+      },
+      {
         day: 'Thursday',
         time: '6:00 PM - 8:00 PM',
         location: 'Choir Room',
       },
+      {
+        day: 'Saturday',
+        time: '10:00 AM - 12:00 PM',
+        location: 'Training Session',
+      },
     ],
-    leader: 'Mr Rexford Sackey',
+    leader: 'Deacon Cyril Mawuli Honu-Mensah',
     phone: CHURCH_PHONE,
   },
   {
@@ -59,34 +77,6 @@ const BASE_MINISTRIES = [
       },
     ],
     leader: 'Deaconess Wilhemina Tete-Mensah',
-    phone: CHURCH_PHONE,
-  },
-  {
-    id: 'media',
-    name: 'Media & Tech',
-    icon: PlayCircle,
-    color: 'from-purple-500 to-indigo-500',
-    description: 'Spreading the gospel through technology',
-    about:
-      'Media & Tech supports services with sound, visuals, and live streaming so people in the auditorium and online can take part. The team also helps record and share church messages.',
-    meetings: [
-      {
-        day: 'Sunday',
-        time: '6:00 AM - 2:00 PM',
-        location: 'Media Room',
-      },
-      {
-        day: 'Wednesday',
-        time: '5:00 PM - 9:00 PM',
-        location: 'Media Room',
-      },
-      {
-        day: 'Saturday',
-        time: '10:00 AM - 12:00 PM',
-        location: 'Training Session',
-      },
-    ],
-    leader: 'Bro. Kwame Boateng',
     phone: CHURCH_PHONE,
   },
   {
@@ -225,18 +215,6 @@ const BASE_MINISTRIES = [
     description: 'Coordinating church events and publicity',
     about:
       'Events and Publicity plans church programmes and helps people know what is happening. The team handles announcements, invitations, and the running of special gatherings.',
-    meetings: [],
-    leader: 'Deacon Cyril Mawuli Honu-Mensah',
-    phone: CHURCH_PHONE,
-  },
-  {
-    id: 'music-media',
-    name: 'Music and Media',
-    icon: Clapperboard,
-    color: 'from-blue-600 to-indigo-600',
-    description: 'Serving through music and media',
-    about:
-      'Music and Media oversees worship, sound, and media for church gatherings. The team works with the Music Team and Media & Tech so services are heard and seen clearly.',
     meetings: [],
     leader: 'Deacon Cyril Mawuli Honu-Mensah',
     phone: CHURCH_PHONE,

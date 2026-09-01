@@ -1,10 +1,16 @@
 const FOLDER_TO_MINISTRY: Record<string, string> = {
-  music: 'worship',
-  media: 'media',
+  musicmedia: 'music-media',
   men: 'men',
   pvv: 'women',
   newbreed: 'youth',
   outreach: 'outreach',
+  intercessory: 'intercessory',
+  ushering: 'ushering',
+  welfare: 'welfare',
+  family: 'family-life',
+  eventpublicity: 'events',
+  projects: 'projects',
+  administration: 'administration',
 };
 
 const assetModules = import.meta.glob<string>(
@@ -55,17 +61,23 @@ function collectByFolder() {
 const FOLDERS = collectByFolder();
 
 export function getLocalMinistryImages(ministryId: string) {
-  const folderName = Object.keys(FOLDER_TO_MINISTRY).find(
-    folder => FOLDER_TO_MINISTRY[folder] === ministryId
-  );
-  if (!folderName) return null;
+  const folderNames = Object.entries(FOLDER_TO_MINISTRY)
+    .filter(([, id]) => id === ministryId)
+    .map(([folder]) => folder);
 
-  const folder = FOLDERS[folderName];
-  if (!folder || (!folder.cover && folder.gallery.length === 0)) return null;
+  const headerImage = folderNames.map(name => FOLDERS[name]?.cover).find(Boolean);
+  const gallery = folderNames.flatMap(name => {
+    const folder = FOLDERS[name];
+    if (!folder) return [];
+    const extraCover = folder.cover && folder.cover !== headerImage ? [folder.cover] : [];
+    return [...extraCover, ...folder.gallery];
+  });
+
+  if (!headerImage && gallery.length === 0) return null;
 
   return {
-    headerImage: folder.cover,
-    gallery: folder.gallery,
+    headerImage,
+    gallery,
   };
 }
 
