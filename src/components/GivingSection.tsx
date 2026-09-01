@@ -5,8 +5,8 @@ import { fadeUp, staggerTransition, viewportOnce } from '@/lib/motion';
 const MONEY_NUMBER = '024 595 3629';
 const BANK_NAME = 'Bank name';
 const BANK_ACCOUNT_NAME = 'ICGC Living Word Temple';
-const BANK_ACCOUNT_NUMBER = '0000000000';
-const BANK_BRANCH = 'Branch';
+const BANK_ACCOUNT_NUMBER = '3051180000400';
+const BANK_BRANCH = 'Winneba';
 
 const GivingSection = () => {
   return (
