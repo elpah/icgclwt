@@ -47,7 +47,7 @@ const ContactSection = () => {
 
       form.reset();
       setStatus('success');
-      setFeedback('Thank you. Your message has been sent.');
+      setFeedback('Your message has been sent successfully.');
     } catch {
       setStatus('error');
       setFeedback('We could not send your message. Please try again.');
