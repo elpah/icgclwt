@@ -43,8 +43,6 @@ const LiveService = () => {
   const [selectedVideoId, setSelectedVideoId] = useState('');
   const youtube = LIVE_STREAM_CONFIG.youtube;
   const facebook = LIVE_STREAM_CONFIG.facebook;
-  const watchHref = platform === 'youtube' ? youtube.channelUrl : facebook.pageUrl;
-  const watchLabel = platform === 'youtube' ? 'Watch on YouTube' : 'Watch on Facebook';
 
   useEffect(() => {
     let cancelled = false;
@@ -77,15 +75,9 @@ const LiveService = () => {
     };
   }, []);
 
-  const youtubeVideoId =
-    selectedVideoId ||
-    youtubeFeed.liveVideoId?.trim() ||
-    youtube.liveVideoId.trim() ||
-    youtubeFeed.latestVideoId?.trim() ||
-    '';
-  const youtubeChannelId = youtubeFeed.channelId?.trim() || youtube.channelId.trim();
-  const youtubeIsLive =
-    youtubeFeed.liveStatus === 'live' && youtubeVideoId === (youtubeFeed.liveVideoId ?? '');
+  const liveVideoId = youtubeFeed.liveVideoId?.trim() || youtube.liveVideoId.trim();
+  const youtubeIsLive = youtubeFeed.liveStatus === 'live' && Boolean(liveVideoId);
+  const youtubeVideoId = selectedVideoId || (youtubeIsLive ? liveVideoId : '');
   const youtubeMessages: PastMessage[] = youtubeFeed.pastMessages.length
     ? youtubeFeed.pastMessages
     : LIVE_STREAM_CONFIG.pastMessages.filter(message => message.platform === 'youtube');
@@ -96,7 +88,7 @@ const LiveService = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 pt-24">
-      <section className="py-12 md:py-16 bg-white">
+      <section className="pt-12 md:pt-16 pb-4 md:pb-6 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 md:mb-10">
             <SectionEyebrow>Watch Live</SectionEyebrow>
@@ -111,38 +103,55 @@ const LiveService = () => {
 
           <PlatformSelector value={platform} onChange={setPlatform} />
 
-          <div
-            id="watch-player"
-            className="relative rounded-2xl overflow-hidden shadow-md aspect-video bg-slate-900 mt-6 mb-5"
-          >
-            {platform === 'youtube' && youtubeIsLive ? (
-              <span className="absolute top-3 left-3 z-10 rounded-full bg-red-600 px-2.5 py-1 text-[11px] font-semibold tracking-wide uppercase text-white">
-                Live
-              </span>
-            ) : null}
-            {platform === 'youtube' ? (
-              <YouTubePlayer
-                videoId={youtubeVideoId}
-                channelId={youtubeChannelId}
-                channelUrl={youtube.channelUrl}
-                loading={youtubeLoading}
-              />
-            ) : (
-              <FacebookPlayer videoUrl={facebook.liveVideoUrl.trim()} pageUrl={facebook.pageUrl} />
-            )}
-          </div>
-
-          <div className="mb-10 flex justify-center">
-            <a
-              href={watchHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cursor-pointer inline-flex items-center gap-2 text-[#006B3F] hover:text-emerald-800 font-semibold text-sm min-h-10"
+          {platform === 'youtube' && !youtubeLoading ? (
+            <p
+              className={`mt-5 flex items-center justify-center gap-2 text-sm font-semibold ${
+                youtubeIsLive ? 'text-[#006B3F]' : 'text-red-600'
+              }`}
             >
-              {watchLabel}
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          </div>
+              <span
+                className={`h-2 w-2 rounded-full ${youtubeIsLive ? 'bg-[#006B3F]' : 'bg-red-600'}`}
+                aria-hidden="true"
+              />
+              {youtubeIsLive
+                ? 'Currently streaming'
+                : 'ICGC Living Word Temple is currently not streaming'}
+            </p>
+          ) : null}
+
+          {platform === 'youtube' && (youtubeLoading || youtubeIsLive || selectedVideoId) ? (
+            <div
+              id="watch-player"
+              className="relative rounded-2xl overflow-hidden shadow-md aspect-video bg-slate-900 mt-5 mb-6"
+            >
+              <YouTubePlayer videoId={youtubeVideoId} loading={youtubeLoading} />
+            </div>
+          ) : null}
+
+          {platform === 'facebook' ? (
+            <>
+              <div
+                id="watch-player"
+                className="relative rounded-2xl overflow-hidden shadow-md aspect-video bg-slate-900 mt-6 mb-5"
+              >
+                <FacebookPlayer
+                  videoUrl={facebook.liveVideoUrl.trim()}
+                  pageUrl={facebook.pageUrl}
+                />
+              </div>
+              <div className="mb-10 flex justify-center">
+                <a
+                  href={facebook.pageUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cursor-pointer inline-flex items-center gap-2 text-[#006B3F] hover:text-emerald-800 font-semibold text-sm min-h-10"
+                >
+                  Watch on Facebook
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </div>
+            </>
+          ) : null}
         </div>
       </section>
 

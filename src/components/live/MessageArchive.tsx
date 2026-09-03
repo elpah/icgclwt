@@ -29,9 +29,9 @@ const MessageArchive = ({
   const archiveLabel = platform === 'youtube' ? 'Watch on YouTube' : 'Watch on Facebook';
 
   return (
-    <section id="past-messages" className="scroll-mt-24 py-12 md:py-16 bg-white">
+    <section id="past-messages" className="scroll-mt-24 pt-6 md:pt-8 pb-12 md:pb-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 md:mb-10">
+        <div className="text-center mb-6 md:mb-8">
           <SectionEyebrow>Archive</SectionEyebrow>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 tracking-tight">
             Past Messages
