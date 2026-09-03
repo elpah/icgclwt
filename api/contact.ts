@@ -1,7 +1,15 @@
+import { createRequire } from 'node:module';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import nodemailer from 'nodemailer';
+import type { Transporter } from 'nodemailer';
 import { buildConfirmationEmail, buildContactEmail } from './contactEmail';
+
+export const config = {
+  runtime: 'nodejs',
+  maxDuration: 10,
+};
+
+const require = createRequire(resolve(process.cwd(), 'package.json'));
 
 export type ContactPayload = {
   fullName: string;
@@ -176,16 +184,29 @@ export function logMailError(error: unknown, target?: SmtpTarget) {
   );
 }
 
+function loadNodemailer() {
+  const nodemailer = require('nodemailer') as {
+    createTransport: (options: Record<string, unknown>) => Transporter;
+    default?: { createTransport: (options: Record<string, unknown>) => Transporter };
+  };
+  const createTransport = nodemailer.createTransport ?? nodemailer.default?.createTransport;
+  if (!createTransport) {
+    throw new Error('Nodemailer is unavailable.');
+  }
+  return createTransport;
+}
+
 function createTransporter(
-  config: ReturnType<typeof getMailConfig>,
+  mailConfig: ReturnType<typeof getMailConfig>,
   target: SmtpTarget
 ) {
-  return nodemailer.createTransport({
+  return loadNodemailer()({
     host: target.host,
     port: target.port,
     secure: target.secure,
     requireTLS: target.port === 587,
-    auth: { user: config.user, pass: config.pass },
+    family: 4,
+    auth: { user: mailConfig.user, pass: mailConfig.pass },
     connectionTimeout: 8_000,
     greetingTimeout: 8_000,
     socketTimeout: 12_000,
@@ -194,33 +215,58 @@ function createTransporter(
 
 let cachedSmtpTarget: SmtpTarget | null = null;
 
-async function getWorkingTransporter(config: ReturnType<typeof getMailConfig>) {
-  if (cachedSmtpTarget) {
-    return {
-      transporter: createTransporter(config, cachedSmtpTarget),
-      target: cachedSmtpTarget,
-    };
+function vercelSmtpTargets(preferred: SmtpTarget): SmtpTarget[] {
+  const hosts = [preferred.host, siblingZohoHost(preferred.host)].filter(Boolean);
+  const seen = new Set<string>();
+  const targets: SmtpTarget[] = [];
+
+  for (const host of hosts) {
+    for (const option of [
+      { port: preferred.port || 465, secure: (preferred.port || 465) === 465 },
+      { port: 465, secure: true },
+      { port: 587, secure: false },
+    ]) {
+      const key = `${host}:${option.port}`;
+      if (seen.has(key)) {
+        continue;
+      }
+      seen.add(key);
+      targets.push({ host, port: option.port, secure: option.port === 465 });
+    }
   }
+
+  return targets;
+}
+
+async function sendWithFallback(
+  mailConfig: ReturnType<typeof getMailConfig>,
+  message: Parameters<Transporter['sendMail']>[0]
+) {
+  const preferred = {
+    host: mailConfig.host,
+    port: mailConfig.port,
+    secure: mailConfig.secure,
+  };
+  const targets = process.env.VERCEL
+    ? vercelSmtpTargets(preferred)
+    : cachedSmtpTarget
+      ? [cachedSmtpTarget]
+      : smtpTargets(preferred);
 
   let lastError: unknown;
   let lastTarget: SmtpTarget | undefined;
 
-  for (const target of smtpTargets({
-    host: config.host,
-    port: config.port,
-    secure: config.secure,
-  })) {
-    const transporter = createTransporter(config, target);
+  for (const target of targets) {
     try {
-      await transporter.verify();
+      const transporter = createTransporter(mailConfig, target);
+      await transporter.sendMail(message);
       cachedSmtpTarget = target;
-      console.info(`[contact-mail] connected ${target.host}:${target.port}`);
-      return { transporter, target };
+      return;
     } catch (error) {
       lastError = error;
       lastTarget = target;
-      const message = error instanceof Error ? error.message : '';
-      const wrongServer = message.includes('Access Restricted');
+      const messageText = error instanceof Error ? error.message : '';
+      const wrongServer = messageText.includes('Access Restricted');
       const authFailed =
         error && typeof error === 'object' && 'code' in error && error.code === 'EAUTH';
       if (authFailed && !wrongServer) {
@@ -238,12 +284,11 @@ export async function sendContactEmail(data: ContactPayload) {
     throw new Error('Email is not configured yet.');
   }
 
-  const config = getMailConfig();
-  const { from, to } = config;
+  const mailConfig = getMailConfig();
+  const { from, to } = mailConfig;
   const email = buildContactEmail(data);
-  const { transporter } = await getWorkingTransporter(config);
 
-  await transporter.sendMail({
+  await sendWithFallback(mailConfig, {
     from: {
       name: email.fromName,
       address: from,
@@ -261,7 +306,7 @@ export async function sendContactEmail(data: ContactPayload) {
 
   try {
     const confirmation = buildConfirmationEmail(data);
-    await transporter.sendMail({
+    await sendWithFallback(mailConfig, {
       from: {
         name: confirmation.fromName,
         address: from,
@@ -299,23 +344,23 @@ function readRequestBody(body: unknown) {
 }
 
 export default async function handler(req: ContactRequest, res: ContactResponse) {
-  if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method not allowed' });
-    return;
-  }
-
-  const parsed = parseContactPayload(readRequestBody(req.body));
-  if (!parsed.ok) {
-    res.status(400).json({ error: parsed.error });
-    return;
-  }
-
-  if (!isMailConfigured()) {
-    res.status(503).json({ error: 'Email is not configured yet.' });
-    return;
-  }
-
   try {
+    if (req.method !== 'POST') {
+      res.status(405).json({ error: 'Method not allowed' });
+      return;
+    }
+
+    const parsed = parseContactPayload(readRequestBody(req.body));
+    if (!parsed.ok) {
+      res.status(400).json({ error: parsed.error });
+      return;
+    }
+
+    if (!isMailConfigured()) {
+      res.status(503).json({ error: 'Email is not configured yet.' });
+      return;
+    }
+
     await sendContactEmail(parsed.data);
     res.status(200).json({ ok: true });
   } catch (error) {

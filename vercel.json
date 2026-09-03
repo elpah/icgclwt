@@ -1,3 +1,8 @@
 {
-  "rewrites": [{ "source": "/((?!api/).*)", "destination": "/" }]
+  "rewrites": [{ "source": "/((?!api/).*)", "destination": "/" }],
+  "functions": {
+    "api/contact.ts": {
+      "includeFiles": "node_modules/nodemailer/**"
+    }
+  }
 }
