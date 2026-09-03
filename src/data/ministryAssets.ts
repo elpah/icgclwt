@@ -1,5 +1,6 @@
 const FOLDER_TO_MINISTRY: Record<string, string> = {
   musicmedia: 'music-media',
+  children: 'children',
   men: 'men',
   pvv: 'women',
   newbreed: 'youth',

@@ -3,7 +3,7 @@ import SectionEyebrow from '@/components/SectionEyebrow';
 import { fadeUp, staggerTransition, viewportOnce } from '@/lib/motion';
 
 const MONEY_NUMBER = '024 595 3629';
-const BANK_NAME = 'Bank name';
+const BANK_NAME = 'Ghana Commercial Bank';
 const BANK_ACCOUNT_NAME = 'ICGC Living Word Temple';
 const BANK_ACCOUNT_NUMBER = '3051180000400';
 const BANK_BRANCH = 'Winneba';
