@@ -129,16 +129,29 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
-          <p>© {new Date().getFullYear()} ICGC Living Word Temple. All Rights Reserved.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link to="/privacy-policy" className="hover:text-white transition-colors">
-              Privacy Policy
-            </Link>
-            <Link to="/terms-of-service" className="hover:text-white transition-colors">
-              Terms of Service
-            </Link>
+        <div className="border-t border-slate-800 pt-8 text-slate-500 text-sm">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>© {new Date().getFullYear()} ICGC Living Word Temple. All Rights Reserved.</p>
+            <div className="flex space-x-6">
+              <Link to="/privacy-policy" className="hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+              <Link to="/terms-of-service" className="hover:text-white transition-colors">
+                Terms of Service
+              </Link>
+            </div>
           </div>
+          <p className="text-center mt-4">
+            Designed and Developed by{' '}
+            <a
+              href="https://paruah.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-[#FFD700] transition-colors"
+            >
+              Paruah Systems
+            </a>
+          </p>
         </div>
       </div>
     </footer>
