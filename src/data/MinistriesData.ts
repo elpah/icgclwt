@@ -33,29 +33,34 @@ const BASE_MINISTRIES = [
       'Music and Media leads the congregation in song during services and supports sound, visuals, and live streaming so people in the auditorium and online can take part. The team prepares before gatherings, records church messages, and helps services be heard and seen clearly.',
     meetings: [
       {
+        group: 'Music Team meeting times',
         day: 'Sunday',
         time: '6:00 AM - 7:00 AM',
-        location: 'Main Sanctuary',
+        location: 'Church Auditorium',
       },
       {
-        day: 'Sunday',
-        time: '6:00 AM - 2:00 PM',
-        location: 'Media Room',
-      },
-      {
-        day: 'Wednesday',
-        time: '5:00 PM - 9:00 PM',
-        location: 'Media Room',
-      },
-      {
+        group: 'Music Team meeting times',
         day: 'Thursday',
         time: '6:00 PM - 8:00 PM',
-        location: 'Choir Room',
+        location: 'Church Auditorium',
       },
       {
+        group: 'Media Team meeting times',
+        day: 'Sunday',
+        time: '6:00 AM - 2:00 PM',
+        location: 'Church Auditorium',
+      },
+      {
+        group: 'Media Team meeting times',
+        day: 'Wednesday',
+        time: '5:00 PM - 9:00 PM',
+        location: 'Church Auditorium',
+      },
+      {
+        group: 'Media Team meeting times',
         day: 'Saturday',
         time: '10:00 AM - 12:00 PM',
-        location: 'Training Session',
+        location: 'Church Auditorium',
       },
     ],
     leader: 'Deacon Cyril Mawuli Honu-Mensah',
@@ -73,7 +78,7 @@ const BASE_MINISTRIES = [
       {
         day: 'Sunday',
         time: '8:00 AM - 10:30 AM',
-        location: "Children's Wing",
+        location: 'Church Auditorium',
       },
     ],
     leader: 'Deaconess Wilhemina Tete-Mensah',
@@ -91,12 +96,12 @@ const BASE_MINISTRIES = [
       {
         day: 'Sunday',
         time: '10:30 AM - 1:00 PM',
-        location: 'Youth Center',
+        location: 'Church Auditorium',
       },
       {
         day: 'Friday',
         time: '6:00 PM - 8:00 PM',
-        location: 'Youth Center',
+        location: 'Church Auditorium',
       },
     ],
     leader: 'Deacon Cyril Mawuli Honu-Mensah',
@@ -114,12 +119,12 @@ const BASE_MINISTRIES = [
       {
         day: '1st Saturday',
         time: '7:00 AM - 9:00 AM',
-        location: 'Main Hall',
+        location: 'Church Auditorium',
       },
       {
         day: '3rd Saturday',
         time: '7:00 AM - 9:00 AM',
-        location: 'Main Hall',
+        location: 'Church Auditorium',
       },
     ],
     leader: 'Mr Frederick Essel',
@@ -137,12 +142,12 @@ const BASE_MINISTRIES = [
       {
         day: '2nd Saturday',
         time: '9:00 AM - 11:00 AM',
-        location: 'Fellowship Hall',
+        location: 'Church Auditorium',
       },
       {
         day: '4th Saturday',
         time: '9:00 AM - 11:00 AM',
-        location: 'Fellowship Hall',
+        location: 'Church Auditorium',
       },
     ],
     leader: 'Lady Martha Obeng',
@@ -160,12 +165,12 @@ const BASE_MINISTRIES = [
       {
         day: 'Saturday',
         time: '2:00 PM - 5:00 PM',
-        location: 'Community Center',
+        location: 'Church Auditorium',
       },
       {
         day: 'Last Sunday',
         time: '2:00 PM - 5:00 PM',
-        location: 'Various Locations',
+        location: 'Church Auditorium',
       },
     ],
     leader: 'Deacon Cyril Mawuli Honu-Mensah',

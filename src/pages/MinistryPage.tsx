@@ -120,25 +120,43 @@ const MinistryPage = () => {
                   </h3>
 
                   <div className="space-y-3">
-                    {ministry.meetings.map(meeting => (
-                      <div
-                        key={`${meeting.day}-${meeting.time}`}
-                        className="pb-3 border-b border-slate-100 last:border-0"
-                      >
-                        <div className="flex items-center space-x-2 mb-1">
-                          <Calendar className="w-3.5 h-3.5 text-[#FFD700]" />
-                          <span className="font-semibold text-slate-900 text-sm">{meeting.day}</span>
-                        </div>
+                    {ministry.meetings.map((meeting, index) => {
+                      const group = 'group' in meeting ? meeting.group : undefined;
+                      const previous = ministry.meetings[index - 1];
+                      const previousGroup =
+                        previous && 'group' in previous ? previous.group : undefined;
+                      const showGroup = Boolean(group && group !== previousGroup);
 
-                        <div className="text-sm text-slate-600 ml-5">
-                          <p>{meeting.time}</p>
-                          <p className="flex items-center mt-0.5">
-                            <MapPin className="w-3 h-3 mr-1 text-slate-400" />
-                            {meeting.location}
-                          </p>
+                      return (
+                        <div key={`${group ?? ''}-${meeting.day}-${meeting.time}`}>
+                          {showGroup ? (
+                            <p
+                              className={`text-xs font-semibold uppercase tracking-wide text-[#006B3F] mb-2 ${
+                                index > 0 ? 'mt-4' : ''
+                              }`}
+                            >
+                              {group}
+                            </p>
+                          ) : null}
+                          <div className="pb-3 border-b border-slate-100 last:border-0">
+                            <div className="flex items-center space-x-2 mb-1">
+                              <Calendar className="w-3.5 h-3.5 text-[#FFD700]" />
+                              <span className="font-semibold text-slate-900 text-sm">
+                                {meeting.day}
+                              </span>
+                            </div>
+
+                            <div className="text-sm text-slate-600 ml-5">
+                              <p>{meeting.time}</p>
+                              <p className="flex items-center mt-0.5">
+                                <MapPin className="w-3 h-3 mr-1 text-slate-400" />
+                                {meeting.location}
+                              </p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </>
               ) : null}
