@@ -1,71 +1,81 @@
-import { useEffect, lazy, Suspense, useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Clock, Calendar, ArrowRight, Video } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { lazy, Suspense, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { ArrowRight, Video } from "lucide-react";
+import { motion } from "framer-motion";
+import SectionEyebrow from "@/components/SectionEyebrow";
+import HeroSlideshow from "@/components/HeroSlideshow";
+import MinistryCoverCard from "@/components/MinistrySection/MinistryCoverCard";
+import MeetThePastor from "@/components/MeetThePastor";
+import { MINISTRIES_DATA } from "@/data/MinistriesData";
+import { fadeUp, heroTransition, staggerTransition, viewportOnce } from "@/lib/motion";
 
-const About = lazy(() => import('./About'));
-const QuoteSection = lazy(() => import('@/components/QuoteSection'));
-const UpcomingEvents = lazy(() => import('@/components/UpcomingEvents'));
-const GivingSection = lazy(() => import('@/components/GivingSection'));
-const ContactSection = lazy(() => import('@/components/ContactSection'));
-const JoinMinistriesSection = lazy(
-  () => import('@/components/MinistrySection/JoinMinistriesSection')
-);
+const HOME_PHOTOS = [
+  {
+    src: "/images/church_cover_image.webp",
+    alt: "ICGC Living Word Temple sanctuary",
+  },
+  {
+    src: "/images/cover_images_smaller/cover_image_5.webp",
+    alt: "Congregation gathered in worship",
+  },
+  {
+    src: "https://res.cloudinary.com/dvwpuenzk/image/upload/v1787967714/sunday_service_lwt_ld62po.jpg",
+    alt: "Sunday service at Living Word Temple",
+  },
+  {
+    src: "/images/cover_images_smaller/cover_image_2.webp",
+    alt: "A moment from Living Word Temple",
+  },
+];
 
-const easeOutExpo = [0.22, 1, 0.36, 1] as const;
+const HOME_MINISTRIES = ["men", "women", "youth"]
+  .map(id => MINISTRIES_DATA.find(ministry => ministry.id === id))
+  .filter((ministry): ministry is (typeof MINISTRIES_DATA)[number] => Boolean(ministry));
+
+const QuoteSection = lazy(() => import("@/components/QuoteSection"));
+const SalvationCta = lazy(() => import("@/components/SalvationCta"));
+const GivingSection = lazy(() => import("@/components/GivingSection"));
 
 const SERVICE_TIMES = [
   {
-    id: 'sunday',
-    day: 'Sundays',
-    time: '7:30 AM - 10:00 AM',
-    title: 'Sunday Service',
+    id: "sunday",
+    day: "Sundays",
+    time: "8:00 AM - 10:30 AM",
+    title: "Sunday Service",
   },
   {
-    id: 'wednesday',
-    day: 'Wednesday',
-    time: '6:00 PM - 8:00 PM',
-    title: 'Teaching Service',
+    id: "thursday",
+    day: "Thursday",
+    time: "6:00 PM",
+    title: "Teaching Service",
   },
   {
-    id: 'friday',
-    day: 'Friday',
-    time: '6:00 PM - 8:00 PM',
-    title: 'Prayer Service',
+    id: "friday",
+    day: "Friday",
+    time: "6:00 PM - 8:00 PM",
+    title: "Prayer Service",
   },
 ];
 
 const HomePage = () => {
-  const location = useLocation();
   const navigate = useNavigate();
 
-  const scrollToId = useCallback(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    requestAnimationFrame(() => {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  }, []);
-
-  useEffect(() => {
-    const targetId = location.state?.scrollTo;
-    if (!targetId) return;
-    scrollToId(targetId);
-  }, [location.state?.scrollTo, scrollToId]);
-
   const goToLiveService = useCallback(() => {
-    navigate('/live-service');
+    navigate("/live-service");
   }, [navigate]);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-linear-to-br from-slate-900 via-[#006B3F] to-emerald-900">
+      <section
+        id="home"
+        className="relative min-h-[100svh] flex items-center overflow-hidden bg-linear-to-br from-slate-900 via-[#006B3F] to-emerald-900"
+      >
         <div className="absolute inset-0 z-0 opacity-20">
           <img
-            src="images/church_cover_image.webp"
+            src="/images/church_cover_image.webp"
             alt="Church Hero"
-            width={1920}
-            height={1080}
+            width={2040}
+            height={1360}
             loading="eager"
             fetchPriority="high"
             decoding="async"
@@ -73,156 +83,260 @@ const HomePage = () => {
           />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-20 pb-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* LEFT */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-24 pb-16 md:pt-28 md:pb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] gap-10 lg:gap-10 items-center">
             <div className="text-white">
-              <motion.div
-                initial={{ y: 25 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3, ease: easeOutExpo }}
+              <motion.h1
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-5"
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={heroTransition(0.08)}
               >
-                <motion.h1
-                  className="text-5xl md:text-7xl lg:text-8xl font-extrabold leading-[0.95] mb-6"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.3, ease: easeOutExpo }}
-                >
-                  Experience
-                  <br />
-                  <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FFD700] via-yellow-400 to-[#FFD700]">
-                    God's Power
-                  </span>
-                </motion.h1>
-              </motion.div>
+                Experience
+                <br />
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FFD700] via-yellow-400 to-[#FFD700]">
+                  God's Power
+                </span>
+              </motion.h1>
 
               <motion.p
-                className="text-lg md:text-xl text-slate-300 max-w-xl mb-10"
-                initial={{ opacity: 0, y: 25 }}
+                className="text-sm md:text-base text-slate-300 max-w-xl mb-8 leading-relaxed"
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5, ease: easeOutExpo }}
+                transition={heroTransition(0.16)}
               >
-                A message-centered, mission-oriented community where lives are transformed and
-                leaders are raised.
+                A message-centered, mission-oriented community where lives are
+                transformed and leaders are raised.
               </motion.p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <motion.button
-                  onClick={() => scrollToId('contact')}
-                  className="cursor-pointer bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center"
-                  initial={{ opacity: 0, y: 25 }}
+                  onClick={() => navigate("/contact")}
+                  className="cursor-pointer bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-6 py-3 rounded-full font-semibold text-base flex items-center justify-center min-h-12 transition-shadow duration-300 hover:shadow-md"
+                  initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.6, ease: easeOutExpo }}
+                  transition={heroTransition(0.24)}
                 >
                   Plan Your Visit
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight className="ml-2 w-4 h-4" />
                 </motion.button>
 
                 <motion.button
                   onClick={goToLiveService}
-                  className="cursor-pointer bg-white/10 border border-white/30 text-white px-8 py-4 rounded-full font-bold flex items-center justify-center"
-                  initial={{ opacity: 0, y: 25 }}
+                  className="cursor-pointer bg-white/10 border border-white/30 text-white px-6 py-3 rounded-full font-semibold text-base flex items-center justify-center min-h-12 transition-colors duration-300 hover:bg-white/15"
+                  initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.7, ease: easeOutExpo }}
+                  transition={heroTransition(0.32)}
                 >
-                  <Video className="mr-2 w-5 h-5" />
+                  <Video className="mr-2 w-4 h-4" />
                   Watch Services
                 </motion.button>
               </div>
             </div>
 
-            {/* RIGHT */}
-            <div className="hidden lg:block relative">
-              <motion.img
-                src="images/church_cover_smaller.webp"
-                alt="Church Worship"
-                width={800}
-                height={450}
-                loading="lazy"
-                decoding="async"
-                className="w-full h-125 object-cover rounded-3xl shadow-2xl"
-                initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, ease: easeOutExpo }}
-              />
-
-              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent rounded-3xl" />
-
+            <div className="hidden md:block relative mt-4 lg:mt-0 pt-10">
               <motion.div
-                className="absolute -top-6 -right-6 bg-linear-to-br from-[#FFD700] to-[#FDB813] rounded-2xl p-6 shadow-xl w-64"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.8, ease: easeOutExpo }}
+                className="relative"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={heroTransition(0.12)}
               >
-                <p className="text-sm text-[#006B3F] font-bold">
-                  Raising leaders, shaping vision, influencing society through Christ
-                </p>
-              </motion.div>
+                <HeroSlideshow />
 
-              <motion.div
-                className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl w-48"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1.0, ease: easeOutExpo }}
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="bg-[#006B3F]/10 p-2 rounded-xl">
-                    <Calendar className="w-5 h-5 text-[#006B3F]" />
-                  </div>
-                  <div className="text-2xl font-bold text-[#006B3F]">3x</div>
-                </div>
-                <div className="text-sm text-slate-600 font-bold">Weekly Services</div>
+                <motion.div
+                  className="absolute top-0 right-6 z-20 -translate-y-1/2 bg-linear-to-br from-[#FFD700] to-[#FDB813] rounded-xl p-4 shadow-md w-56"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={heroTransition(0.36)}
+                >
+                  <p className="text-sm text-[#006B3F] font-semibold leading-snug">
+                    Raising leaders, shaping vision, influencing society through
+                    Christ
+                  </p>
+                </motion.div>
               </motion.div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* WORSHIP WITH US — ANIMATED */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6, ease: easeOutExpo }}
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">Worship With Us</h2>
-            <p className="text-slate-600 mt-4">
-              Experience vibrant worship, powerful teaching, and genuine community
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {SERVICE_TIMES.map((service, index) => (
-              <motion.div
-                key={service.id}
-                className="p-8 rounded-3xl border bg-white hover:shadow-lg transition-shadow"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.2,
-                  ease: easeOutExpo,
-                }}
+      <section className="py-16 md:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.2fr)] gap-12 lg:gap-20 items-start">
+            <motion.div {...fadeUp} transition={staggerTransition(0)}>
+              <SectionEyebrow align="left">Service Times</SectionEyebrow>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
+                Worship With Us
+              </h2>
+              <p className="text-slate-600 mt-4 text-sm md:text-[0.95rem] leading-relaxed max-w-md">
+                Experience vibrant worship, powerful teaching, and genuine
+                community
+              </p>
+              <button
+                onClick={() => navigate("/contact#map")}
+                className="cursor-pointer mt-6 text-[#006B3F] font-semibold text-sm inline-flex items-center min-h-10"
               >
-                <div className="w-14 h-14 bg-[#006B3F] rounded-2xl flex items-center justify-center mb-6">
-                  <Clock className="w-7 h-7 text-[#FFD700]" />
-                </div>
+                Get Directions
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </button>
+            </motion.div>
 
-                <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                <div className="text-sm text-[#006B3F] font-semibold mb-2">{service.day}</div>
-                <div className="text-slate-600 font-medium">{service.time}</div>
+            <div>
+              <motion.div
+                {...fadeUp}
+                transition={staggerTransition(1)}
+                className="bg-[#006B3F] text-white px-6 py-7 md:px-8 md:py-8"
+              >
+                <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[#FFD700] mb-3">
+                  {SERVICE_TIMES[0].day}
+                </p>
+                <p className="text-2xl md:text-4xl font-bold tracking-tight leading-none mb-3">
+                  {SERVICE_TIMES[0].time}
+                </p>
+                <p className="text-slate-100 text-sm md:text-base">
+                  {SERVICE_TIMES[0].title}
+                </p>
+              </motion.div>
 
-                <button
-                  onClick={() => scrollToId('map')}
-                  className=" cursor-pointer mt-6 text-[#006B3F] font-bold flex items-center"
-                >
-                  Get Directions
-                  <ArrowRight className=" ml-2 w-4 h-4" />
-                </button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-7">
+                {SERVICE_TIMES.slice(1).map((service, index) => (
+                  <motion.div
+                    key={service.id}
+                    {...fadeUp}
+                    transition={staggerTransition(index + 2)}
+                  >
+                    <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#006B3F] mb-2">
+                      {service.day}
+                    </p>
+                    <p className="text-xl font-semibold text-slate-900 mb-1">
+                      {service.time}
+                    </p>
+                    <p className="text-slate-600 text-sm">{service.title}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+            <motion.div {...fadeUp} transition={staggerTransition(0)}>
+              <SectionEyebrow align="left">Our Story</SectionEyebrow>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-slate-900 leading-tight tracking-tight">
+                A house in the
+                <br />
+                <span className="inline-block text-transparent bg-clip-text bg-linear-to-r from-[#006B3F] to-emerald-600">
+                  ICGC family
+                </span>
+              </h2>
+              <p className="text-slate-600 mb-4 leading-relaxed text-sm md:text-[0.95rem]">
+                International Central Gospel Church (ICGC) is a Christian
+                organization, multi-cultural in nature, but primarily for the
+                empowerment of the African person.
+              </p>
+              <p className="text-slate-600 leading-relaxed text-sm md:text-[0.95rem]">
+                Living Word Temple, Winneba is a vibrant branch of the ICGC family,
+                dedicated to building people of integrity and excellence.
+              </p>
+              <button
+                onClick={() => navigate("/about")}
+                className="cursor-pointer mt-6 text-[#006B3F] font-semibold text-sm inline-flex items-center min-h-10"
+              >
+                About the church
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </button>
+            </motion.div>
+
+            <motion.div
+              className="relative rounded-2xl overflow-hidden shadow-md"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={viewportOnce}
+              transition={{ duration: 0.58, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <img
+                src="https://res.cloudinary.com/dvwpuenzk/image/upload/v1781938363/icgc_banner_kfyfxr.avif"
+                alt="ICGC Living Word Temple church family"
+                className="w-full aspect-[4/5] max-h-[26rem] md:max-h-[30rem] object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="absolute inset-0 bg-linear-to-t from-[#006B3F]/20 to-transparent" />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <MeetThePastor />
+
+      <section className="py-16 md:py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+            <motion.div {...fadeUp} transition={staggerTransition(0)}>
+              <SectionEyebrow align="left">Moments</SectionEyebrow>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
+                Church Gallery
+              </h2>
+            </motion.div>
+            <button
+              onClick={() => navigate("/gallery")}
+              className="cursor-pointer text-[#006B3F] font-semibold text-sm inline-flex items-center min-h-10 shrink-0"
+            >
+              See the gallery
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {HOME_PHOTOS.map((photo) => (
+              <div
+                key={photo.src}
+                className="group relative overflow-hidden rounded-2xl bg-slate-200 aspect-[4/5]"
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+            <motion.div {...fadeUp} transition={staggerTransition(0)}>
+              <SectionEyebrow align="left">Get Involved</SectionEyebrow>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
+                Our Ministries
+              </h2>
+            </motion.div>
+            <button
+              onClick={() => navigate("/ministries")}
+              className="cursor-pointer text-[#006B3F] font-semibold text-sm inline-flex items-center min-h-10 shrink-0"
+            >
+              See all ministries
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+            {HOME_MINISTRIES.map((ministry, index) => (
+              <motion.div
+                key={ministry.id}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={viewportOnce}
+                transition={staggerTransition(index)}
+              >
+                <MinistryCoverCard ministry={ministry} />
               </motion.div>
             ))}
           </div>
@@ -230,23 +344,15 @@ const HomePage = () => {
       </section>
 
       <Suspense fallback={null}>
-        <About />
-      </Suspense>
-
-      <Suspense fallback={null}>
         <QuoteSection />
       </Suspense>
 
       <Suspense fallback={null}>
-        <JoinMinistriesSection />
+        <SalvationCta />
       </Suspense>
 
       <Suspense fallback={null}>
         <GivingSection />
-      </Suspense>
-
-      <Suspense fallback={<div className="p-10 text-center">Loading...</div>}>
-        <ContactSection />
       </Suspense>
     </div>
   );

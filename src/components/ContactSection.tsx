@@ -1,54 +1,73 @@
-import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
-
-const easeOutExpo = [0.22, 1, 0.36, 1] as const;
+import { FormEvent, useState } from 'react';
+import { MapPin, Phone, Mail, Facebook, Instagram, Youtube } from 'lucide-react';
+import TikTokIcon from '@/components/TikTokIcon';
+import {
+  CHURCH_ADDRESS,
+  CHURCH_DIGITAL_ADDRESS,
+  CHURCH_FACEBOOK_URL,
+  CHURCH_INSTAGRAM_URL,
+  CHURCH_MAPS_EMBED_URL,
+  CHURCH_MAPS_URL,
+  CHURCH_TIKTOK_URL,
+  CHURCH_YOUTUBE_URL,
+} from '@/data/churchInfo';
 
 const ContactSection = () => {
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [feedback, setFeedback] = useState('');
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setStatus('sending');
+    setFeedback('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: formData.get('fullName'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          subject: formData.get('subject'),
+          message: formData.get('message'),
+        }),
+      });
+
+      const result = (await response.json().catch(() => null)) as { error?: string } | null;
+
+      if (!response.ok) {
+        setStatus('error');
+        setFeedback(result?.error || 'We could not send your message. Please try again.');
+        return;
+      }
+
+      form.reset();
+      setStatus('success');
+      setFeedback('Your message has been sent successfully.');
+    } catch {
+      setStatus('error');
+      setFeedback('We could not send your message. Please try again.');
+    }
+  };
+
   return (
-    <section id="contact" className="py-24 bg-white">
+    <section className="py-12 md:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* LEFT */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
           <div>
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.5, ease: easeOutExpo }}
-              className="inline-block px-4 py-1.5 rounded-full bg-[#006B3F]/10 text-[#006B3F] text-sm font-bold uppercase tracking-wider mb-6"
-            >
-              Contact
-            </motion.span>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.5, delay: 0.1, ease: easeOutExpo }}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight"
-            >
-              Get in Touch
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.5, delay: 0.2, ease: easeOutExpo }}
-              className="text-slate-600 mb-10 text-md lg:text-lg leading-relaxed"
-            >
-              We'd love to hear from you! Whether you have questions, need prayer, or want to know
-              more about our church, we're here to help.
-            </motion.p>
-
-            <div className="space-y-6">
+            <div className="flex flex-col md:flex-row md:flex-wrap gap-4 md:gap-x-8 md:gap-y-4">
               {[
                 {
                   icon: MapPin,
                   title: 'Location',
-                  content: 'Living Word Temple, Winneba, Ghana',
+                  content: CHURCH_ADDRESS,
+                  detail: `Digital address: ${CHURCH_DIGITAL_ADDRESS}`,
                   color: 'from-red-500 to-pink-500',
-                  link: 'https://maps.google.com',
+                  link: CHURCH_MAPS_URL,
                 },
                 {
                   icon: Phone,
@@ -64,132 +83,92 @@ const ContactSection = () => {
                   color: 'from-blue-500 to-cyan-500',
                   link: 'mailto:info@icgclivingwordtemple.com',
                 },
-              ].map((item, index) => (
-                <motion.a
-                  key={index}
+              ].map(item => (
+                <a
+                  key={item.title}
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-50px' }}
-                  transition={{
-                    duration: 0.5,
-                    delay: index * 0.1,
-                    ease: easeOutExpo,
-                  }}
-                  whileHover={{ x: 5 }}
-                  className="flex items-start space-x-4 group cursor-pointer"
+                  className="flex items-start gap-3 group cursor-pointer min-w-0 md:min-w-[14rem] md:flex-1"
                 >
-                  <div
-                    className={`bg-linear-to-br ${item.color} p-4 rounded-2xl shadow-lg group-hover:scale-110 transition-transform`}
-                  >
-                    <item.icon className="w-6 h-6 text-white" />
+                  <div className={`bg-linear-to-br ${item.color} p-2.5 rounded-md shrink-0`}>
+                    <item.icon className="w-4 h-4 text-white" />
                   </div>
-                  <div>
-                    <p className="font-bold text-slate-900 mb-1">{item.title}</p>
-                    <p className="text-slate-600">{item.content}</p>
+                  <div className="min-w-0">
+                    <p className="font-semibold text-slate-900 text-sm mb-0.5">{item.title}</p>
+                    <p className="text-slate-600 text-sm break-words">{item.content}</p>
+                    {item.detail ? (
+                      <p className="text-slate-500 text-sm mt-0.5">{item.detail}</p>
+                    ) : null}
                   </div>
-                </motion.a>
+                </a>
               ))}
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.5, delay: 0.3, ease: easeOutExpo }}
-              className="mt-12"
-            >
-              <h3 className="font-bold text-slate-900 mb-6 text-lg">Connect With Us</h3>
-              <div className="flex space-x-4">
+            <div className="mt-8">
+              <h2 className="font-semibold text-slate-900 mb-4 text-base">Connect With Us</h2>
+              <div className="flex space-x-3">
                 {[
                   {
                     Icon: Facebook,
                     color: 'hover:bg-blue-500',
-                    link: 'https://facebook.com/icgc',
+                    link: CHURCH_FACEBOOK_URL,
                     name: 'facebook',
                   },
                   {
-                    Icon: Twitter,
-                    color: 'hover:bg-sky-500',
-                    link: 'https://twitter.com/icgc',
-                    name: 'twitter',
+                    Icon: TikTokIcon,
+                    color: 'hover:bg-slate-900',
+                    link: CHURCH_TIKTOK_URL,
+                    name: 'tiktok',
                   },
                   {
                     Icon: Instagram,
                     color: 'hover:bg-pink-500',
-                    link: 'https://instagram.com/icgc',
+                    link: CHURCH_INSTAGRAM_URL,
                     name: 'instagram',
                   },
                   {
                     Icon: Youtube,
                     color: 'hover:bg-red-500',
-                    link: 'https://youtube.com/@icgc',
+                    link: CHURCH_YOUTUBE_URL,
                     name: 'youtube',
                   },
-                ].map(({ Icon, color, link, name }, index) => (
-                  <motion.a
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-50px' }}
-                    transition={{
-                      duration: 0.5,
-                      delay: 0.4 + index * 0.1,
-                      ease: easeOutExpo,
-                    }}
-                    whileHover={{ scale: 1.1, y: -2 }}
+                ].map(({ Icon, color, link, name }) => (
+                  <a
+                    key={name}
                     aria-label={name}
-                    href={link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-md border-2 border-slate-100 text-slate-400 ${color} hover:text-white hover:border-transparent transition-colors`}
+                    href={link || undefined}
+                    target={link ? '_blank' : undefined}
+                    rel={link ? 'noopener noreferrer' : undefined}
+                    className={`w-10 h-10 bg-white rounded-md flex items-center justify-center shadow-sm border border-slate-100 text-slate-400 ${color} hover:text-white hover:border-transparent transition-colors duration-300`}
                   >
-                    <Icon className="w-5 h-5" />
-                  </motion.a>
+                    <Icon className="w-4 h-4" />
+                  </a>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.5, delay: 0.3, ease: easeOutExpo }}
-              className="mt-12 bg-linear-to-br from-slate-50 to-white rounded-2xl p-6 border-2 border-slate-100"
-            >
-              <p className="font-bold text-slate-900 mb-4">Office Hours</p>
-              <div className="space-y-2 text-slate-600">
-                <p className="flex justify-between">
+            <div className="mt-8 bg-slate-50 rounded-xl p-5 border border-slate-100">
+              <p className="font-semibold text-slate-900 mb-3 text-sm">Office Hours</p>
+              <div className="space-y-1.5 text-slate-600 text-sm">
+                <p className="flex justify-between gap-4">
                   <span>Monday - Friday:</span>
-                  <span className="font-semibold">9:00 AM - 5:00 PM</span>
+                  <span className="font-medium">9:00 AM - 5:00 PM</span>
                 </p>
-                <p className="flex justify-between">
-                  <span>Saturday:</span>
-                  <span className="font-semibold">10:00 AM - 2:00 PM</span>
-                </p>
-                <p className="flex justify-between">
+                <p className="flex justify-between gap-4">
                   <span>Sunday:</span>
-                  <span className="font-semibold">Closed (Worship Services)</span>
+                  <span className="font-medium text-right">Closed (Worship Services)</span>
                 </p>
               </div>
-            </motion.div>
+            </div>
           </div>
 
-          {/* RIGHT - Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.7, ease: easeOutExpo }}
-            className="bg-white py-10 px-5 md:p-10 rounded-2xl shadow-2xl border-2 border-slate-100"
-          >
-            <p className="text-2xl font-bold mb-8 text-slate-900">Send us a Message</p>
-            <form className="space-y-5">
+          <div className="bg-white py-6 px-5 md:p-8 rounded-2xl shadow-sm border border-slate-100">
+            <p className="text-xl font-bold mb-5 text-slate-900">Send us a Message</p>
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label htmlFor="fullName" className="text-sm font-bold text-slate-700">
+                <div className="space-y-1.5">
+                  <label htmlFor="fullName" className="text-sm font-semibold text-slate-700">
                     Name
                   </label>
                   <input
@@ -197,12 +176,13 @@ const ContactSection = () => {
                     name="fullName"
                     autoComplete="name"
                     type="text"
-                    className="w-full px-5 py-3 md:py-4 rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-colors mt-1"
+                    required
+                    className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-colors"
                     placeholder="Your name"
                   />
                 </div>
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-bold text-slate-700">
+                <div className="space-y-1.5">
+                  <label htmlFor="email" className="text-sm font-semibold text-slate-700">
                     Email
                   </label>
                   <input
@@ -210,13 +190,14 @@ const ContactSection = () => {
                     name="email"
                     autoComplete="email"
                     type="email"
-                    className="w-full px-5 py-3 md:py-4 rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-colors mt-1"
+                    required
+                    className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-colors"
                     placeholder="Your email"
                   />
                 </div>
               </div>
-              <div className="space-y-2">
-                <label htmlFor="phone" className="text-sm font-bold text-slate-700">
+              <div className="space-y-1.5">
+                <label htmlFor="phone" className="text-sm font-semibold text-slate-700">
                   Phone
                 </label>
                 <input
@@ -224,65 +205,70 @@ const ContactSection = () => {
                   name="phone"
                   autoComplete="tel"
                   type="tel"
-                  className="w-full px-5 py-3 md:py-4 rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-colors mt-1"
+                  className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-colors"
                   placeholder="Your phone number"
                 />
               </div>
-              <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm font-bold text-slate-700">
+              <div className="space-y-1.5">
+                <label htmlFor="subject" className="text-sm font-semibold text-slate-700">
                   Subject
                 </label>
                 <input
                   id="subject"
                   name="subject"
                   type="text"
-                  className="w-full px-5 py-3 md:py-4 rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-colors mt-1"
+                  className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-colors"
                   placeholder="How can we help?"
                 />
               </div>
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-bold text-slate-700">
+              <div className="space-y-1.5">
+                <label htmlFor="message" className="text-sm font-semibold text-slate-700">
                   Message
                 </label>
                 <textarea
                   id="message"
                   name="message"
-                  rows={5}
-                  className="w-full px-5 py-3 md:py-4 rounded-2xl border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-colors resize-none mt-1"
+                  rows={4}
+                  required
+                  className="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#006B3F]/20 focus:border-[#006B3F] transition-colors resize-none"
                   placeholder="Your message..."
                 />
               </div>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="cursor-pointer w-full bg-linear-to-r from-[#006B3F] to-emerald-600 text-white py-5 rounded-lg font-bold text-lg hover:shadow-xl transition-shadow shadow-lg"
+              {feedback ? (
+                <p
+                  className={`text-sm ${
+                    status === 'success' ? 'text-[#006B3F]' : 'text-red-600'
+                  }`}
+                  role="status"
+                >
+                  {feedback}
+                </p>
+              ) : null}
+              <button
+                type="submit"
+                disabled={status === 'sending'}
+                className="cursor-pointer w-full bg-linear-to-r from-[#006B3F] to-emerald-600 text-white py-3 rounded-full font-semibold text-base min-h-12 hover:shadow-md transition-shadow duration-300 disabled:cursor-not-allowed disabled:opacity-70"
               >
-                Submit Message
-              </motion.button>
+                {status === 'sending' ? 'Sending...' : 'Submit Message'}
+              </button>
             </form>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Google Map */}
-        <div id="map" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.7, ease: easeOutExpo }}
-            className="rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-100"
-          >
+        <div id="map" className="scroll-mt-24 mt-12 md:mt-14">
+          <div className="rounded-2xl overflow-hidden shadow-sm border border-slate-100">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.8059385883547!2d-0.1618419!3d5.6037168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMzYnMTMuNCJOIDDCsDA5JzQyLjYiVw!5e0!3m2!1sen!2sgh!4v1234567890123"
+              src={CHURCH_MAPS_EMBED_URL}
               width="100%"
-              height="500"
+              height="320"
               style={{ border: 0 }}
               allowFullScreen={true}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="ICGC Living Word Temple Location"
+              className="w-full h-64 md:h-80"
             />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

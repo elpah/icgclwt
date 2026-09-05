@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Calendar } from 'lucide-react';
 
 import EventCard from '@/components/EventCard';
+import SectionEyebrow from '@/components/SectionEyebrow';
 import { UPCOMING_EVENTS } from '@/data/upcomingEventsData';
 
 const AllEventsPage = () => {
@@ -13,18 +14,15 @@ const AllEventsPage = () => {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <section className="relative py-24 bg-linear-to-br from-[#006B3F] via-emerald-700 to-[#006B3F] overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#FFD700]/10 rounded-full -mr-48 -mt-48" />
-
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full -ml-48 -mb-48" />
+      <section className="relative pt-28 pb-16 md:pt-32 md:pb-20 bg-linear-to-br from-[#006B3F] via-emerald-700 to-[#006B3F] overflow-hidden">
+        <div className="absolute top-0 right-0 w-72 h-72 bg-[#FFD700]/10 rounded-full -mr-36 -mt-36" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-white/5 rounded-full -ml-36 -mb-36" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center text-white">
-            <span className="inline-block px-4 py-2 rounded-full bg-[#FFD700]/20 backdrop-blur-sm border border-[#FFD700]/30 text-[#FFD700] text-sm font-bold uppercase tracking-wider mb-6">
-              Upcoming Events
-            </span>
+            <SectionEyebrow tone="light">Upcoming Events</SectionEyebrow>
 
-            <h1 className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight tracking-tight">
               Join Us for
               <br />
               <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FFD700] via-yellow-400 to-[#FFD700]">
@@ -32,45 +30,45 @@ const AllEventsPage = () => {
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-slate-200 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-sm md:text-[0.95rem] text-slate-200 max-w-2xl mx-auto leading-relaxed">
               Experience powerful worship, transformative teaching, and life-changing encounters
               with God at our upcoming events and conferences.
             </p>
           </div>
         </div>
       </section>
-      <section className="py-20">
+      <section className="py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-3xl p-8 shadow-lg mb-16 border border-slate-100">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-white rounded-2xl p-4 md:p-6 shadow-sm mb-10 border border-slate-100">
+            <div className="grid grid-cols-3 gap-3 md:gap-6">
               <div className="text-center">
-                <div className="text-4xl font-bold text-[#006B3F] mb-2">{events.length}</div>
-                <div className="text-slate-600 font-semibold">Upcoming Events</div>
+                <div className="text-xl md:text-3xl font-bold text-[#006B3F] mb-1">{events.length}</div>
+                <div className="text-slate-600 text-[11px] md:text-sm font-medium leading-snug">Upcoming Events</div>
               </div>
 
               <div className="text-center">
-                <div className="text-4xl font-bold text-[#006B3F] mb-2">{categoryCount}</div>
-                <div className="text-slate-600 font-semibold">Event Categories</div>
+                <div className="text-xl md:text-3xl font-bold text-[#006B3F] mb-1">{categoryCount}</div>
+                <div className="text-slate-600 text-[11px] md:text-sm font-medium leading-snug">Event Categories</div>
               </div>
 
               <div className="text-center">
-                <div className="text-4xl font-bold text-[#006B3F] mb-2">Free</div>
-                <div className="text-slate-600 font-semibold">All Events Open to All</div>
+                <div className="text-xl md:text-3xl font-bold text-[#006B3F] mb-1">Free</div>
+                <div className="text-slate-600 text-[11px] md:text-sm font-medium leading-snug">Open to All</div>
               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {events.map((event, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {events.map(event => (
               <EventCard key={event.id} event={event} />
             ))}
           </div>
           {events.length === 0 && (
-            <div className="text-center py-20">
-              <div className="bg-white rounded-3xl p-12 shadow-lg max-w-2xl mx-auto">
-                <Calendar className="w-20 h-20 text-slate-300 mx-auto mb-6" />
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">No Events Scheduled</h3>
-                <p className="text-slate-600">
+            <div className="text-center py-16">
+              <div className="bg-white rounded-2xl p-8 shadow-sm max-w-xl mx-auto border border-slate-100">
+                <Calendar className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">No Events Scheduled</h3>
+                <p className="text-slate-600 text-sm">
                   Check back soon for upcoming events and conferences.
                 </p>
               </div>
@@ -78,41 +76,6 @@ const AllEventsPage = () => {
           )}
         </div>
       </section>
-      {/* hide dont miss out section for now */}
-
-      {/* <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden bg-linear-to-br from-[#006B3F] to-emerald-700 rounded-[3rem] p-12 md:p-16 text-center text-white">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#FFD700]/10 rounded-full -mr-32 -mt-32" />
-
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full -ml-32 -mb-32" />
-
-      <div className="relative z-10">
-              <h2 className="text-3xl md:text-5xl font-bold mb-6">
-                Don't Miss Out!
-              </h2>
-
-              <p className="text-slate-200 text-lg mb-10 max-w-2xl mx-auto">
-                Subscribe to our newsletter to receive updates about upcoming
-                events and announcements.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-6 py-4 rounded-full text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-[#FFD700]/40"
-                />
-
-                <button className="w-full sm:w-auto bg-linear-to-r from-[#FFD700] to-[#FDB813] text-[#006B3F] px-8 py-4 rounded-full font-bold shadow-lg">
-                  Subscribe
-                </button>
-              </div>
-            </div> 
-          </div>
-        </div>
-      </section>
-      */}
     </div>
   );
 };

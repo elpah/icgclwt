@@ -22,46 +22,46 @@ const EventCard = ({ event }: EventCardProps) => {
   return (
     <div
       onClick={() => navigate(`/event-details/${event.id}`)}
-      className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer border-2 border-slate-100 hover:border-[#FFD700]/50"
+      className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer border border-slate-100"
     >
-      <div className="h-56 relative overflow-hidden">
+      <div className="h-44 relative overflow-hidden">
         <img
           src={event.image}
           alt={event.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
           loading="lazy"
           decoding="async"
         />
-        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/55 via-transparent to-transparent" />
 
-        <div className="absolute top-4 left-4 bg-white rounded-2xl px-4 py-2 shadow-lg">
-          <p className="text-xs font-bold text-[#006B3F] uppercase tracking-wider">{event.date}</p>
+        <div className="absolute top-3 left-3">
+          <p className="text-[11px] font-semibold text-white tracking-wide">{event.date}</p>
         </div>
 
         {event.time && (
-          <div className="absolute bottom-4 right-4 bg-[#FFD700] rounded-full px-3 py-1.5">
-            <p className="text-xs font-bold text-[#006B3F] flex items-center">
-              <Clock className="w-3 h-3 mr-1" />
-              {event.time}
-            </p>
+          <div className="absolute bottom-3 right-3 flex items-center text-[#FFD700]">
+            <Clock className="w-3 h-3 mr-1" />
+            <p className="text-[11px] font-semibold">{event.time}</p>
           </div>
         )}
 
-        <div className="absolute top-4 right-4 bg-[#006B3F] rounded-full px-3 py-1.5">
-          <p className="text-xs font-bold text-white">{event.category}</p>
+        <div className="absolute top-3 right-3">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#FFD700]">
+            {event.category}
+          </p>
         </div>
       </div>
 
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-3 text-slate-900 group-hover:text-[#006B3F] transition-colors">
+      <div className="p-5">
+        <h3 className="text-lg font-bold mb-2 text-slate-900 group-hover:text-[#006B3F] transition-colors duration-300">
           {event.title}
         </h3>
 
-        <p className="text-slate-600 text-sm mb-4 line-clamp-2 leading-relaxed">{event.desc}</p>
+        <p className="text-slate-600 text-sm mb-3 line-clamp-2 leading-relaxed">{event.desc}</p>
 
-        <span className="text-[#006B3F] text-sm font-bold flex items-center group-hover:text-[#FFD700] transition-colors">
+        <span className="text-[#006B3F] text-sm font-semibold flex items-center">
           Learn More
-          <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
         </span>
       </div>
     </div>

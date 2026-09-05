@@ -1,124 +1,191 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { ArrowLeft, Clock, MapPin, Calendar } from 'lucide-react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { MINISTRIES_DATA } from '../data/MinistriesData';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { MINISTRIES_DATA, MINISTRY_ID_ALIASES } from '../data/MinistriesData';
+import { toGalleryImages } from '@/data/galleryData';
+import ImageGallery from '@/components/gallery/ImageGallery';
+import NotFound from '@/pages/NotFound';
 
-const MinistryPage: React.FC = () => {
+function whatsappLink(phone: string) {
+  const digits = phone.replace(/\D/g, '');
+  const international = digits.startsWith('233') ? digits : digits.replace(/^0/, '233');
+  return `https://wa.me/${international}`;
+}
+
+const MinistryPage = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+  const canonicalId = id ? (MINISTRY_ID_ALIASES[id] ?? id) : id;
 
-  const ministry = useMemo(() => MINISTRIES_DATA.find(min => min.id === id), [id]);
+  const ministry = useMemo(
+    () => MINISTRIES_DATA.find(min => min.id === canonicalId),
+    [canonicalId]
+  );
+  const galleryImages = useMemo(
+    () =>
+      ministry
+        ? toGalleryImages(ministry.gallery, {
+            idPrefix: ministry.id,
+            alt: ministry.name,
+            title: ministry.name,
+            category: 'Ministries',
+            ministry: ministry.id,
+          })
+        : [],
+    [ministry]
+  );
+
+  if (id && MINISTRY_ID_ALIASES[id]) {
+    return <Navigate to={`/ministries/${MINISTRY_ID_ALIASES[id]}`} replace />;
+  }
 
   if (!ministry) {
-    return <p className="text-center py-20 text-xl text-red-500">Ministry not found</p>;
+    return <NotFound />;
   }
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* HERO */}
-      <div className="relative h-150 overflow-hidden">
-        <img
-          src={ministry.headerImage}
-          alt={ministry.name}
-          loading="lazy"
-          decoding="async"
-          className="w-full h-full object-cover"
-        />
+      <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden">
+        {ministry.headerImage ? (
+          <img
+            src={ministry.headerImage}
+            alt={ministry.name}
+            loading="eager"
+            decoding="async"
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className={`absolute inset-0 bg-linear-to-br ${ministry.color}`} />
+        )}
 
         <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/40 to-slate-50" />
 
         <div className="absolute inset-0 flex items-center">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16">
             <button
-              onClick={() => navigate('/', { state: { scrollTo: 'ministries' } })}
-              className="flex items-center space-x-2 text-white mb-6 hover:text-[#FFD700] transition-colors"
+              onClick={() => navigate('/ministries')}
+              className="cursor-pointer flex items-center space-x-2 text-white mb-5 hover:text-[#FFD700] transition-colors duration-300 min-h-10"
             >
-              <ArrowLeft className="w-5 h-5" />
-              <span className="font-semibold">Back to Ministries</span>
+              <ArrowLeft className="w-4 h-4" />
+              <span className="font-semibold text-sm">Back to Ministries</span>
             </button>
 
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-4">
               <div
-                className={`w-20 h-20 bg-linear-to-br ${ministry.color} rounded-2xl flex items-center justify-center shadow-2xl`}
+                className={`w-12 h-12 md:w-14 md:h-14 bg-linear-to-br ${ministry.color} rounded-md flex items-center justify-center shrink-0`}
               >
-                <ministry.icon className="w-10 h-10 text-white" />
+                <ministry.icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
               </div>
 
               <div>
-                <h1 className="text-5xl md:text-6xl font-bold text-white mb-2">{ministry.name}</h1>
-                <p className="text-slate-200 text-lg">{ministry.description}</p>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 tracking-tight">
+                  {ministry.name}
+                </h1>
+                <p className="text-slate-200 text-sm md:text-[0.95rem]">{ministry.description}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <div className="lg:col-span-2 space-y-12">
-            <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-100">
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Vision</h2>
-              <p className="text-slate-600 leading-relaxed text-lg">{ministry.vision}</p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 space-y-8">
+            <div className="bg-white rounded-2xl p-5 md:p-7 shadow-sm border border-slate-100">
+              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-3 tracking-tight">
+                About this ministry
+              </h2>
+              <p className="text-slate-600 leading-relaxed text-sm md:text-[0.95rem]">
+                {ministry.about}
+              </p>
+              {'quote' in ministry && ministry.quote ? (
+                <blockquote className="mt-5 pl-4 md:pl-5 border-l-4 border-[#FFD700] bg-slate-50 rounded-r-xl py-4 pr-4">
+                  <p className="text-slate-700 italic text-sm md:text-[0.95rem] leading-relaxed">
+                    {ministry.quote}
+                  </p>
+                  {'quoteSource' in ministry && ministry.quoteSource ? (
+                    <cite className="mt-3 block not-italic text-xs font-semibold tracking-wide uppercase text-[#006B3F]">
+                      {ministry.quoteSource}
+                    </cite>
+                  ) : null}
+                </blockquote>
+              ) : null}
             </div>
 
-            <div>
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">Gallery</h2>
-
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {ministry.gallery.map((image, index) => (
-                  <div
-                    key={image}
-                    className="relative h-48 rounded-2xl overflow-hidden shadow-md cursor-pointer"
-                  >
-                    <img
-                      src={image}
-                      alt={`Gallery ${index + 1}`}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-colors" />
-                  </div>
-                ))}
+            {galleryImages.length > 0 ? (
+              <div>
+                <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-4 tracking-tight">
+                  Gallery
+                </h2>
+                <ImageGallery images={galleryImages} layout="grid" />
               </div>
-            </div>
+            ) : null}
           </div>
 
-          <div className="space-y-6">
-            <div className="bg-white rounded-3xl p-6 shadow-lg border border-slate-100 sticky top-6">
-              <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center">
-                <Clock className="w-6 h-6 mr-2 text-[#006B3F]" />
-                Meeting Times
-              </h3>
+          <div>
+            <div className="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 lg:sticky lg:top-24">
+              {ministry.meetings.length > 0 ? (
+                <>
+                  <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center">
+                    <Clock className="w-5 h-5 mr-2 text-[#006B3F]" />
+                    Meeting Times
+                  </h3>
 
-              <div className="space-y-4">
-                {ministry.meetings.map((meeting, index) => (
-                  <div key={index} className="pb-4 border-b border-slate-100 last:border-0">
-                    <div className="flex items-center space-x-2 mb-2">
-                      <Calendar className="w-4 h-4 text-[#FFD700]" />
-                      <span className="font-bold text-slate-900">{meeting.day}</span>
-                    </div>
+                  <div className="space-y-3">
+                    {ministry.meetings.map((meeting, index) => {
+                      const group = 'group' in meeting ? meeting.group : undefined;
+                      const previous = ministry.meetings[index - 1];
+                      const previousGroup =
+                        previous && 'group' in previous ? previous.group : undefined;
+                      const showGroup = Boolean(group && group !== previousGroup);
 
-                    <div className="text-sm text-slate-600 ml-6">
-                      <p>{meeting.time}</p>
-                      <p className="flex items-center mt-1">
-                        <MapPin className="w-3 h-3 mr-1 text-slate-400" />
-                        {meeting.location}
-                      </p>
-                    </div>
+                      return (
+                        <div key={`${group ?? ''}-${meeting.day}-${meeting.time}`}>
+                          {showGroup ? (
+                            <p
+                              className={`text-xs font-semibold uppercase tracking-wide text-[#006B3F] mb-2 ${
+                                index > 0 ? 'mt-4' : ''
+                              }`}
+                            >
+                              {group}
+                            </p>
+                          ) : null}
+                          <div className="pb-3 border-b border-slate-100 last:border-0">
+                            <div className="flex items-center space-x-2 mb-1">
+                              <Calendar className="w-3.5 h-3.5 text-[#FFD700]" />
+                              <span className="font-semibold text-slate-900 text-sm">
+                                {meeting.day}
+                              </span>
+                            </div>
+
+                            <div className="text-sm text-slate-600 ml-5">
+                              <p>{meeting.time}</p>
+                              <p className="flex items-center mt-0.5">
+                                <MapPin className="w-3 h-3 mr-1 text-slate-400" />
+                                {meeting.location}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
-                ))}
+                </>
+              ) : null}
+
+              <div className={ministry.meetings.length > 0 ? 'mt-5 pt-5 border-t border-slate-200' : ''}>
+                <h4 className="font-semibold text-slate-900 mb-1 text-sm">Ministry Leader</h4>
+                <p className="text-slate-600 text-sm">{ministry.leader}</p>
               </div>
 
-              <div className="mt-6 pt-6 border-t border-slate-200">
-                <h4 className="font-bold text-slate-900 mb-2">Ministry Leader</h4>
-                <p className="text-slate-600 mb-1">{ministry.leader}</p>
-                <p className="text-sm text-[#006B3F] font-semibold">{ministry.contact}</p>
-              </div>
-
-              <button className="w-full mt-6 bg-linear-to-r from-[#006B3F] to-emerald-600 text-white py-4 rounded-2xl font-bold hover:shadow-xl transition-all">
-                Join This Ministry
-              </button>
+              <a
+                href={whatsappLink(ministry.phone)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full mt-5 bg-linear-to-r from-[#006B3F] to-emerald-600 text-white py-3 rounded-full font-semibold text-sm min-h-12 hover:shadow-md transition-shadow duration-300 inline-flex items-center justify-center"
+              >
+                Contact Ministry Leader
+              </a>
             </div>
           </div>
         </div>

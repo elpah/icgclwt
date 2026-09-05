@@ -1,38 +1,70 @@
-import { Music, Heart, PlayCircle, Users, GraduationCap, Church, MapPin } from 'lucide-react';
+import {
+  Music,
+  Heart,
+  GraduationCap,
+  Church,
+  MapPin,
+  HeartHandshake,
+  Home,
+  HandHeart,
+  Megaphone,
+  Handshake,
+  Hammer,
+  Briefcase,
+  ShieldCheck,
+} from 'lucide-react';
+import { getLocalMinistryImages } from './ministryAssets';
 
-export const MINISTRIES_DATA = [
+const CHURCH_PHONE = '024 595 3629';
+
+export const MINISTRY_ID_ALIASES: Record<string, string> = {
+  worship: 'music-media',
+  media: 'music-media',
+};
+
+const BASE_MINISTRIES = [
   {
-    id: 'worship',
-    name: 'Worship Team',
+    id: 'music-media',
+    name: 'Music and Media',
     icon: Music,
     color: 'from-blue-500 to-cyan-500',
-    description: "Leading the congregation into God's presence through music",
-    headerImage:
-      'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=1920',
-    vision:
-      'To create an atmosphere where believers can connect with God through spirit-filled worship and praise. We are committed to excellence in musical ministry and developing gifted musicians.',
+    description: 'Serving through music and media',
+    about:
+      'Music and Media leads the congregation in song during services and supports sound, visuals, and live streaming so people in the auditorium and online can take part. The team prepares before gatherings, records church messages, and helps services be heard and seen clearly.',
     meetings: [
       {
+        group: 'Music Team meeting times',
         day: 'Sunday',
         time: '6:00 AM - 7:00 AM',
-        location: 'Main Sanctuary',
+        location: 'Church Auditorium',
       },
       {
+        group: 'Music Team meeting times',
         day: 'Thursday',
         time: '6:00 PM - 8:00 PM',
-        location: 'Choir Room',
+        location: 'Church Auditorium',
+      },
+      {
+        group: 'Media Team meeting times',
+        day: 'Sunday',
+        time: '6:00 AM - 2:00 PM',
+        location: 'Church Auditorium',
+      },
+      {
+        group: 'Media Team meeting times',
+        day: 'Wednesday',
+        time: '5:00 PM - 9:00 PM',
+        location: 'Church Auditorium',
+      },
+      {
+        group: 'Media Team meeting times',
+        day: 'Saturday',
+        time: '10:00 AM - 12:00 PM',
+        location: 'Church Auditorium',
       },
     ],
-    gallery: [
-      'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=600',
-    ],
-    leader: 'Bro. Emmanuel Mensah',
-    contact: 'info@icgclivingwordtemple.com',
+    leader: 'Deacon Cyril Mawuli Honu-Mensah',
+    phone: CHURCH_PHONE,
   },
   {
     id: 'children',
@@ -40,169 +72,66 @@ export const MINISTRIES_DATA = [
     icon: Heart,
     color: 'from-pink-500 to-rose-500',
     description: 'Nurturing young hearts for Christ',
-    headerImage:
-      'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&q=80&w=1920',
-    vision:
-      'To partner with parents in raising children who love God, know His Word, and live out their faith. We provide age-appropriate, engaging biblical teaching that sets a strong foundation.',
+    about:
+      "Children's Ministry walks with parents to teach children the Word of God in a way they can understand. During Sunday service, children are cared for and taught in their own space so they can grow in faith from an early age.",
     meetings: [
       {
         day: 'Sunday',
-        time: '7:30 AM - 10:00 AM',
-        location: "Children's Wing",
-      },
-      {
-        day: 'Sunday',
-        time: '10:30 AM - 1:00 PM',
-        location: "Children's Wing",
+        time: '8:00 AM - 10:30 AM',
+        location: 'Church Auditorium',
       },
     ],
-    gallery: [
-      'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1566004100631-35d015d6a491?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1587616211892-533b89e2f617?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1612731486606-2614b4d74921?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1560251485-97bc9fa9fa0e?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&q=80&w=600',
-    ],
-    leader: 'Sis. Grace Asante',
-    contact: 'info@icgclivingwordtemple.com',
-  },
-  {
-    id: 'media',
-    name: 'Media & Tech',
-    icon: PlayCircle,
-    color: 'from-purple-500 to-indigo-500',
-    description: 'Spreading the gospel through technology',
-    headerImage:
-      'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=1920',
-    vision:
-      'To leverage modern technology for kingdom expansion by providing excellent audio-visual production, live streaming, and digital content that reaches both our local congregation and the global community.',
-    meetings: [
-      {
-        day: 'Sunday',
-        time: '6:00 AM - 2:00 PM',
-        location: 'Media Room',
-      },
-      {
-        day: 'Wednesday',
-        time: '5:00 PM - 9:00 PM',
-        location: 'Media Room',
-      },
-      {
-        day: 'Saturday',
-        time: '10:00 AM - 12:00 PM',
-        location: 'Training Session',
-      },
-    ],
-    gallery: [
-      'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1614935151651-0bea6508db6b?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1499673610122-01c7122c5dcb?auto=format&fit=crop&q=80&w=600',
-    ],
-    leader: 'Bro. Kwame Boateng',
-    contact: 'info@icgclivingwordtemple.com',
-  },
-  {
-    id: 'hospitality',
-    name: 'Hospitality',
-    icon: Users,
-    color: 'from-orange-500 to-amber-500',
-    description: 'Creating a welcoming atmosphere for all',
-    headerImage:
-      'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&q=80&w=1920',
-    vision:
-      'To embody the love of Christ through warm hospitality, ensuring every person who walks through our doors feels welcomed, valued, and cared for as part of the church family.',
-    meetings: [
-      {
-        day: 'Sunday',
-        time: '6:30 AM - 2:00 PM',
-        location: 'Welcome Desk',
-      },
-      {
-        day: '1st Saturday',
-        time: '10:00 AM - 12:00 PM',
-        location: 'Fellowship Hall',
-      },
-    ],
-    gallery: [
-      'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1591115765373-5207764f72e7?auto=format&fit=crop&q=80&w=600',
-    ],
-    leader: 'Sis. Abena Osei',
-    contact: 'info@icgclivingwordtemple.com',
+    leader: 'Deaconess Wilhemina Tete-Mensah',
+    phone: CHURCH_PHONE,
   },
   {
     id: 'youth',
-    name: 'Youth & Teens',
+    name: 'New Breed',
     icon: GraduationCap,
     color: 'from-indigo-500 to-blue-500',
     description: 'Empowering the next generation',
-    headerImage:
-      'https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=1920',
-    vision:
-      'To raise up a generation of young people who are passionate about God, grounded in His Word, and equipped to be influencers in their schools, communities, and beyond.',
+    about:
+      'Our New Breed Ministry is responsible for our Young Adults from the ages of 17 to 25. These Young Adults of our church have completed our Youth Program and have been graduated to join our adult service. At ICGC Living Word Temple we refer to our Young Adults as New Breed. These are Senior High School or tertiary students, national service personnel, workers, and professionals in their diverse fields of endeavour. We desire for our New Breed to anchor their lives on the scripture at 1 Timothy 4:12.',
+    quote:
+      "Don't let anyone think less of you because you are young. Be an example to all believers in what you say, in the way you live, in your love, your faith, and your purity.",
+    quoteSource: '1 Timothy 4:12',
     meetings: [
       {
         day: 'Sunday',
         time: '10:30 AM - 1:00 PM',
-        location: 'Youth Center',
+        location: 'Church Auditorium',
       },
       {
         day: 'Friday',
         time: '6:00 PM - 8:00 PM',
-        location: 'Youth Center',
+        location: 'Church Auditorium',
       },
     ],
-    gallery: [
-      'https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1525026198548-4baa812f1183?auto=format&fit=crop&q=80&w=600',
-    ],
-    leader: 'Pastor Daniel Owusu',
-    contact: 'info@icgclivingwordtemple.com',
+    leader: 'Deacon Cyril Mawuli Honu-Mensah',
+    phone: CHURCH_PHONE,
   },
   {
     id: 'men',
-    name: 'Men of Valor',
+    name: 'Mighty Men of Valor',
     icon: Church,
     color: 'from-emerald-500 to-green-500',
     description: 'Building strong men of God',
-    headerImage:
-      'https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=1920',
-    vision:
-      'To develop men of integrity, character, and spiritual strength who lead their families well and impact their communities for Christ.',
+    about:
+      "Mighty Men of Valor is the men's ministry of the church. The men gather to grow in faith, encourage one another, and learn how to lead well at home and in the church.",
     meetings: [
       {
         day: '1st Saturday',
         time: '7:00 AM - 9:00 AM',
-        location: 'Main Hall',
+        location: 'Church Auditorium',
       },
       {
         day: '3rd Saturday',
         time: '7:00 AM - 9:00 AM',
-        location: 'Main Hall',
+        location: 'Church Auditorium',
       },
     ],
-    gallery: [
-      'https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1542596768-5d1d21f1cf98?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&q=80&w=600',
-    ],
-    leader: 'Elder Joseph Antwi',
-    contact: 'info@icgclivingwordtemple.com',
+    leader: 'Mr Frederick Essel',
+    phone: CHURCH_PHONE,
   },
   {
     id: 'women',
@@ -210,64 +139,150 @@ export const MINISTRIES_DATA = [
     icon: Heart,
     color: 'from-rose-500 to-pink-500',
     description: 'Empowering women in faith',
-    headerImage:
-      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1920',
-    vision:
-      "To empower women to discover and fulfill their God-given purpose through fellowship, discipleship, and service, creating a sisterhood that reflects Christ's love.",
+    about:
+      "Precious Vessels of Virtue is the women's ministry of the church. The women gather for fellowship, teaching, and service, and support one another in faith and family life.",
     meetings: [
       {
         day: '2nd Saturday',
         time: '9:00 AM - 11:00 AM',
-        location: 'Fellowship Hall',
+        location: 'Church Auditorium',
       },
       {
         day: '4th Saturday',
         time: '9:00 AM - 11:00 AM',
-        location: 'Fellowship Hall',
+        location: 'Church Auditorium',
       },
     ],
-    gallery: [
-      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1506863530036-1efeddceb993?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&fit=crop&q=80&w=600',
-    ],
-    leader: 'Sis. Akosua Adjei',
-    contact: 'info@icgclivingwordtemple.com',
+    leader: 'Lady Martha Obeng',
+    phone: CHURCH_PHONE,
   },
   {
     id: 'outreach',
-    name: 'Outreach',
+    name: 'Outreach and Follow up',
     icon: MapPin,
     color: 'from-teal-500 to-cyan-500',
     description: 'Reaching our community for Christ',
-    headerImage:
-      'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=1920',
-    vision:
-      'To demonstrate the love of Christ through practical acts of service, evangelism, and community engagement, being the hands and feet of Jesus in our city.',
+    about:
+      'Outreach and Follow up visits the community and stays in touch with first-time guests and new members. The team helps people feel welcome and connected after they visit the church.',
     meetings: [
       {
         day: 'Saturday',
         time: '2:00 PM - 5:00 PM',
-        location: 'Community Center',
+        location: 'Church Auditorium',
       },
       {
         day: 'Last Sunday',
         time: '2:00 PM - 5:00 PM',
-        location: 'Various Locations',
+        location: 'Church Auditorium',
       },
     ],
-    gallery: [
-      'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1593113630400-ea4288922497?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&q=80&w=600',
-      'https://images.unsplash.com/photo-1532629345422-7515f3d16bb8?auto=format&fit=crop&q=80&w=600',
-    ],
-    leader: 'Bro. Samuel Nkrumah',
-    contact: 'info@icgclivingwordtemple.com',
+    leader: 'Deacon Cyril Mawuli Honu-Mensah',
+    phone: CHURCH_PHONE,
+  },
+  {
+    id: 'welfare',
+    name: 'Welfare',
+    icon: HeartHandshake,
+    color: 'from-amber-500 to-orange-500',
+    description: 'Caring for members in times of need',
+    about:
+      'Welfare looks after members who need care, support, or practical help. The team walks with families during difficult seasons so no one in the church stands alone.',
+    meetings: [],
+    leader: 'Deaconess Wilhemina Tete-Mensah',
+    phone: CHURCH_PHONE,
+  },
+  {
+    id: 'family-life',
+    name: 'Family Life Enrichment',
+    icon: Home,
+    color: 'from-sky-500 to-blue-500',
+    description: 'Strengthening families in the church',
+    about:
+      'Family Life Enrichment helps families in the church grow stronger in faith and in the home. It offers teaching and support for marriage, parenting, and healthy family life.',
+    meetings: [],
+    leader: 'Deaconess Wilhemina Tete-Mensah',
+    phone: CHURCH_PHONE,
+  },
+  {
+    id: 'intercessory',
+    name: 'Intercessory',
+    icon: HandHeart,
+    color: 'from-violet-500 to-purple-500',
+    description: 'Standing in prayer for the church',
+    about:
+      'Intercessory leads the church in prayer for members, leaders, and the work of the ministry. The team stands in the gap so the church is covered in prayer through the week.',
+    meetings: [],
+    leader: 'Deaconess Wilhemina Tete-Mensah',
+    phone: CHURCH_PHONE,
+  },
+  {
+    id: 'events',
+    name: 'Events and Publicity',
+    icon: Megaphone,
+    color: 'from-orange-500 to-red-500',
+    description: 'Coordinating church events and publicity',
+    about:
+      'Events and Publicity plans church programmes and helps people know what is happening. The team handles announcements, invitations, and the running of special gatherings.',
+    meetings: [],
+    leader: 'Deacon Cyril Mawuli Honu-Mensah',
+    phone: CHURCH_PHONE,
+  },
+  {
+    id: 'ushering',
+    name: 'Ushering & Protocol',
+    icon: Handshake,
+    color: 'from-emerald-600 to-teal-600',
+    description: 'Welcoming and hosting guests',
+    about:
+      'Ushering & Protocol welcomes guests, seats the congregation, and helps services run smoothly. The team is often the first smile people see when they arrive.',
+    meetings: [],
+    leader: 'Deacon Seth Tetteh',
+    phone: CHURCH_PHONE,
+  },
+  {
+    id: 'projects',
+    name: 'Projects',
+    icon: Hammer,
+    color: 'from-stone-500 to-neutral-600',
+    description: 'Supporting church building and projects',
+    about:
+      'Projects supports building work and other church development assignments. The team helps plan and carry out work that keeps the church facilities in good shape.',
+    meetings: [],
+    leader: 'Deacon Seth Tetteh',
+    phone: CHURCH_PHONE,
+  },
+  {
+    id: 'administration',
+    name: 'Administration',
+    icon: Briefcase,
+    color: 'from-slate-500 to-slate-700',
+    description: 'Church administration and operations',
+    about:
+      'Administration handles the day-to-day running of the church office and records. The team supports the pastors and other ministries with letters, files, and coordination.',
+    meetings: [],
+    leader: 'Deacon Seth Tetteh',
+    phone: CHURCH_PHONE,
+  },
+  {
+    id: 'traffic-security',
+    name: 'Traffic and Security',
+    icon: ShieldCheck,
+    color: 'from-zinc-600 to-slate-800',
+    description: 'Keeping the grounds safe and orderly',
+    about:
+      'Traffic and Security keeps the compound safe and helps members and visitors move in and out with order. The team watches over parking, entry points, and the grounds during services.',
+    meetings: [],
+    leader: 'Deacon Seth Tetteh',
+    phone: CHURCH_PHONE,
   },
 ];
+
+export const MINISTRIES_DATA = BASE_MINISTRIES.map(ministry => {
+  const local = getLocalMinistryImages(ministry.id);
+
+  return {
+    ...ministry,
+    headerImage: local?.headerImage || local?.gallery[0] || '',
+    gallery: local?.gallery ?? [],
+  };
+});
