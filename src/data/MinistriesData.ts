@@ -91,7 +91,10 @@ const BASE_MINISTRIES = [
     color: 'from-indigo-500 to-blue-500',
     description: 'Empowering the next generation',
     about:
-      'New Breed is the youth ministry of the church. It helps young people grow in faith, build friendship, and find ways to serve in the house of God.',
+      'Our New Breed Ministry is responsible for our Young Adults from the ages of 17 to 25. These Young Adults of our church have completed our Youth Program and have been graduated to join our adult service. At ICGC Living Word Temple we refer to our Young Adults as New Breed. These are Senior High School or tertiary students, national service personnel, workers, and professionals in their diverse fields of endeavour. We desire for our New Breed to anchor their lives on the scripture at 1 Timothy 4:12.',
+    quote:
+      "Don't let anyone think less of you because you are young. Be an example to all believers in what you say, in the way you live, in your love, your faith, and your purity.",
+    quoteSource: '1 Timothy 4:12',
     meetings: [
       {
         day: 'Sunday',

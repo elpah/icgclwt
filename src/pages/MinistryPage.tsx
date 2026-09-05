@@ -98,6 +98,18 @@ const MinistryPage = () => {
               <p className="text-slate-600 leading-relaxed text-sm md:text-[0.95rem]">
                 {ministry.about}
               </p>
+              {'quote' in ministry && ministry.quote ? (
+                <blockquote className="mt-5 pl-4 md:pl-5 border-l-4 border-[#FFD700] bg-slate-50 rounded-r-xl py-4 pr-4">
+                  <p className="text-slate-700 italic text-sm md:text-[0.95rem] leading-relaxed">
+                    {ministry.quote}
+                  </p>
+                  {'quoteSource' in ministry && ministry.quoteSource ? (
+                    <cite className="mt-3 block not-italic text-xs font-semibold tracking-wide uppercase text-[#006B3F]">
+                      {ministry.quoteSource}
+                    </cite>
+                  ) : null}
+                </blockquote>
+              ) : null}
             </div>
 
             {galleryImages.length > 0 ? (
